@@ -1,3 +1,9 @@
+/**
+ * Anthony Scinocco
+ * incident-management.azurewebsites.net
+ * November 23, 2015
+ * Handles routing for all public page related url request
+ */
 var express = require('express');
 var router = express.Router();
 

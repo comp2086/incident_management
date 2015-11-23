@@ -14,4 +14,4 @@ module.exports = {
     'secret': 'incidentManagementSecret',
     'saveUninitialized': true,
     'resave': true
-}
+};

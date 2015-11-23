@@ -7,9 +7,11 @@
 var express = require('express');
 var router = express.Router();
 
+
+//grab the incident controller
+var incidentController = require('../controller/incident');
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
-});
+router.get('/', incidentController.home);
 
 module.exports = router;
