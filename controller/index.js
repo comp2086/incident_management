@@ -11,3 +11,18 @@ exports.home = function(req, res, next){
       title: 'Incident Management'
   });
 };
+
+//process login form
+//this function will need access to passport
+exports.login = function(req, res, next){
+    res.render('index',{
+        title: 'Process user login credentials'
+    });
+};
+
+//process user registration form
+exports.register = function(){
+    res.render('index',{
+        title: 'Process user registration form'
+    });
+};

@@ -13,4 +13,12 @@ var indexController = require('../controller/index');
 /* GET home page. */
 router.get('/', indexController.home);
 
+//login post route
+//in our html login form use "/login" as the route to submit to, so action="/login"
+router.post('/login', indexController.login);
+
+//registration post route
+//in our html registration form use "/register" as the route to submit to, so action="/register"
+router.post('/register', indexController.register);
+
 module.exports = router;
