@@ -11,7 +11,13 @@ var router = express.Router();
 //grab the incident controller
 var incidentController = require('../controller/incident');
 
-/* GET home page. */
-router.get('/', incidentController.home);
+//grab the ticket dashboard
+router.get('/', incidentController.dashboard);
+
+//display a ticket update view based on ticket id
+router.get('/update/:id?', incidentController.update);
+
+//allow the user to delete tickets based on id
+router.post('/delete/:id?', incidentController.delete);
 
 module.exports = router;
