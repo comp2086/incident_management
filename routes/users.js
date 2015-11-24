@@ -11,7 +11,8 @@ var router = express.Router();
 //grab the user controller
 var usersController = require('../controller/users');
 
-/* GET users listing. */
-router.get('/', usersController.home);
+//grab the user id from the route(pass it into the route from the session?) and use it to
+//grab the user profile from the db
+router.get('/:id', usersController.update);
 
 module.exports = router;
