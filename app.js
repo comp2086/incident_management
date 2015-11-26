@@ -4,9 +4,25 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var mongoose = require('mongoose');
+var flash = require('connect-flash');
+var passport = require('passport');
+
+//database configuration
+var db = require('./config/db');
+mongoose.connect(db.url);
+
+//check for db connection errors
+mongoose.connection.on('error', function(){
+  console.log('MongoDB Connection Error');
+});
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+//added route handler for incident requests
+var incidents =  require('./routes/incident');
 
 var app = express();
 
@@ -22,8 +38,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//configure session
+var sessionAttributes = require('./config/session');
+app.use(session({
+  secret: sessionAttributes.secret,
+  saveUninitialized: sessionAttributes.saveUninitialized,
+  resave: sessionAttributes.resave
+}));
+
+//configure flash
+app.use(flash());
+
+//configure passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//configure routes
 app.use('/', routes);
 app.use('/users', users);
+//use custom incident routes
+app.use('/incident', incidents);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
