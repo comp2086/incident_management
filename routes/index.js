@@ -19,6 +19,7 @@ router.post('/login', indexController.login);
 
 //registration post route
 //in our html registration form use "/register" as the route to submit to, so action="/register"
-router.post('/register', indexController.register);
+router.get('/register', indexController.register)
+//router.post('/register', indexController.register);
 
 module.exports = router;
