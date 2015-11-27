@@ -10,13 +10,11 @@ var passport = require('passport'),
     User = require('mongoose').model('User');
 
 module.exports = function() {
-  passport.use('local-signup', new LocalStrategy({
+  passport.use('register', new LocalStrategy({
 		passReqToCallback: true
 	},
 	function(req, username, password, done) {
-
 		process.nextTick(function() {
-			// Check if not already logged in
 			if(!req.user) {
 				User.findOne({'username': username},
 				function(err, user) {
@@ -29,17 +27,15 @@ module.exports = function() {
 						return done(null, false, req.flash('signupMessage', 'This username is already taken'));
 					}
 
-          // Create a user object and save it in the DB
+          // Create a user and save it in the DB
 					else {
 						var newUser = new User(req.body);
 						newUser.password = newUser.generateHash(newUser.password);
 						newUser.provider = 'local';
-
 						newUser.save(function(err) {
 							if(err) {
 								throw err;
 							}
-
 							return done(null, newUser);
 						});
 					}

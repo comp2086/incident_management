@@ -16,13 +16,22 @@ register page view
 			<% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
 			<h2>Register</h2>
 			<div class="input">
-				<input id="username" name="username" type="text" placeholder="Username: " autofocus required>
+				<input id="firstName" name="firstName" type="text" placeholder="First name: " autofocus required>
 			</div>
 			<div class="input">
-				<input id="email" name="email" type="text" placeholder="Email: " required>
+				<input id="lastName" name="lastName" type="text" placeholder="Last name: " required>
+			</div>
+			<div class="input">
+				<input id="email" name="email" type="email" placeholder="Email: " required>
+			</div>
+			<div class="input">
+				<input id="username" name="username" type="text" placeholder="Username: " required>
 			</div>
 			<div class="input">
 				<input id="password" name="password" type="password" placeholder="Password: " required>
+			</div>
+			<div class="input">
+				<input id="role" name="role" type="text" placeholder="Please change me to a dropdown list: " required>
 			</div>
 			<div class="submit">
 				<button type="submit">Register</button>
