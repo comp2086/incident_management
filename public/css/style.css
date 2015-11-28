@@ -1,0 +1,21 @@
+.container form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border: 1px solid gray;
+	padding: 20px 40px;
+	text-align: center;
+	-webkit-transform: translateY(-50%) translateX(-50%);
+	-moz-transform: translateY(-50%) translateX(-50%);
+	-ms-transform: translateY(-50%) translateX(-50%);
+	-o-transform: translateY(-50%) translateX(-50%);
+	transform: translateY(-50%) translateX(-50%);
+	-webkit-box-shadow: 0 0 8px #000000;
+	-moz-box-shadow: 0 0 8px #000000;
+	-ms-box-shadow: 0 0 8px #000000;
+	-o-box-shadow: 0 0 8px #000000;
+	box-shadow: 0 0 8px #000000;	
+}
+.interior-header h1 {
+	margin-top: 60px;
+}
