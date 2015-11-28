@@ -15,10 +15,11 @@ var indexController = require('../controller/index');
 router.get('/', indexController.home);
 
 // Login page
+router.get('/login', indexController.renderLogin);
 router.post('/login', indexController.login);
 
 // Register page
-router.get('/register', indexController.renderRegister)
+router.get('/register', indexController.renderRegister);
 router.post('/register', indexController.register);
 
 module.exports = router;
