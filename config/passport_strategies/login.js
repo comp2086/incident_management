@@ -40,4 +40,4 @@ module.exports = function() {
         }) // End of findOne
       }); // End of process
   }));
-}
+};
