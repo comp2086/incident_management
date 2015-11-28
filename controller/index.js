@@ -9,7 +9,15 @@ var passport = require('passport');
 
 // Home GET
 exports.home = function(req, res, next){
-  res.redirect('login');
+  //If user is logged in - redirect to backend dashboard
+  if (req.user) {
+    //This page is yet to be created. Just an example.
+    res.redirect('tickets/index'); 
+  }
+  //If user isn't logged in - redirect to login page
+  else {
+    res.redirect('login');
+  }
 };
 
 
@@ -19,7 +27,7 @@ exports.renderLogin = function (req, res, next) {
       title: 'Login to your Incident Management Account',
       page: 'login',
       username: req.user ? req.user.username : '',
-      messages: req.flash('signinMessage')
+      messages: req.flash('loginMessage')
   });
 };
 // Login POST
@@ -36,7 +44,7 @@ exports.renderRegister = function(req, res, next){
         title: 'Create your Incident Management Account',
         page: 'register',
         username: req.user ? req.user.username : '',
-        messages: req.flash('signupMessage')
+        messages: req.flash('registerMessage')
     });
 };
 // Register page POST
