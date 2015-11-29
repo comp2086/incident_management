@@ -4,21 +4,22 @@
  * November 23, 2015
  * Handles routing for all public page related url request
  */
-var express = require('express');
-var router = express.Router();
 
-//grab the index controller
+var express = require('express'),
+    router = express.Router();
+
+// Controller
 var indexController = require('../controller/index');
 
-/* GET home page. */
+// Home page
 router.get('/', indexController.home);
 
-//login post route
-//in our html login form use "/login" as the route to submit to, so action="/login"
+// Login page
+router.get('/login', indexController.renderLogin);
 router.post('/login', indexController.login);
 
-//registration post route
-//in our html registration form use "/register" as the route to submit to, so action="/register"
+// Register page
+router.get('/register', indexController.renderRegister);
 router.post('/register', indexController.register);
 
 module.exports = router;
