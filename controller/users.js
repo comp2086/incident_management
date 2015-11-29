@@ -5,13 +5,16 @@
 * Handles the logic for requests specific to the user management functionality
 */
 
+var passport =  require('passport')
+    User = require('../models/user');
+
 // Authentication check
 function requireAuth(req, res, next) {
   if(!req.isAuthenticated()) {
     return res.redirect('/signin');
   }
   next();
-}
+};
 
 // Render home page with a list of all users
 // NOTE: in future, this should be based on user's role

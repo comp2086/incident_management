@@ -10,7 +10,7 @@ var passport = require('passport'),
     User = require('mongoose').model('User');
 
 module.exports = function() {
-  passport.use('local-signin', new LocalStrategy({
+  passport.use('login', new LocalStrategy({
     passReqToCallback: true
   },
   function(req, username, password, done) {
@@ -23,21 +23,17 @@ module.exports = function() {
           if(err) {
             return done(err);
           }
-
           // No user found
           if(!user) {
-            return done(null, false, req.flash('signinMessage', 'Incorrect username'));
+            return done(null, false, req.flash('loginMessage', 'Incorrect username'));
           }
-
           // Incorrect password
           if(!user.validPassword(password)) {
-            return done(null, false, req.flash('signinMessage', 'Incorrect password'));
+            return done(null, false, req.flash('loginMessage', 'Incorrect password'));
           }
-
           // Log in
           return done(null, user);
-
         }) // End of findOne
       }); // End of process
   }));
-}
+};

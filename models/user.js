@@ -13,17 +13,29 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
-  email: String,
-  username: String,
+  firstName: {
+    type: String,
+    trim: true
+  },
+  lastName: {
+    type: String,
+    trim: true
+  },
+  email: {
+    type: String,
+    trim: true
+  },
+  username: {
+    type: String,
+    trim: true
+  },
   password: String,
   //using a number to identify role
   //as it will be easy to check
   //if a user is 1 or 2
   //1 == client
   //2 == admin
-  role: Number
+  role: Number,
   salt: String,
 	provider: String,
 	providerId: String,
@@ -56,4 +68,4 @@ UserSchema.set('toJSON', {
 	virtuals: true
 });
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

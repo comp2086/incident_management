@@ -23,6 +23,6 @@ module.exports = function() {
   });
 
   // Strategies
-  require('./strategies/login.js')();
-  require('./strategies/register.js')();
-}
+  require('./passport_strategies/login.js')();
+  require('./passport_strategies/register.js')();
+};

@@ -15,19 +15,18 @@ module.exports = function() {
 	},
 	function(req, username, password, done) {
 		process.nextTick(function() {
+			// If you aren't logged in
 			if(!req.user) {
 				User.findOne({'username': username},
 				function(err, user) {
 					if(err) {
 						return done(err);
 					}
-
 					// Username already exists
 					if(user) {
-						return done(null, false, req.flash('signupMessage', 'This username is already taken'));
+						return done(null, false, req.flash('registerMessage', 'This username is already taken'));
 					}
-
-          // Create a user and save it in the DB
+			        // Create a user and save it in the DB
 					else {
 						var newUser = new User(req.body);
 						newUser.password = newUser.generateHash(newUser.password);
@@ -40,8 +39,7 @@ module.exports = function() {
 						});
 					}
 				});
-
-      // Already logged in
+      		// Already logged in
 			} else {
 				return done(null, req.user);
 			}
