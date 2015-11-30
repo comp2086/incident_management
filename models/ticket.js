@@ -10,14 +10,15 @@ var mongoose = require('mongoose');
 //build schema object
 var Schema = mongoose.Schema;
 
+//removed semcologns from properties as they are not needed
 var IncidentSchema = new Schema({
   userId: {
     type: String,
-    trim: true;
+    trim: true
   },
   description: {
     type: String,
-    trim: true;
+    trim: true
   },
   //storing priority as a number
   //for easy comparison
@@ -31,15 +32,15 @@ var IncidentSchema = new Schema({
     {
       narrativeId: {
         type: String,
-        trim: true;
+        trim: true
       },
       narrativeTitle: {
         type: String,
-        trim: true;
+        trim: true
       },
       narrativeBody: {
         type: String,
-        trim: true;
+        trim: true
       },
       narrativeCreatedAt: {
         type: Date,

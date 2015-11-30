@@ -1,5 +1,36 @@
 <%- include ../partials/header.ejs %>
 
-<!-- Used to add a ticket - using a form -->
+<section>
+    <div class="container">
+        <h1><%= title %></h1>
+
+        <form method="post" action="/processAdd">
+            <fieldset class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" placeholder="description" required></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="priority">Priority</label>
+                <select class="form-control" id="priority" name="priority">
+                    <option value="1">1 (Low)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (High)</option>
+                </select>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status">
+                    <option value="1">Open</option>
+                    <option value="2">In Progress</option>
+                    <option value="3">Closed</option>
+                </select>
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Submit Ticket</button>
+        </form>
+
+    </div>
+</section>
 
 <%- include ../partials/footer.ejs %>

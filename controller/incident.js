@@ -26,3 +26,15 @@ exports.delete = function(req, res, next){
   });
 };
 
+//provides page for user add ticket
+exports.add = function(req, res, next){
+    res.render('tickets/add',{
+        title: 'Add a ticket'
+    });
+};
+
+//processes submitted user data to add ticket
+exports.processAdd = function(req, res, next){
+
+};
+

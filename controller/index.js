@@ -32,7 +32,7 @@ exports.renderLogin = function (req, res, next) {
 };
 // Login POST
 exports.login = passport.authenticate('login', {
-  successRedirect: '/users',
+  successRedirect: '/incident',
   failureRedirect: '/login',
   failureFlash: true
 });
