@@ -11,8 +11,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var IncidentSchema = new Schema({
-  userId: String,
-  description: String,
+  userId: {
+    type: String,
+    trim: true;
+  },
+  description: {
+    type: String,
+    trim: true;
+  },
   //storing priority as a number
   //for easy comparison
   priority: Number,
@@ -23,9 +29,18 @@ var IncidentSchema = new Schema({
   //modularity
   narrative: [
     {
-      narrativeId: String,
-      narrativeTitle: String,
-      narrativeBody: String,
+      narrativeId: {
+        type: String,
+        trim: true;
+      },
+      narrativeTitle: {
+        type: String,
+        trim: true;
+      },
+      narrativeBody: {
+        type: String,
+        trim: true;
+      },
       narrativeCreatedAt: {
         type: Date,
         default: Date.now

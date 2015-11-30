@@ -1,32 +1,29 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var mongoose = require('mongoose');
-var flash = require('connect-flash');
-var passport = require('passport');
+var express = require('express'),
+    path = require('path'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    mongoose = require('mongoose'),
+    flash = require('connect-flash'),
+    passport = require('passport');
 
 //database configuration
-var db = require('./config/db');
+var db = require('./config/db.js');
 mongoose.connect(db.url);
-
-//check for db connection errors
-mongoose.connection.on('error', function(){
-  console.log('MongoDB Connection Error');
+mongoose.connection.on('error', function() {
+  console.error('MongoDB Connection Error');
 });
-
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-//added route handler for incident requests
-var incidents =  require('./routes/incident');
 
 var app = express();
 
-// view engine setup
+require('./config/passport')(passport);
+
+//view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -57,7 +54,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 //use custom incident routes
-app.use('/incident', incidents);
+//app.use('/dashboard', dashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
