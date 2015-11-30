@@ -5,17 +5,18 @@
  * Handles routing for all user related url request
  */
 var express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    auth = require('../config/auth.js');
 
 // User controller
 var usersController = require('../controller/users');
 
 // Users home page
-router.get('/', usersController.renderIndex);
+router.get('/', auth.requireAuth, usersController.renderIndex);
 
 //grab the user id from the route(pass it into the route from the session?) and use it to
 //grab the user profile from the db
-//router.get('/:id', usersController.update);
+//router.get('/:id', requireAuth, usersController.update);
 
 
 
