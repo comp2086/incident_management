@@ -1,19 +1,34 @@
 <!--
-Anthony Scinocco
+Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
 incident-management.azurewebsites.net
-November 24, 2015
-Provides a universal header for our site
+November 23, 2015
+header partial view
 -->
+
+
 <!DOCTYPE html>
-<html lang="en"><!--Add angular app here-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-    <title><%= title %></title>
-</head>
-<!--added container for formatting-->
-<body>
+<html>
+
+    <head>
+    	<meta charset="UTF-8">
+        <title><%= title; %></title>
+		
+		<!-- Css/JS/Jquery -->
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+		<!-- font-awesome -->
+		<link red="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">	
+
+		<!-- Custom CSS -->	
+		<link rel="stylesheet" href="css/style.css">
+
+ 	</head>
+
+    <body>
+
+	    <header>
+	
+			<% include navbar %>
+
+	    </header>				    
