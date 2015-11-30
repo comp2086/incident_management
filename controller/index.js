@@ -49,7 +49,7 @@ exports.renderRegister = function(req, res, next){
 };
 // Register page POST
 exports.register = passport.authenticate('register', {
-  successRedirect: '/users',
+  successRedirect: '/incident',
   failureRedirect: '/register',
   failureFlash: true
 });

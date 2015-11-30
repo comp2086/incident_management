@@ -18,7 +18,7 @@ router.get('/', auth.requireAuth, incidentController.dashboard);
 router.get('/add', auth.requireAuth, incidentController.add);
 
 //process added ticket
-router.post('/processAdd', auth.requireAuth, incidentController.processAdd);
+router.post('/add', auth.requireAuth, incidentController.processAdd);
 
 //display a ticket update view based on ticket id
 router.get('/update/:id?', auth.requireAuth, incidentController.update);

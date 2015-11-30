@@ -5,6 +5,9 @@
  * Handles the logic for requests specific to the incident management functionality
  */
 
+//need the ticket model to create new tickets
+var Ticket = require('../models/ticket');
+
 //dashboard page
 exports.dashboard = function(req, res, next){
     res.render('index',{
@@ -35,6 +38,19 @@ exports.add = function(req, res, next){
 
 //processes submitted user data to add ticket
 exports.processAdd = function(req, res, next){
-
+    var ticket = new Ticket(req.body);
+    Ticket.create({
+        userId: req.user._id,
+        description: req.body.description,
+        priority: req.body.priority,
+        status: req.body.status
+    }, function(err, Ticket){
+        if(err){
+            console.log(err);
+            res.end(err);
+        } else {
+            res.redirect('/incident');
+        }
+    });
 };
 
