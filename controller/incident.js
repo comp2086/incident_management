@@ -20,10 +20,20 @@ exports.dashboard = function(req, res, next){
 };
 
 //update ticket page
+//need 2 seperate views here because
+//clients cannot update all the same fields
+//as admins can
 exports.update = function(req, res, next){
-  res.render('index',{
-      title: 'Update ticket'
-  });
+
+  if(req.user.role == 1) {//client update page
+      res.render('tickets/client-update',{
+          title: 'Update your ticket'
+      });
+  }else if(req.user.role == 2) {//admin update page
+      res.render('tickets/update',{
+          title: 'Update the users ticket'
+      });
+  }
 };
 
 //processes the submitted updated ticket
