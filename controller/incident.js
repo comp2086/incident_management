@@ -10,8 +10,12 @@ var Ticket = require('../models/ticket');
 
 //dashboard page
 exports.dashboard = function(req, res, next){
-    res.render('index',{
-        title: 'Incident Dashboard'
+    //sends ticket json array to the tickets variable on the incident dashboard
+    Ticket.find({}, function(err, ticket){
+        res.render('tickets/index',{
+            title: 'Incident Dashboard',
+            tickets: ticket
+        });
     });
 };
 
@@ -22,11 +26,22 @@ exports.update = function(req, res, next){
   });
 };
 
+//processes the submitted updated ticket
+exports.processUpdate = function(req, res, next){
+
+};
+
 //delete ticket route functionality
 exports.delete = function(req, res, next){
-  res.render('index', {
-      title: 'Delete functionality here'
-  });
+    var id = req.params.id;
+    Ticket.remove({_id: id}, function(err){
+        if(err){
+            console.log(err);
+            res.end(err);
+        } else {
+            res.redirect('/incident/');
+        }
+    });
 };
 
 //provides page for user add ticket

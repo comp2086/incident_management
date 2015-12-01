@@ -1,4 +1,55 @@
+<%/**
+ * Anthony Scinocco 200271982
+ * November 30, 2015
+ * incident-management.azurewebsite.net
+ * Contains the view for our ticket dashboard
+ *
+ * */%>
 <%- include ../partials/header.ejs %>
+
+
+<section>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Ticket Owner</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i < tickets.length; i++) { %>
+                    <tr>
+                        <td><%= tickets[i]._id %></td>
+                        <td><%= tickets[i].userId %></td>
+                        <td><%= tickets[i].description %></td>
+                        <td><%= tickets[i].priority %></td>
+                        <%if(tickets[i].status == 1){ %>
+                            <td>Open</td>
+                        <% }else if(tickets[i].status == 2){ %>
+                            <td>In Progress</td>
+                        <% }else if(tickets[i].status == 3){ %>
+                            <td>Closed</td>
+                        <% } %>
+                        <td><a href="/incident/update/<%= tickets[i]._id %>" title="Update" class="btn btn-primary">Update</a></td>
+                        <td><a href="/incident/delete/<%= tickets[i]._id %>" title="Delete" onclick="return confirm('Are you sure you what to delete <%= tickets[i]._id %> from your tickets?');" class="btn btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+            <a href="/incident/add/" title="Add a ticket" class="btn btn-primary">Add Ticket</a>
+        </div>
+    </div>
+</section>
 
 <!-- This is our Ticket "Dashboard" where appropriate tickets will be displayed
 in list/table format. Only a portion of the information will be displayed. Click

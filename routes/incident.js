@@ -24,6 +24,6 @@ router.post('/add', auth.requireAuth, incidentController.processAdd);
 router.get('/update/:id?', auth.requireAuth, incidentController.update);
 
 //allow the user to delete tickets based on id
-router.post('/delete/:id?', auth.requireAuth, incidentController.delete);
+router.get('/delete/:id?', auth.requireAuth, incidentController.delete);
 
 module.exports = router;
