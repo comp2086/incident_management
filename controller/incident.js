@@ -10,13 +10,25 @@ var Ticket = require('../models/ticket');
 
 //dashboard page
 exports.dashboard = function(req, res, next){
-    //sends ticket json array to the tickets variable on the incident dashboard
-    Ticket.find({}, function(err, ticket){
-        res.render('tickets/index',{
-            title: 'Incident Dashboard',
-            tickets: ticket
+
+    if(req.user.role == 1){//show this if the user is a client
+        //find all tickets that belong to the one logged in user
+        Ticket.find({userId: req.user._id}, function(err, ticket){
+            res.render('tickets/index',{
+                title: 'Client Incident Dashboard',
+                tickets: ticket
+            });
         });
-    });
+    }else if (req.user.role == 2) {//show this if the user is an admin
+        //finds all the tickets
+        //sends ticket json array to the tickets variable on the incident dashboard
+        Ticket.find({}, function (err, ticket) {
+            res.render('tickets/index', {
+                title: 'Admin Incident Dashboard',
+                tickets: ticket
+            });
+        });
+    }
 };
 
 //update ticket page
@@ -26,8 +38,11 @@ exports.dashboard = function(req, res, next){
 exports.update = function(req, res, next){
 
   if(req.user.role == 1) {//client update page
-      res.render('tickets/client-update',{
-          title: 'Update your ticket'
+      Ticket.find({userId: req.user._id}, function(err, ticket){
+          res.render('tickets/client-update',{
+              title: 'Update your ticket',
+              tickets: ticket
+          });
       });
   }else if(req.user.role == 2) {//admin update page
       res.render('tickets/update',{

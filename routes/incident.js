@@ -23,6 +23,9 @@ router.post('/add', auth.requireAuth, incidentController.processAdd);
 //display a ticket update view based on ticket id
 router.get('/update/:id?', auth.requireAuth, incidentController.update);
 
+//process the updated ticket
+router.post('/update', auth.requireAuth, incidentController.processUpdate);
+
 //allow the user to delete tickets based on id
 router.get('/delete/:id?', auth.requireAuth, incidentController.delete);
 
