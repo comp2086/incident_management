@@ -16,7 +16,8 @@ exports.dashboard = function(req, res, next){
         Ticket.find({userId: req.user._id}, function(err, ticket){
             res.render('tickets/index',{
                 title: 'Client Incident Dashboard',
-                tickets: ticket
+                tickets: ticket,
+                user: req.user
             });
         });
     }else if (req.user.role == 2) {//show this if the user is an admin
@@ -25,7 +26,8 @@ exports.dashboard = function(req, res, next){
         Ticket.find({}, function (err, ticket) {
             res.render('tickets/index', {
                 title: 'Admin Incident Dashboard',
-                tickets: ticket
+                tickets: ticket,
+                user: req.user
             });
         });
     }
@@ -41,12 +43,14 @@ exports.update = function(req, res, next){
       Ticket.find({userId: req.user._id}, function(err, ticket){
           res.render('tickets/client-update',{
               title: 'Update your ticket',
-              tickets: ticket
+              tickets: ticket,
+              user: req.user
           });
       });
   }else if(req.user.role == 2) {//admin update page
       res.render('tickets/update',{
-          title: 'Update the users ticket'
+          title: 'Update the users ticket',
+          user: req.user
       });
   }
 };
@@ -73,11 +77,13 @@ exports.delete = function(req, res, next){
 exports.add = function(req, res, next){
     if(req.user.role == 1){
         res.render('tickets/add-client',{
-            title: 'Add a ticket'
+            title: 'Add a ticket',
+            user: req.user
         });
     }else if(req.user.role == 2){
         res.render('tickets/add-admin',{
-            title: 'Add a ticket'
+            title: 'Add a ticket',
+            user: req.user
         });
     }
 };
