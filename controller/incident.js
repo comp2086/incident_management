@@ -71,9 +71,15 @@ exports.delete = function(req, res, next){
 
 //provides page for user add ticket
 exports.add = function(req, res, next){
-    res.render('tickets/add',{
-        title: 'Add a ticket'
-    });
+    if(req.user.role == 1){
+        res.render('tickets/add-client',{
+            title: 'Add a ticket'
+        });
+    }else if(req.user.role == 2){
+        res.render('tickets/add-admin',{
+            title: 'Add a ticket'
+        });
+    }
 };
 
 //processes submitted user data to add ticket
@@ -83,8 +89,11 @@ exports.processAdd = function(req, res, next){
         userId: req.user._id,
         description: req.body.description,
         priority: req.body.priority,
-        status: req.body.status,
-        isUrgent: req.body.isUrgent
+        status: 1,//sets the default status to open
+        isUrgent: req.body.isUrgent,
+        urgency: req.body.urgency,
+        impact: req.body.impact,
+        title: req.body.title
     }, function(err, Ticket){
         if(err){
             console.log(err);

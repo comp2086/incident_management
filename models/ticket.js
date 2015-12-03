@@ -20,6 +20,11 @@ var IncidentSchema = new Schema({
     type: String,
     trim: true
   },
+
+  title: {
+    type: String,
+    trim: true
+  },
   //storing priority as a number
   //for easy comparison
   priority: Number,
