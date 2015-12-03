@@ -12,7 +12,12 @@ var Schema = mongoose.Schema;
 
 //removed semcologns from properties as they are not needed
 var IncidentSchema = new Schema({
-  userId: {
+  //userId: { //added complexity to our controllers going to try username as our unique field instead
+    //type: String,
+    //trim: true
+  //},
+  //holds the username of the client the ticket belongs to
+  client: {
     type: String,
     trim: true
   },

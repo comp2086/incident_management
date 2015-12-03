@@ -7,26 +7,27 @@
 
 //need the ticket model to create new tickets
 var Ticket = require('../models/ticket');
+var User = require('../models/user');
 
 //dashboard page
 exports.dashboard = function(req, res, next){
 
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
-        Ticket.find({userId: req.user._id}, function(err, ticket){
+        Ticket.find({client: req.user.username}, function(err, ticketList){
             res.render('tickets/index',{
                 title: 'Client Incident Dashboard',
-                tickets: ticket,
+                tickets: ticketList,
                 user: req.user
             });
         });
     }else if (req.user.role == 2) {//show this if the user is an admin
         //finds all the tickets
         //sends ticket json array to the tickets variable on the incident dashboard
-        Ticket.find({}, function (err, ticket) {
+        Ticket.find({}, function (err, ticketList) {
             res.render('tickets/index', {
                 title: 'Admin Incident Dashboard',
-                tickets: ticket,
+                tickets: ticketList,
                 user: req.user
             });
         });
@@ -81,32 +82,59 @@ exports.add = function(req, res, next){
             user: req.user
         });
     }else if(req.user.role == 2){
-        res.render('tickets/add-admin',{
-            title: 'Add a ticket',
-            user: req.user
+        //query all users to populate client username dropdown box
+        User.find({}, function(err, users){
+            res.render('tickets/add-admin',{
+                title: 'Add a ticket',
+                user: req.user,
+                userList: users
+            });
         });
     }
 };
 
 //processes submitted user data to add ticket
 exports.processAdd = function(req, res, next){
-    var ticket = new Ticket(req.body);
-    Ticket.create({
-        userId: req.user._id,
-        description: req.body.description,
-        priority: req.body.priority,
-        status: 1,//sets the default status to open
-        isUrgent: req.body.isUrgent,
-        urgency: req.body.urgency,
-        impact: req.body.impact,
-        title: req.body.title
-    }, function(err, Ticket){
-        if(err){
-            console.log(err);
-            res.end(err);
-        } else {
-            res.redirect('/incident');
-        }
-    });
+    if(req.user.role == 1) {
+        var ticket = new Ticket(req.body);
+        //default values are passed in when a client creates
+        //a ticket
+        Ticket.create({
+            client: req.user.username,
+            description: req.body.description,
+            priority: 1,
+            status: 1,//sets the default status to open
+            isUrgent: req.body.isUrgent,
+            urgency: 1,
+            impact: 1,
+            title: req.body.title
+        }, function(err, Ticket){
+            if(err){
+                console.log(err);
+                res.end(err);
+            } else {
+                res.redirect('/incident');
+            }
+        });
+    }else if(req.user.role == 2){
+        var ticket = new Ticket(req.body);
+        Ticket.create({
+            client: req.body.client,
+            description: req.body.description,
+            priority: req.body.priority,
+            status: 1,//sets the default status to open
+            isUrgent: req.body.isUrgent,
+            urgency: req.body.urgency,
+            impact: req.body.impact,
+            title: req.body.title
+        }, function(err, Ticket){
+            if(err){
+                console.log(err);
+                res.end(err);
+            } else {
+                res.redirect('/incident');
+            }
+        });
+    }
 };
 

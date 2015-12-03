@@ -27,7 +27,7 @@
                 <% for(var i = 0; i < tickets.length; i++) { %>
                     <tr>
                         <td><%= tickets[i]._id %></td>
-                        <td><%= tickets[i].userId %></td>
+                        <td><%= tickets[i].client %></td>
                         <td><%= tickets[i].title %></td>
                         <td><%= tickets[i].priority %></td>
                         <%if(tickets[i].status == 1){ %>
