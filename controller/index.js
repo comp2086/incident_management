@@ -12,7 +12,7 @@ exports.home = function(req, res, next){
   //If user is logged in - redirect to backend dashboard
   if (req.user) {
     //This page is yet to be created. Just an example.
-    res.redirect('tickets/index'); 
+    res.redirect('incident');
   }
   //If user isn't logged in - redirect to login page
   else {
@@ -32,7 +32,7 @@ exports.renderLogin = function (req, res, next) {
 };
 // Login POST
 exports.login = passport.authenticate('login', {
-  successRedirect: '/users',
+  successRedirect: '/incident',
   failureRedirect: '/login',
   failureFlash: true
 });
@@ -49,7 +49,7 @@ exports.renderRegister = function(req, res, next){
 };
 // Register page POST
 exports.register = passport.authenticate('register', {
-  successRedirect: '/users',
+  successRedirect: '/incident',
   failureRedirect: '/register',
   failureFlash: true
 });

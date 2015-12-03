@@ -9,7 +9,7 @@
 */
 //modules for schmea
 var mongoose = require('mongoose'),
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcrypt-nodejs'),
     Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
@@ -55,7 +55,7 @@ var UserSchema = new Schema({
 
 //hash users password
 UserSchema.methods.generateHash = function(password){
-  return bcrypt.hashSync(password, 8, null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 //validate password
