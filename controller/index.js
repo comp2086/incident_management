@@ -27,7 +27,8 @@ exports.renderLogin = function (req, res, next) {
       title: 'Login to your Incident Management Account',
       page: 'login',
       username: req.user ? req.user.username : '',
-      messages: req.flash('loginMessage')
+      messages: req.flash('loginMessage'),
+      user: req.user
   });
 };
 // Login POST
@@ -38,13 +39,15 @@ exports.login = passport.authenticate('login', {
 });
 
 
+
 // Register page GET
 exports.renderRegister = function(req, res, next){
     res.render('register', {
         title: 'Create your Incident Management Account',
         page: 'register',
         username: req.user ? req.user.username : '',
-        messages: req.flash('registerMessage')
+        messages: req.flash('registerMessage'),
+        user: req.user
     });
 };
 // Register page POST

@@ -18,6 +18,12 @@ router.get('/', indexController.home);
 router.get('/login', indexController.renderLogin);
 router.post('/login', indexController.login);
 
+//logout
+router.get('/logout', function(req, res){
+    req.logOut();
+    res.redirect('/');
+});
+
 // Register page
 router.get('/register', indexController.renderRegister);
 router.post('/register', indexController.register);

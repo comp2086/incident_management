@@ -17,7 +17,8 @@ exports.renderIndex = function(req, res, next) {
     } else {
       res.render('users/index', {
         title: 'Users list',
-        usersCollection: users
+        usersCollection: users,
+        user: req.user
       });
     }
   }).sort({ firstname : 1}); // ('-1' - desc)
@@ -25,6 +26,7 @@ exports.renderIndex = function(req, res, next) {
 
 exports.update = function(req, res, next){
   res.render('index',{
-    title: 'User Management'
+    title: 'User Management',
+    user: req.user
   });
 };
