@@ -20,12 +20,9 @@
                 </select>
             </fieldset>
             <fieldset class="form-group">
-                <label for="status">Status</label>
-                <select class="form-control" id="status" name="status">
-                    <option value="1">Open</option>
-                    <option value="2">In Progress</option>
-                    <option value="3">Closed</option>
-                </select>
+                <div class="checkbox">
+                    <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
+                </div>
             </fieldset>
             <button type="submit" class="btn btn-primary">Submit Ticket</button>
         </form>

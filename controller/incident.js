@@ -83,7 +83,8 @@ exports.processAdd = function(req, res, next){
         userId: req.user._id,
         description: req.body.description,
         priority: req.body.priority,
-        status: req.body.status
+        status: req.body.status,
+        isUrgent: req.body.isUrgent
     }, function(err, Ticket){
         if(err){
             console.log(err);

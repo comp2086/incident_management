@@ -26,6 +26,16 @@ var IncidentSchema = new Schema({
   //storing status as a number for
   //easy comparison
   status: Number,
+  //the overall impact of ticket on the userbase
+  impact: Number,
+  //how urgent the ticket is based on admin review
+  urgency: Number,
+  //a calculated value base on impact and urgency
+  //that determine how import a ticket is
+  severity: Number,
+  //allows the user to state whether or not they believe that there problem is urgent
+  //then an admin can decide how urgent the ticket really is
+  isUrgent: Boolean,
   //narrative stored as nested document for
   //modularity
   narrative: [
