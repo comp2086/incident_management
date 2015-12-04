@@ -6,7 +6,6 @@
 */
 //modules for schema
 var mongoose = require('mongoose');
-
 //build schema object
 var Schema = mongoose.Schema;
 
@@ -16,6 +15,15 @@ var IncidentSchema = new Schema({
     //type: String,
     //trim: true
   //},
+
+  //reference Id is a user friendly number that can be given to users
+  //to reference their ticket in the ticket database or provide to the admin
+  //working on their ticket to find their ticket
+  referenceId: {
+    type: String,
+    unique: true
+  },
+
   //holds the username of the client the ticket belongs to
   client: {
     type: String,

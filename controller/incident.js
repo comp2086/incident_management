@@ -8,6 +8,7 @@
 //need the ticket model to create new tickets
 var Ticket = require('../models/ticket');
 var User = require('../models/user');
+var shortId = require('shortid');
 
 //dashboard page
 exports.dashboard = function(req, res, next){
@@ -107,7 +108,8 @@ exports.processAdd = function(req, res, next){
             isUrgent: req.body.isUrgent,
             urgency: 1,
             impact: 1,
-            title: req.body.title
+            title: req.body.title,
+            referenceId: shortId.generate()
         }, function(err, Ticket){
             if(err){
                 console.log(err);
@@ -126,7 +128,8 @@ exports.processAdd = function(req, res, next){
             isUrgent: req.body.isUrgent,
             urgency: req.body.urgency,
             impact: req.body.impact,
-            title: req.body.title
+            title: req.body.title,
+            referenceId: shortId.generate()
         }, function(err, Ticket){
             if(err){
                 console.log(err);

@@ -14,7 +14,7 @@
             <table class="table-bordered">
                 <thead>
                     <tr>
-                        <th>Ticket ID</th>
+                        <th>Ticket Reference ID</th>
                         <th>Ticket Owner</th>
                         <th>Title</th>
                         <th>Priority</th>
@@ -26,7 +26,7 @@
                 <tbody>
                 <% for(var i = 0; i < tickets.length; i++) { %>
                     <tr>
-                        <td><%= tickets[i]._id %></td>
+                        <td><%= tickets[i].referenceId %></td>
                         <td><%= tickets[i].client %></td>
                         <td><%= tickets[i].title %></td>
                         <td><%= tickets[i].priority %></td>
