@@ -14,11 +14,12 @@
             <table class="table-bordered">
                 <thead>
                     <tr>
-                        <th>Ticket ID</th>
+                        <th>Ticket Reference ID</th>
                         <th>Ticket Owner</th>
                         <th>Title</th>
-                        <th>Priority</th>
+                        <th>Severity</th>
                         <th>Status</th>
+                        <th>Opened On</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
@@ -26,17 +27,20 @@
                 <tbody>
                 <% for(var i = 0; i < tickets.length; i++) { %>
                     <tr>
-                        <td><%= tickets[i]._id %></td>
-                        <td><%= tickets[i].userId %></td>
+                        <td><%= tickets[i].referenceId %></td>
+                        <td><%= tickets[i].username %></td>
                         <td><%= tickets[i].title %></td>
-                        <td><%= tickets[i].priority %></td>
-                        <%if(tickets[i].status == 1){ %>
-                            <td>Open</td>
-                        <% }else if(tickets[i].status == 2){ %>
-                            <td>In Progress</td>
-                        <% }else if(tickets[i].status == 3){ %>
-                            <td>Closed</td>
-                        <% } %>
+                        <td>
+                            <% if (tickets[i].severity <= 15) { %>
+                                Green
+                            <% } else if(tickets[i].severity >= 16 && tickets[i].severity <= 30) { %>
+                                Yellow
+                            <% } else if (tickets[i].severity >= 31 && tickets[i].severity <= 45) { %>
+                                Red
+                            <% } %>
+                        </td>
+                        <td><%= tickets[i].status %></td>
+                        <td><%= tickets[i].createdAt %></td>
                         <td><a href="/incident/update/<%= tickets[i]._id %>" title="Update" class="btn btn-primary">Update</a></td>
                         <td><a href="/incident/delete/<%= tickets[i]._id %>" title="Delete" onclick="return confirm('Are you sure you what to delete <%= tickets[i]._id %> from your tickets?');" class="btn btn-danger">
                                 Delete

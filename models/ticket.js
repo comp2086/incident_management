@@ -6,13 +6,25 @@
 */
 //modules for schema
 var mongoose = require('mongoose');
-
 //build schema object
 var Schema = mongoose.Schema;
 
 //removed semcologns from properties as they are not needed
 var IncidentSchema = new Schema({
-  userId: {
+  //userId: { //added complexity to our controllers going to try username as our unique field instead
+    //type: String,
+    //trim: true
+  //},
+
+  //reference Id is a user friendly number that can be given to users
+  //to reference their ticket in the ticket database or provide to the admin
+  //working on their ticket to find their ticket
+  referenceId: {
+    type: String,
+    unique: true
+  },
+  //holds the username of the client the ticket belongs to
+  username: {
     type: String,
     trim: true
   },
@@ -30,7 +42,7 @@ var IncidentSchema = new Schema({
   priority: Number,
   //storing status as a number for
   //easy comparison
-  status: Number,
+  status: String,
   //the overall impact of ticket on the userbase
   impact: Number,
   //how urgent the ticket is based on admin review
@@ -43,6 +55,13 @@ var IncidentSchema = new Schema({
   isUrgent: Boolean,
   //narrative stored as nested document for
   //modularity
+
+  //holds the date of creation for sorting
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+
   narrative: [
     {
       narrativeId: {
