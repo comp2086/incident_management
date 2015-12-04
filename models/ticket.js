@@ -55,6 +55,13 @@ var IncidentSchema = new Schema({
   isUrgent: Boolean,
   //narrative stored as nested document for
   //modularity
+
+  //holds the date of creation for sorting
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+
   narrative: [
     {
       narrativeId: {

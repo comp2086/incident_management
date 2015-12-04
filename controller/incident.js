@@ -22,7 +22,9 @@ exports.dashboard = function(req, res, next){
 
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
-        Ticket.find({client: req.user.username}, function(err, ticketList){
+        Ticket.find({client: req.user.username})
+            .sort({createdAt: 'desc'})
+            .exec(function(err, ticketList){
             res.render('tickets/index',{
                 title: 'Client Incident Dashboard',
                 tickets: ticketList,
@@ -32,7 +34,9 @@ exports.dashboard = function(req, res, next){
     }else if (req.user.role == 2) {//show this if the user is an admin
         //finds all the tickets
         //sends ticket json array to the tickets variable on the incident dashboard
-        Ticket.find({}, function (err, ticketList) {
+        Ticket.find({})
+            .sort({createdAt: 'desc'})
+            .exec(function (err, ticketList) {
             res.render('tickets/index', {
                 title: 'Admin Incident Dashboard',
                 tickets: ticketList,
@@ -117,7 +121,8 @@ exports.processAdd = function(req, res, next){
             impact: 1,
             title: req.body.title,
             referenceId: shortId.generate(),
-            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority)
+            //defaults are provided as clients cannot change this information
+            severity: calculateSeverity(1, 1, 1)
         }, function(err, Ticket){
             if(err){
                 console.log(err);
