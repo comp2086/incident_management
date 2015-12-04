@@ -9,6 +9,7 @@
 var Ticket = require('../models/ticket');
 var User = require('../models/user');
 var shortId = require('shortid');
+var mongoose = require('mongoose');
 
 //this calculates the severity of tickets based
 // based on weighted values for eac variable
@@ -83,7 +84,33 @@ exports.update = function(req, res, next){
 
 //processes the submitted updated ticket
 exports.processUpdate = function(req, res, next){
+    var ticket = new Ticket(req.body);
 
+    Ticket.update({_id: req.params.id}, {$push :{
+        description: req.body.description,
+        priority: req.body.priority,
+        status: req.body.status,//sets the default status to open
+        isUrgent: req.body.isUrgent,
+        urgency: req.body.urgency,
+        impact: req.body.impact,
+        title: req.body.title,
+        severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
+        narrative: [{
+            //generate unique id for narrative
+            narrativeId:shortId.generate(),
+            //grabs title and body from admin-update view
+            narrativeTitle:req.body.narrativeTitle,
+            narrativeBody:req.body.narrativeBody
+        }]
+    }}, function(err){
+        if(err){
+            console.log(err);
+            res.end(err);
+        }else {
+
+            res.redirect('/incident/')
+        }
+    });
 };
 
 //delete ticket route functionality
