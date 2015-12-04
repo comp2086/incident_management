@@ -17,7 +17,7 @@
                         <th>Ticket Reference ID</th>
                         <th>Ticket Owner</th>
                         <th>Title</th>
-                        <th>Priority</th>
+                        <th>Severity</th>
                         <th>Status</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -29,7 +29,15 @@
                         <td><%= tickets[i].referenceId %></td>
                         <td><%= tickets[i].client %></td>
                         <td><%= tickets[i].title %></td>
-                        <td><%= tickets[i].priority %></td>
+                        <td>
+                            <% if (tickets[i].severity <= 15) { %>
+                                Green
+                            <% } else if(tickets[i].severity >= 16 && tickets[i].severity <= 30) { %>
+                                Yellow
+                            <% } else if (tickets[i].severity >= 31 && tickets[i].severity <= 45) { %>
+                                Red
+                            <% } %>
+                        </td>
                         <%if(tickets[i].status == 1){ %>
                             <td>Open</td>
                         <% }else if(tickets[i].status == 2){ %>

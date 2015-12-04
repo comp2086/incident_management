@@ -10,6 +10,13 @@ var Ticket = require('../models/ticket');
 var User = require('../models/user');
 var shortId = require('shortid');
 
+//this calculates the severity of tickets based
+// based on weighted values for eac variable
+var calculateSeverity = function(impact, urgency, priority){
+    return ((impact) * ((urgency * 0.75) + (priority * 0.50)));
+};
+
+
 //dashboard page
 exports.dashboard = function(req, res, next){
 
@@ -109,7 +116,8 @@ exports.processAdd = function(req, res, next){
             urgency: 1,
             impact: 1,
             title: req.body.title,
-            referenceId: shortId.generate()
+            referenceId: shortId.generate(),
+            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority)
         }, function(err, Ticket){
             if(err){
                 console.log(err);
@@ -129,7 +137,8 @@ exports.processAdd = function(req, res, next){
             urgency: req.body.urgency,
             impact: req.body.impact,
             title: req.body.title,
-            referenceId: shortId.generate()
+            referenceId: shortId.generate(),
+            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority)
         }, function(err, Ticket){
             if(err){
                 console.log(err);
