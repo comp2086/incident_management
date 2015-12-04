@@ -40,7 +40,11 @@
             </fieldset>
             <fieldset class="form-group">
                 <div class="checkbox">
+                    <% if (ticket.isUrgent == true) { %>
+                        <input type="checkbox" name="isUrgent" id="isUrgent" checked> Is this ticket urgent?
+                    <% } else if(ticket.isUrgent == false || ticket.isUrgent == null) { %>
                     <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
+                    <% } %>
                 </div>
             </fieldset>
             <button type="submit" class="btn btn-primary">Update Ticket</button>

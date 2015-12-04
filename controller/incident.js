@@ -53,18 +53,31 @@ exports.dashboard = function(req, res, next){
 exports.update = function(req, res, next){
 
   if(req.user.role == 1) {//client update page
+      //gets id parameter from url string
       Ticket.findById(req.params.id, function(err, ticket){
-          res.render('tickets/update-client',{
-              title: 'Update your ticket',
-              ticket: ticket,
-              user: req.user
-          });
-      });
+          if(err){
+              console.log(err);
+              res.end(err);
+          }else {
+              res.render('tickets/update-client', {
+                  title: 'Update your ticket',
+                  ticket: ticket,
+                  user: req.user
+              });
+          }});
   }else if(req.user.role == 2) {//admin update page
-      res.render('tickets/update-admin',{
-          title: 'Update the users ticket',
-          user: req.user
-      });
+      //gets id parameter from url string
+      Ticket.findById(req.params.id, function(err, ticket) {
+          if(err){
+              console.log(err);
+              res.end(err);
+          }else {
+              res.render('tickets/update-admin', {
+                  title: 'Update the users ticket',
+                  ticket: ticket,
+                  user: req.user
+              });
+          }});
   }
 };
 
