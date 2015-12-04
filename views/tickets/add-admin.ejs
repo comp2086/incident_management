@@ -14,8 +14,8 @@
                 <textarea class="form-control" id="description" name="description" placeholder="description" required></textarea>
             </fieldset>
             <fieldset class="form-group">
-                <label for="client">Client Username</label>
-                <select class="form-control" id="client" name="client">
+                <label for="username">Client Username</label>
+                <select class="form-control" id="username" name="username">
                     <%for(var i = 0; i < userList.length; i++) { %>
                         <option value="<%= userList[i].username %>">
                             <%= userList[i].username %>

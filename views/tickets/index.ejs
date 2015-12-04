@@ -28,7 +28,7 @@
                 <% for(var i = 0; i < tickets.length; i++) { %>
                     <tr>
                         <td><%= tickets[i].referenceId %></td>
-                        <td><%= tickets[i].client %></td>
+                        <td><%= tickets[i].username %></td>
                         <td><%= tickets[i].title %></td>
                         <td>
                             <% if (tickets[i].severity <= 15) { %>

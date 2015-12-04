@@ -23,7 +23,7 @@ exports.dashboard = function(req, res, next){
 
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
-        Ticket.find({client: req.user.username})
+        Ticket.find({username: req.user.username})
             .sort({createdAt: 'desc'})
             .exec(function(err, ticketList){
             res.render('tickets/index',{
@@ -158,7 +158,7 @@ exports.processAdd = function(req, res, next){
         //default values are passed in when a client creates
         //a ticket
         Ticket.create({
-            client: req.user.username,
+            username: req.user.username,
             description: req.body.description,
             priority: 1,
             status: 'Open',//sets the default status to open
@@ -191,7 +191,7 @@ exports.processAdd = function(req, res, next){
     }else if(req.user.role == 2){
         var ticket = new Ticket(req.body);
         Ticket.create({
-            client: req.body.client,
+            username: req.body.username,
             description: req.body.description,
             priority: req.body.priority,
             status: 'Open',//sets the default status to open

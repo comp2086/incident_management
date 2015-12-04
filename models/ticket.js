@@ -24,7 +24,7 @@ var IncidentSchema = new Schema({
     unique: true
   },
   //holds the username of the client the ticket belongs to
-  client: {
+  username: {
     type: String,
     trim: true
   },
