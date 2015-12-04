@@ -8,8 +8,8 @@
 //need the ticket model to create new tickets
 var Ticket = require('../models/ticket');
 var User = require('../models/user');
+//used for generating unique user friendly id's
 var shortId = require('shortid');
-var mongoose = require('mongoose');
 
 //this calculates the severity of tickets based
 // based on weighted values for eac variable
@@ -84,9 +84,14 @@ exports.update = function(req, res, next){
 
 //processes the submitted updated ticket
 exports.processUpdate = function(req, res, next){
-    var ticket = new Ticket(req.body);
-
-    Ticket.update({_id: req.params.id}, {$push :{
+    //manually populate ticket data
+    //so that the nest narrative document is
+    //properly filled out
+    var ticket = new Ticket({
+        //need to overwrite object id with its own id from the url
+        //or else mongo tries to assign a new object id which then
+        //throws an error and crashed the app
+        _id: req.params.id,
         description: req.body.description,
         priority: req.body.priority,
         status: req.body.status,//sets the default status to open
@@ -96,13 +101,14 @@ exports.processUpdate = function(req, res, next){
         title: req.body.title,
         severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
         narrative: [{
-            //generate unique id for narrative
-            narrativeId:shortId.generate(),
             //grabs title and body from admin-update view
             narrativeTitle:req.body.narrativeTitle,
             narrativeBody:req.body.narrativeBody
         }]
-    }}, function(err){
+    });
+
+    //update the selected ticket
+    Ticket.update({_id: req.params.id}, ticket, function(err){
         if(err){
             console.log(err);
             res.end(err);
@@ -162,7 +168,18 @@ exports.processAdd = function(req, res, next){
             title: req.body.title,
             referenceId: shortId.generate(),
             //defaults are provided as clients cannot change this information
-            severity: calculateSeverity(1, 1, 1)
+            severity: calculateSeverity(1, 1, 1),
+            //create an empty narrative
+            //that will be filled out as the ticket progresses
+            //if no default values are provided
+            //The client-update and admin-update
+            //will throw errors
+            narrative: [{
+                //shorter user friendly reference id
+                narrativeId:shortId.generate(),
+                narrativeTitle: '',
+                narrativeBody: ''
+            }]
         }, function(err, Ticket){
             if(err){
                 console.log(err);
@@ -183,7 +200,18 @@ exports.processAdd = function(req, res, next){
             impact: req.body.impact,
             title: req.body.title,
             referenceId: shortId.generate(),
-            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority)
+            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
+            //create an empty narrative
+            //that will be filled out as the ticket progresses
+            //if no default values are provided
+            //The client-update and admin-update
+            //will throw errors
+            narrative: [{
+                //shorter user friendly reference id
+                narrativeId:shortId.generate(),
+                narrativeTitle: '',
+                narrativeBody: ''
+            }]
         }, function(err, Ticket){
             if(err){
                 console.log(err);
