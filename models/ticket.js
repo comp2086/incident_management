@@ -42,7 +42,7 @@ var IncidentSchema = new Schema({
   priority: Number,
   //storing status as a number for
   //easy comparison
-  status: Number,
+  status: String,
   //the overall impact of ticket on the userbase
   impact: Number,
   //how urgent the ticket is based on admin review

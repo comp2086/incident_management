@@ -53,15 +53,15 @@ exports.dashboard = function(req, res, next){
 exports.update = function(req, res, next){
 
   if(req.user.role == 1) {//client update page
-      Ticket.find({userId: req.user._id}, function(err, ticket){
-          res.render('tickets/client-update',{
+      Ticket.findById(req.params.id, function(err, ticket){
+          res.render('tickets/update-client',{
               title: 'Update your ticket',
-              tickets: ticket,
+              ticket: ticket,
               user: req.user
           });
       });
   }else if(req.user.role == 2) {//admin update page
-      res.render('tickets/update',{
+      res.render('tickets/update-admin',{
           title: 'Update the users ticket',
           user: req.user
       });
@@ -115,7 +115,7 @@ exports.processAdd = function(req, res, next){
             client: req.user.username,
             description: req.body.description,
             priority: 1,
-            status: 1,//sets the default status to open
+            status: 'Open',//sets the default status to open
             isUrgent: req.body.isUrgent,
             urgency: 1,
             impact: 1,
@@ -137,7 +137,7 @@ exports.processAdd = function(req, res, next){
             client: req.body.client,
             description: req.body.description,
             priority: req.body.priority,
-            status: 1,//sets the default status to open
+            status: 'Open',//sets the default status to open
             isUrgent: req.body.isUrgent,
             urgency: req.body.urgency,
             impact: req.body.impact,

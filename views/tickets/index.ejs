@@ -19,6 +19,7 @@
                         <th>Title</th>
                         <th>Severity</th>
                         <th>Status</th>
+                        <th>Opened On</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
@@ -38,13 +39,8 @@
                                 Red
                             <% } %>
                         </td>
-                        <%if(tickets[i].status == 1){ %>
-                            <td>Open</td>
-                        <% }else if(tickets[i].status == 2){ %>
-                            <td>In Progress</td>
-                        <% }else if(tickets[i].status == 3){ %>
-                            <td>Closed</td>
-                        <% } %>
+                        <td><%= tickets[i].status %></td>
+                        <td><%= tickets[i].createdAt %></td>
                         <td><a href="/incident/update/<%= tickets[i]._id %>" title="Update" class="btn btn-primary">Update</a></td>
                         <td><a href="/incident/delete/<%= tickets[i]._id %>" title="Delete" onclick="return confirm('Are you sure you what to delete <%= tickets[i]._id %> from your tickets?');" class="btn btn-danger">
                                 Delete

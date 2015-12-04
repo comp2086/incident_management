@@ -1,0 +1,51 @@
+<%- include ../partials/header.ejs %>
+
+<section>
+    <div class="container">
+        <h1><%= title %></h1>
+
+        <form method="post" action="/incident/update">
+            <fieldset class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="<%= ticket.title %>" required>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" required><%= ticket.description %></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="status">Status(Read Only)</label>
+                <input type="text" class="form-control" id="status" name="status" value="<%= ticket.status %>" required readonly>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="priority">Priority(Read Only)</label>
+                <input type="text" class="form-control" id="priority" name="priority" value="<%= ticket.priority %>" required readonly>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="impact">Impact(Read Only)</label>
+                <input type="text" class="form-control" id="impact" name="impact" value="<%= ticket.impact %>" required readonly>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="urgency">Urgency(Read Only)</label>
+                <input type="text" class="form-control" id="urgency" name="urgency" value="<%= ticket.urgency %>" required readonly>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="narrativeTitle">Narrative Title</label>
+                <input type="text" id="narrativeTitle" name="narrativeTitle" class="form-control" placeholder="Narrative Title" required readonly>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="narrativeBody">Narrative Description</label>
+                    <textarea class="form-control" id="narrativeBody" name="narrativeBody"
+                              placeholder="Narrative Description" required readonly></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+                <div class="checkbox">
+                    <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
+                </div>
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Update Ticket</button>
+        </form>
+
+    </div>
+</section>
+<%- include ../partials/footer.ejs %>
