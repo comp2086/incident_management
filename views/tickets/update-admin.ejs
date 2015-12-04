@@ -13,9 +13,17 @@
                 <input type="text" class="form-control" id="title" name="title" value="<%= ticket.title %>" required>
             </fieldset>
             <fieldset class="form-group">
-                <label for="description">Description:</label>
+                <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" placeholder="description"
                           required><%= ticket.description %></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="severity">Severity</label>
+                <input type="text" class="form-control" id="severity" name="severity"
+                       value="<% if (ticket.severity <= 15) { %>Green
+                            <% } else if(ticket.severity >= 16 && ticket.severity <= 30) { %>Yellow
+                            <% } else if (ticket.severity >= 31 && ticket.severity <= 45) { %>Red
+                            <% } %>" readonly>
             </fieldset>
             <fieldset class="form-group">
                 <label for="status">Status</label>
@@ -187,9 +195,7 @@
                 <label for="narrativeBody">Narrative Description</label>
                     <textarea class="form-control" id="narrativeBody" name="narrativeBody"
                               placeholder="Narrative Description"
-                              required>
-                            <%= ticket.narrative[0].narrativeBody %>
-                    </textarea>
+                              required><%= ticket.narrative[0].narrativeBody %></textarea>
             </fieldset>
             <fieldset class="form-group">
                 <div class="checkbox">
