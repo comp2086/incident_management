@@ -26,6 +26,7 @@
                 </thead>
                 <tbody>
                 <% for(var i = 0; i < tickets.length; i++) { %>
+                <h1><%= filter %></h1>
                     <tr>
                         <td><%= tickets[i].referenceId %></td>
                         <td><%= tickets[i].username %></td>
@@ -51,7 +52,17 @@
                 </tbody>
             </table>
             <a href="/incident/add/" title="Add a ticket" class="btn btn-primary">Add Ticket</a>
+            <a href="/incident/filter/open" title="View Open Tickets" class="btn btn-primary">View Open Tickets</a>
+            <a href="/incident/filter/closed" title="View Closed Tickets" class="btn btn-primary">View Closed Tickets</a>
+            <a href="/incident/filter/all" title="View All Tickets" class="btn btn-primary">View All Tickets</a>
         </div>
+
+       <!-- <form method="post" action="/incident/filterDashboard/">
+            <div class="checkbox">
+                <input type="checkbox" name="all" id="all"> View all tickets(Including Closed Tickets)?
+            </div>
+            <button type="submit" class="btn btn-primary">Filter Dashboard</button>
+        </form>-->
     </div>
 </section>
 
