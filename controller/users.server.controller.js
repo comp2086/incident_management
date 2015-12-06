@@ -64,7 +64,7 @@ exports.read = function(req, res) {
   res.json(req.user);
 }
 
-// Update existing user
+// Update user
 exports.update = function(req, res) {
   var user = req.user;
 
@@ -86,6 +86,7 @@ exports.update = function(req, res) {
   });
 };
 
+// Delete user
 exports.delete = function(req, res) {
   var user = req.user;
 
