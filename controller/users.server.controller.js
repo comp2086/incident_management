@@ -7,20 +7,99 @@
 
 var mongoose = require('mongoose'),
     User = require('/models/user.server.model.js'),
-    Auth = require('/config/auth.js');
+    passport = require('passport');
 
+                          /******************/
+                          /* REGULAR ROUTES */
+                          /******************/
 
 // Error handling
 var getErrorMessage = function(err) {
-  if(err.errors) {
-    for(var errName in err.errors) {
-      if(err.errors[errName].message)
-        return err.errors[errName].message;
+  var message = null;
+
+  // If an internal MongoDB error occurs get the error message
+  if(err.code) {
+    switch(err.code) {
+      // If a unique index error occurs set the message error
+      case 11000:
+      case 11001:
+        message = 'Username already exists';
+        break;
+      // If a general error occurs set the message error
+      default:
+        message = 'Something went wrong';
     }
   } else {
-    return 'Unknown server error';
+    // Grab the first error message from a list of possible errors
+    for(var errName in err.errors) {
+      if(err.errors[errName].message) message = err.errors[errName].message;
+    }
+  }
+
+  return message;
+};
+
+// Render the login page
+exports.renderLogin = function(req, res, next) {
+  // User not logged in, show the login page
+  if(!req.user) {
+    res.render('login', {
+      title: 'Login',
+      messages: req.flash('error') || req.flash('info')
+    });
+    // User already logged in, redirect to users angular app
+  } else {
+    return res.redirect('/users');
   }
 };
+
+// Render the register page
+exports.renderRegister = function(req, res, next) {
+  if(!req.user) {
+    res.render('register', {
+      title: 'Register',
+      messages: req.flash('error')
+    });
+  } else {
+    return res.redirect('/users');
+  }
+};
+
+exports.register = function(req, res, next) {
+  if(!req.user) {
+    var message = null;
+    var user = new User(req.body);
+
+    user.provider = 'local'
+    user.password = user.generateHash(req.body.password);
+
+    user.save(function(err) {
+      if(err) {
+        message = getErrorMessage(err);
+        req.flash('error', message);
+        return res.redirect('/register');
+      }
+      
+      // If the user was created successfully use the Passport 'login' method to login
+      req.
+    });
+  }
+}
+
+// Authentication
+exports.requiresLogin = function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    return res.status(401).send({
+      message: 'User is not logged in'
+    });
+  }
+
+  next();
+};
+
+                          /**********************/
+                          /* ANGULAR APP ROUTES */
+                          /**********************/
 
 // Create a new user
 exports.create = function(req, res) {
