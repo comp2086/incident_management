@@ -1,13 +1,10 @@
-body section{
-	padding-top: 70px;
-}
-
 .container form {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	border: 1px solid gray;
 	padding: 20px 40px;
+	margin-top: 18%;
 	text-align: center;
 	-webkit-transform: translateY(-50%) translateX(-50%);
 	-moz-transform: translateY(-50%) translateX(-50%);
