@@ -21,12 +21,11 @@
                         <th>Status</th>
                         <th>Opened On</th>
                         <th>Update</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
+                <% if (filter == 'all') { /**Display all open and closed tickets*/%>
                 <% for(var i = 0; i < tickets.length; i++) { %>
-                <h1><%= filter %></h1>
                     <tr>
                         <td><%= tickets[i].referenceId %></td>
                         <td><%= tickets[i].username %></td>
@@ -43,11 +42,55 @@
                         <td><%= tickets[i].status %></td>
                         <td><%= tickets[i].createdAt %></td>
                         <td><a href="/incident/update/<%= tickets[i]._id %>" title="Update" class="btn btn-primary">Update</a></td>
-                        <td><a href="/incident/delete/<%= tickets[i]._id %>" title="Delete" onclick="return confirm('Are you sure you what to delete <%= tickets[i]._id %> from your tickets?');" class="btn btn-danger">
-                                Delete
-                            </a>
-                        </td>
                     </tr>
+                <% }/**close for loop*/ %>
+                <% } else if(filter == 'open') { %>
+                <% for(var i = 0; i < tickets.length; i++) { %>
+                    <!--display all tickets that are not closed-->
+                    <% if(tickets[i].status == 'Open' || tickets[i].status == 'Assigned' || tickets[i].status == 'In Progress' ||
+                          tickets[i].status == 'Pending' || tickets[i].status == 'Resolved') { %>
+                    <tr>
+                        <td><%= tickets[i].referenceId %></td>
+                        <td><%= tickets[i].username %></td>
+                        <td><%= tickets[i].title %></td>
+                        <td>
+                            <% if (tickets[i].severity <= 15) { %>
+                            Green
+                            <% } else if(tickets[i].severity >= 16 && tickets[i].severity <= 30) { %>
+                            Yellow
+                            <% } else if (tickets[i].severity >= 31 && tickets[i].severity <= 45) { %>
+                            Red
+                            <% } %>
+                        </td>
+                        <td><%= tickets[i].status %></td>
+                        <td><%= tickets[i].createdAt %></td>
+                        <td><a href="/incident/update/<%= tickets[i]._id %>" title="Update" class="btn btn-primary">Update</a></td>
+                    </tr>
+                    <% } /**end nested if*/%>
+                <% }/**close for loop*/ %>
+                <% } else if(filter == 'closed') { %>
+                <% for(var i = 0; i < tickets.length; i++) { %>
+                <!--display all tickets that are not closed-->
+                <% if(tickets[i].status == 'Closed') { %>
+                <tr>
+                    <td><%= tickets[i].referenceId %></td>
+                    <td><%= tickets[i].username %></td>
+                    <td><%= tickets[i].title %></td>
+                    <td>
+                        <% if (tickets[i].severity <= 15) { %>
+                        Green
+                        <% } else if(tickets[i].severity >= 16 && tickets[i].severity <= 30) { %>
+                        Yellow
+                        <% } else if (tickets[i].severity >= 31 && tickets[i].severity <= 45) { %>
+                        Red
+                        <% } %>
+                    </td>
+                    <td><%= tickets[i].status %></td>
+                    <td><%= tickets[i].createdAt %></td>
+                    <td><a href="/incident/update/<%= tickets[i]._id %>" title="Update" class="btn btn-primary">Update</a></td>
+                </tr>
+                <% } /**end nested if*/%>
+                <% }/**close for loop*/ %>
                 <% } %>
                 </tbody>
             </table>
