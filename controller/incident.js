@@ -21,6 +21,22 @@ var calculateSeverity = function(impact, urgency, priority){
 //dashboard page
 exports.dashboard = function(req, res, next){
 
+    //check if filter is set
+    //and validate if the filter is a value it should be
+    //if not set the filter to a default
+    //state of 'open'
+    if(req.params.filter == 'all'){
+        var filter = 'all';
+    }else if(req.params.filter == 'open'){
+        var filter = 'open';
+    }else if(req.params.filter == 'closed'){
+        var filter = 'closed';
+    }else {
+        //set to default
+        var filter = 'open';
+    }
+
+
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
         Ticket.find({username: req.user.username})
@@ -29,7 +45,8 @@ exports.dashboard = function(req, res, next){
             res.render('tickets/index',{
                 title: 'Client Incident Dashboard',
                 tickets: ticketList,
-                user: req.user
+                user: req.user,
+                filter: filter
             });
         });
     }else if (req.user.role == 2) {//show this if the user is an admin
@@ -41,7 +58,8 @@ exports.dashboard = function(req, res, next){
             res.render('tickets/index', {
                 title: 'Admin Incident Dashboard',
                 tickets: ticketList,
-                user: req.user
+                user: req.user,
+                filter: filter
             });
         });
     }
@@ -222,4 +240,5 @@ exports.processAdd = function(req, res, next){
         });
     }
 };
+
 

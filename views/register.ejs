@@ -5,37 +5,36 @@ November 23, 2015
 register page view
 -->
 <%- include ./partials/header.ejs %>
-<div class="interior-header" style="background-image: url(../images/slide4.jpg)">
-	<div class="container">
-		<h1>Register</h1>
-	</div>
+<!--causing 404's url leads to nowhere-->
+<!--<div class="interior-header" style="background-image: url(../images/slide4.jpg)">-->
 </div><!-- interior-header -->
 <div class="interior-page" id="register-page">
 	<div class="container">
 		<form method="post">
 			<% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
 			<h2>Register</h2>
-			<div class="input">
-				<input id="firstName" name="firstName" type="text" placeholder="First name: " autofocus required>
-			</div>
-			<div class="input">
-				<input id="lastName" name="lastName" type="text" placeholder="Last name: " required>
-			</div>
-			<div class="input">
-				<input id="email" name="email" type="email" placeholder="Email: " required>
-			</div>
-			<div class="input">
-				<input id="username" name="username" type="text" placeholder="Username: " required>
-			</div>
-			<div class="input">
-				<input id="password" name="password" type="password" placeholder="Password: " required>
-			</div>
-			<div class="input">
-				<input id="role" name="role" type="text" placeholder="Please change me to a dropdown list: " required>
-			</div>
-			<div class="submit">
-				<button type="submit">Register</button>
-			</div><!-- submit -->
+			<fieldset class="form-group">
+				<input id="firstName" name="firstName" type="text" class="form-control" placeholder="First Name" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last Name" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="email" name="email" type="email" class="form-control" placeholder="Email" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="username" name="username" type="text" class="form-control" placeholder="Username" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="password" name="password" type="password" class="form-control" placeholder="Password" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<select id="role" name="role" class="form-control">
+					<option value="1">Client Account</option>
+					<option value="2">Administrative Account</option>
+				</select>
+			</fieldset>
+			<button type="submit" class="btn btn-primary">Register</button>
 		</form>
 	</div><!-- container -->
 </div><!-- #register-page -->
