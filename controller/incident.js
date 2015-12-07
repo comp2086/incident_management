@@ -17,6 +17,18 @@ var calculateSeverity = function(impact, urgency, priority){
     return ((impact) * ((urgency * 0.75) + (priority * 0.50)));
 };
 
+var createReferenceId = function(){
+    //create date object
+    var today = new Date();
+    var formatDay = today.getDate();
+
+    if(formatDay < 10) {
+        formatDay = '0' + formatDay.toString();
+    }
+
+    return today.getFullYear().toString() + (today.getMonth() + 1).toString()
+            + formatDay + '-' + shortId.generate();
+};
 
 //dashboard page
 exports.dashboard = function(req, res, next){
@@ -184,7 +196,7 @@ exports.processAdd = function(req, res, next){
             urgency: 1,
             impact: 1,
             title: req.body.title,
-            referenceId: shortId.generate(),
+            referenceId: createReferenceId(),
             //defaults are provided as clients cannot change this information
             severity: calculateSeverity(1, 1, 1),
             //create an empty narrative
@@ -194,7 +206,7 @@ exports.processAdd = function(req, res, next){
             //will throw errors
             narrative: [{
                 //shorter user friendly reference id
-                narrativeId:shortId.generate(),
+                narrativeId: createReferenceId(),
                 narrativeTitle: '',
                 narrativeBody: ''
             }]
@@ -217,7 +229,7 @@ exports.processAdd = function(req, res, next){
             urgency: req.body.urgency,
             impact: req.body.impact,
             title: req.body.title,
-            referenceId: shortId.generate(),
+            referenceId: createReferenceId(),
             severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
             //create an empty narrative
             //that will be filled out as the ticket progresses
@@ -226,7 +238,7 @@ exports.processAdd = function(req, res, next){
             //will throw errors
             narrative: [{
                 //shorter user friendly reference id
-                narrativeId:shortId.generate(),
+                narrativeId: createReferenceId(),
                 narrativeTitle: '',
                 narrativeBody: ''
             }]
