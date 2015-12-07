@@ -92,7 +92,9 @@ exports.register = function(req, res, next) {
   } else {
     return res.redirect('/');
   }
-}
+};
+
+
 
                           /**********************/
                           /* ANGULAR APP ROUTES */
