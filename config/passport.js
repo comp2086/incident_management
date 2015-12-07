@@ -24,5 +24,4 @@ module.exports = function() {
 
   // Strategies
   require('./passport_strategies/login.js')();
-  require('./passport_strategies/register.js')();
 };

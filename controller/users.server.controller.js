@@ -6,14 +6,15 @@
 */
 
 var mongoose = require('mongoose'),
-    User = require('/models/user.server.model.js'),
-    passport = require('passport');
+    passport = require('passport'),
+    auth = require('/config/auth.js'),
+    User = mongoose.model('User');
 
                           /******************/
                           /* REGULAR ROUTES */
                           /******************/
 
-// Error handling
+// Error handler
 var getErrorMessage = function(err) {
   var message = null;
 
@@ -60,17 +61,19 @@ exports.renderRegister = function(req, res, next) {
       title: 'Register',
       messages: req.flash('error')
     });
+    // if user is already logged in, redirect to the main app page
   } else {
-    return res.redirect('/users');
+    return res.redirect('/');
   }
 };
 
+// Register a new user
 exports.register = function(req, res, next) {
   if(!req.user) {
     var message = null;
     var user = new User(req.body);
 
-    user.provider = 'local'
+    user.provider = 'local';
     user.password = user.generateHash(req.body.password);
 
     user.save(function(err) {
@@ -79,35 +82,44 @@ exports.register = function(req, res, next) {
         req.flash('error', message);
         return res.redirect('/register');
       }
-      
+
       // If the user was created successfully use the Passport 'login' method to login
-      req.
+      req.login(user, function(err) {
+        if(err) return next(err);
+        return res.redirect('/');
+      });
     });
+  } else {
+    return res.redirect('/');
   }
 }
-
-// Authentication
-exports.requiresLogin = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    return res.status(401).send({
-      message: 'User is not logged in'
-    });
-  }
-
-  next();
-};
 
                           /**********************/
                           /* ANGULAR APP ROUTES */
                           /**********************/
 
+// Error handler
+var getNgErrorMessage = function(err) {
+  if(err.errors) {
+    for(var errName in err.errors) {
+      if(err.errors[errName].message) return err.errors[errName];
+    }
+  } else {
+    return 'Unknown server error';
+  }
+};
+
 // Create a new user
 exports.create = function(req, res) {
   var user = new User(req.body);
+
+  user.provider = 'local';
+  user.password = user.generateHash(req.body.password);
+
   user.save(function(err) {
     if(err) {
       return res.status(400).send({
-        message: getErrorMessage(err)
+        message: getNgErrorMessage(err)
       });
     } else {
       res.json(user);
@@ -120,7 +132,7 @@ exports.list = function(req, res) {
   User.find().sort('-lastName').exec(function(err, users) {
     if(err) {
       return res.status(400).send({
-        message: getErrorMessage(err)
+        message: getNgErrorMessage(err)
       });
     } else {
       res.json(users);
@@ -157,7 +169,7 @@ exports.update = function(req, res) {
   user.save(function(err) {
     if(err) {
       return res.status(400).send({
-        message: getErrorMessage(err)
+        message: getNgErrorMessage(err)
       });
     } else {
       res.json(user);
@@ -172,7 +184,7 @@ exports.delete = function(req, res) {
   user.remove(function(err) {
     if(err) {
       return res.status(400).send({
-        message: getErrorMessage(err)
+        message: getNgErrorMessage(err)
       });
     } else {
       res.json(user);
