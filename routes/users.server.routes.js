@@ -7,10 +7,17 @@
 var express = require('express'),
     router = express.Router(),
     auth = require('../config/auth.js'),
-    users = require('../controller/users.server.controller.js');
+    users = require('../controller/users.server.controller'),
+    passport = require('passport');
 
 // Regular routes
 router.get('/login', users.renderLogin);
+//router.post('/login', users.login);
+router.post('/login', passport.authenticate('passport-local', {
+    successRedirect: '/incident',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
 router.get('/register', users.renderRegister);
 router.post('/register', users.register);
 
