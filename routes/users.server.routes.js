@@ -7,7 +7,7 @@
 var express = require('express'),
     router = express.Router(),
     auth = require('../config/auth.js'),
-    users = require('../controller/users.server.routes.js');
+    users = require('../controller/users.server.controller.js');
 
 // Regular routes
 router.get('/login', users.renderLogin);

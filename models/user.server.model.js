@@ -30,7 +30,7 @@ var UserSchema = new Schema({
     trim: true
   },
   password: String,
-  
+
   //role: 1(client), 2(admin)
   role: Number,
   salt: String,

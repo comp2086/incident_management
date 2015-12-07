@@ -6,9 +6,9 @@
 */
 
 var mongoose = require('mongoose'),
-    passport = require('passport'),
-    auth = require('/config/auth.js'),
-    User = mongoose.model('User');
+    passport = require('passport');
+
+var User = require('../models/user.server.model.js');
 
                           /******************/
                           /* REGULAR ROUTES */
