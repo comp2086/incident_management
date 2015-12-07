@@ -13,7 +13,7 @@ var express = require('express'),
 // Regular routes
 router.get('/login', users.renderLogin);
 //router.post('/login', users.login);
-router.post('/login', passport.authenticate('passport-local', {
+router.post('/login', passport.authenticate('local', {
     successRedirect: '/incident',
     failureRedirect: '/login',
     failureFlash: true
