@@ -30,11 +30,8 @@ var UserSchema = new Schema({
     trim: true
   },
   password: String,
-  //using a number to identify role
-  //as it will be easy to check
-  //if a user is 1 or 2
-  //1 == client
-  //2 == admin
+  
+  //role: 1(client), 2(admin)
   role: Number,
   salt: String,
 	provider: String,

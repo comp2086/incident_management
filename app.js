@@ -17,7 +17,7 @@ mongoose.connection.on('error', function() {
 });
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/users.server.routes');
 var incident = require('./routes/incident');
 
 var app = express();
