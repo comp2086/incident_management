@@ -4,6 +4,7 @@ incident-management.azurewebsites.net
 November 23, 2015
 passport config file
 */
+'use strict';
 
 var passport = require('passport'),
     mongoose = require('mongoose');

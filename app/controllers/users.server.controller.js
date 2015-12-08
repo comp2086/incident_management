@@ -55,6 +55,19 @@ exports.renderLogin = function(req, res, next) {
   }
 };
 
+// Login POST
+exports.login = passport.authenticate('login', {
+  successRedirect: '/incident',
+  failureRedirect: '/login',
+  failureFlash: true
+});
+
+// logout
+exports.logout = function(req, res) {
+	req.logout();
+	res.redirect('/');
+};
+
 // Render the register page
 exports.renderRegister = function(req, res, next) {
   if(!req.user) {
