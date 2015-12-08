@@ -12,15 +12,15 @@ var incidentController = require('../controllers/incident.server.controller.js')
 module.exports = function(app) {
 	app.get('/incident', auth.requireAuth, incidentController.dashboard);
 
-	app.route('/add')
+	app.route('/incident/add')
 		 .get(auth.requireAuth, incidentController.add)
 		 .post(auth.requireAuth, incidentController.processAdd);
 
-	app.route('/update/:id')
+	app.route('/incident/update/:id')
 		 .get(auth.requireAuth, incidentController.update)
 		 .post(auth.requireAuth, incidentController.processUpdate);
 
-	app.get('/delete/:id?', auth.requireAuth, incidentController.delete);
+	app.get('/incident/delete/:id?', auth.requireAuth, incidentController.delete);
 
-	app.get('/filter/:filter', auth.requireAuth, incidentController.dashboard);
+	app.get('/incident/filter/:filter', auth.requireAuth, incidentController.dashboard);
 };
