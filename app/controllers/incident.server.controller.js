@@ -6,7 +6,7 @@
  */
 
 //need the ticket model to create new tickets
-var Ticket = require('../models/ticket');
+var Ticket = require('../models/ticket.server.model');
 var User = require('../models/user.server.model');
 //used for generating unique user friendly id's
 var shortId = require('shortid');
