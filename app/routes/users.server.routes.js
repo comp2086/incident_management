@@ -24,4 +24,7 @@ module.exports = function(app) {
      .post(usersController.register);
 
   app.get('/logout', usersController.logout);
+
+  app.route('/users')
+     .get(usersController.list);
 };
