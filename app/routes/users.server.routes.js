@@ -7,7 +7,8 @@
 'use strict';
 
 var usersController = require('../controllers/users.server.controller.js'),
-    passport = require('passport');
+    passport = require('passport'),
+    auth = require('../../config/auth.js');
 
 module.exports = function(app) {
 
@@ -26,5 +27,5 @@ module.exports = function(app) {
   app.get('/logout', usersController.logout);
 
   app.route('/users')
-     .get(usersController.list);
+     .get(auth.requireAuth, usersController.list);
 };
