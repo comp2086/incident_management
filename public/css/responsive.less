@@ -1,0 +1,200 @@
+/**
+* Author : Dan Masci
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Tom Tsiliopolous
+* Purpose : Final Team Project - Incident Management
+* Last Updated By : Dan Masci (12/7/2015)
+*/
+
+/**
+* The follwing stylesheet is the File used for all Responsive styling.
+*
+*/
+
+@media screen and (max-width: 1060px) {
+
+	#incident-dashboard {
+		.tickets {
+			.ticket-tabular {
+				.ticket-container {
+					.ticket-head {
+						.update {
+							background: darken(@silver, 10%);						
+						}//.update
+					}//.ticket-head				
+				}//.ticket-container
+			}//.ticket-tabular
+			.ticket-full {
+				.ticket-container {
+					.ticket {
+						.title {
+							.update-ticket {
+								background: @offWhite;
+								&:hover {
+									background: @offWhite;
+								}
+							}//.update-ticket
+						}//.title
+					}//.ticket
+				}//.ticket-single
+			}//.ticket-full
+		}//.tickets
+	}//#incident-dashboard
+
+}//1060px
+
+@media screen and (max-width: 640px) {
+	header {
+		.logo {
+			left: 12px;
+		}//.logo
+	}//header
+	#incident-dashboard {
+		.clear-float.mobile {
+			display: block;
+		}
+		.filter {
+			width: 100%;
+			&.view-filter {
+				float: none;
+				.buttons {
+					float: left;
+					.filter-button {
+						width: 50%;
+					}
+				}
+			}
+			&.ticket-filter {
+				float: none;
+				.buttons {
+					float: right;
+					.filter-button {
+						width: 33.33%;
+					}
+				}
+			}
+			.buttons {
+				margin: 10px 0;
+				font-size: 20px;
+				width: 100%;
+				float: none;
+				.filter-button {
+					&::before {					
+						border: 8px solid transparent;	
+						border-top-color: @lightBlue;				
+						opacity: 1;
+					}
+					&.active::before {
+						display: none;
+					}
+				}//.filter-button
+				.view-shield {
+					width: calc(~"50% + 10px");
+					&.Tab {
+						left: -5px;
+					}
+					&.Full {
+						left: calc(~"50% - 5px");
+					}
+				}//.shield
+				.status-shield {										
+					width: calc(~"33.33% + 10px");
+					&.Open {
+						left: -5px;
+					}
+					&.Closed {
+						left: calc(~"33.33% - 5px");
+					}
+					&.All {
+						left: calc(~"66.66% - 5px");
+					}
+					&.Disabled {
+						left: -5px;
+						width: calc(~"100% + 10px");
+					}
+				}//.status-shield
+			}//.buttons		
+		}//.ticket-filter
+		.tickets {
+			.ticket-tabular{
+				.ticket-container {
+					.ticket-head {
+						font-size: 24px;
+					}//.ticket-head
+					.ticket-content {
+						font-size: 20px;
+						.content-head {
+							.owner {
+								float: none;
+								display: block;
+								width: 100%;
+							}//.ticket-owner
+							.id {
+								float: none;
+								display: block;
+								width: 100%;
+							}//.ticket-id
+						}//.content-head
+						.content-body {
+						}//.content-body
+					}//.ticket-content
+				}//.ticket-container
+			}//.ticket-tabular
+			.ticket-full {
+				.ticket-container {
+					.ticket {
+						.ticket-head {
+							font-size: 20px;
+						}//.ticket-head
+						.ticket-content {
+							h3 {
+								font-size: 24px;
+							}
+							font-size: 20px;
+						}//.ticket-content
+					}//.ticket
+				}//.ticket-single
+			}//#ticket-full
+		}//.tickets
+	}//#incident-dashboard
+
+}//640px
+
+@media screen and (max-width: 500px) {
+	.interior-page {
+		padding: 20px 0 60px 0;
+		form {
+			.box-shadow(0, 0, 0, transparent);
+			background: transparent;
+			padding: 0 10px;
+		}//form
+	}//.interior-page
+
+	footer {
+		.social {			
+			width: 100%;
+			.author {
+				width: 100%;
+				text-align: center;
+				&.left {
+					width: 100%;
+					float: none;
+				}
+				&.right {
+					width: 100%;
+					float: none;
+				}
+				.name {
+					font-size: 18px;
+				}//.name
+			}//.author
+		}//.social
+		.copyright {
+			#copyright {
+				font-size: 18px;
+			}//#copyright
+		}//.copyright
+	}//footer
+
+}//500px
