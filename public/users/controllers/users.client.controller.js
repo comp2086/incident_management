@@ -23,13 +23,7 @@ function($scope, $routeParams, $location, Authentication, Users) {
 
   // Find all users
   $scope.find = function() {
-    $scope.users = Users.query(function() {
-      $scope.usersList = [];
-      $scope.users.forEach(function(user) {
-        $scope.usersList.push(user);
-      });
-      $scope.users = $scope.usersList;
-    });
+    $scope.users = Users.query();
   };
 
   // Find a single user
