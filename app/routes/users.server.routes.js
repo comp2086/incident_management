@@ -14,11 +14,7 @@ module.exports = function(app) {
 
   app.route('/login')
      .get(usersController.renderLogin)
-	   .post(passport.authenticate('local', {
-       successRedirect: '/incident',
-       failureRedirect: '/login',
-       failureFlash: true
-	   }));
+	   .post(usersController.login);
 
   app.route('/register')
      .get(usersController.renderRegister)
@@ -27,5 +23,7 @@ module.exports = function(app) {
   app.get('/logout', usersController.logout);
 
   app.route('/users')
-     .get(auth.requireAuth, usersController.list);
+     .get(auth.requireAuth, usersController.renderUsers);
+
+  app.param('userId', usersController.userById);
 };

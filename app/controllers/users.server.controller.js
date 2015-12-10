@@ -56,7 +56,7 @@ exports.renderLogin = function(req, res, next) {
 };
 
 // Login POST
-exports.login = passport.authenticate('login', {
+exports.login = passport.authenticate('local', {
   successRedirect: '/incident',
   failureRedirect: '/login',
   failureFlash: true
@@ -108,6 +108,14 @@ exports.register = function(req, res, next) {
     return res.redirect('/');
   }
 };
+
+exports.renderUsers = function(req, res, next) {
+  res.render('users', {
+    title: 'Register',
+    messages: req.flash('error'),
+    user: ''//temporary
+  });
+}
 
 
 

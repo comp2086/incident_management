@@ -6,12 +6,12 @@ function($scope, $routeParams, $location, Authentication, Users) {
   // Create a new user
   $scope.create = function() {
     var user = new Users({
-      firstName = this.firstName,
-      lastName = this.lastName,
-      email = this.email,
-      username = this.username,
-      password = this.password,
-      role = this.role
+      firstName : this.firstName,
+      lastName : this.lastName,
+      email : this.email,
+      username : this.username,
+      password : this.password,
+      role : this.role
     });
 
     $user.save(function(res) {
@@ -23,7 +23,13 @@ function($scope, $routeParams, $location, Authentication, Users) {
 
   // Find all users
   $scope.find = function() {
-    $scope.users = Users.query();
+    $scope.users = Users.query(function() {
+      $scope.usersList = [];
+      $scope.users.forEach(function(user) {
+        $scope.usersList.push(user);
+      });
+      $scope.users = $scope.usersList;
+    });
   };
 
   // Find a single user

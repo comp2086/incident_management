@@ -5,7 +5,7 @@
 angular.module('users').config(['$routeProvider',
 	function($routeProvider) {
 		$routeProvider.
-		when('/users', {
+		when('/', {
 			templateUrl: 'users/views/view-users.client.view.html'
 		});
 	}
