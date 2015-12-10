@@ -1,69 +1,71 @@
 <%- include ../partials/header.ejs %>
 
-<section>
-    <div class="container">
-        <form method="post" action="/incident/add">
-            <h2><%= title %></h2>
-            <fieldset class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="title" required>
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" placeholder="description" required></textarea>
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="username">Client Username</label>
-                <select class="form-control" id="username" name="username">
-                    <%for(var i = 0; i < userList.length; i++) { %>
-                        <option value="<%= userList[i].username %>">
-                            <%= userList[i].username %>
-                        </option>
-                    <% } %>
-                </select>
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="priority">Priority</label>
-                <select class="form-control" id="priority" name="priority">
-                    <option value="1">1 (Low)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6 (High)</option>
-                </select>
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="impact">Impact</label>
-                <select class="form-control" id="impact" name="impact">
-                    <option value="1">1 (Low)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6 (High)</option>
-                </select>
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="urgency">Urgency</label>
-                <select class="form-control" id="urgency" name="urgency">
-                    <option value="1">1 (Low)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6 (High)</option>
-                </select>
-            </fieldset>
-            <fieldset class="form-group">
-                <div class="checkbox">
-                    <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
-                </div>
-            </fieldset>
-            <button type="submit" class="btn btn-primary">Submit Ticket</button>
-        </form>
-
-    </div>
-</section>
+<div class="interior-page" id="add-ticket-admin">
+    <section>
+        <div class="container">
+            <form method="post" action="/incident/add">
+                <h2><%= title %></h2>
+                <fieldset class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="title" required>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" placeholder="description" required></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="username">Client Username</label>
+                    <select class="form-control" id="username" name="username">
+                        <%for(var i = 0; i < userList.length; i++) { %>
+                            <option value="<%= userList[i].username %>">
+                                <%= userList[i].username %>
+                            </option>
+                        <% } %>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="priority">Priority</label>
+                    <select class="form-control" id="priority" name="priority">
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6 (High)</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="impact">Impact</label>
+                    <select class="form-control" id="impact" name="impact">
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6 (High)</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="urgency">Urgency</label>
+                    <select class="form-control" id="urgency" name="urgency">
+                        <option value="1">1 (Low)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6 (High)</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <div class="checkbox">
+                        <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn btn-primary">Submit Ticket</button>
+            </form>
+    
+        </div>
+    </section>
+</div>
 
 <%- include ../partials/footer.ejs %>

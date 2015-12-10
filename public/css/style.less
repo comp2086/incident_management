@@ -1,0 +1,957 @@
+/**
+* Author : Dan Masci
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Tom Tsiliopolous
+* Purpose : Final Team Project - Incident Management
+* Last Updated By : Dan Masci (12/7/2015)
+*/
+
+/**
+* The follwing stylesheet is the "MASTER". It is a Less file that gets auto-compiled into
+* style.css. It uses @import to include other less files that are included. Everything in
+* THIS file is of my own creation. The GLOBAL mixins are from a Project Template that I 
+* created for my Summer Co-op; customized to this site. 
+*
+*/
+
+
+//Colours
+@white: #ffffff;
+@offWhite: #f1f1f1;
+@lighterGrey: #d5d5d5;
+@lightGrey: #acacac;
+@grey: #747474;
+@darkGrey: #464646;
+@darkerGrey: #232323;
+@offBlack: #0c0c0c;
+@black: #000000;
+
+@twitterBlue: #78cdf0;
+@facebookBlue: #537bbd;
+
+//Mine
+@lightBlue: #5271CC;
+@darkBlue: #263D7F;
+@darkerBlue: #0F1F4D;
+@blueGrey: #3D4766;
+
+@gold: #CBA33C;
+@silver: #D4CDE5;
+@red: #5A271A;
+@green: #629916;
+
+
+/****************************************************************************************************
+*																									*
+*											GLOBAL 										
+*																									*
+****************************************************************************************************/
+.gradient-blue {
+	background: rgba(156,173,214,0.85);
+	background: -moz-linear-gradient(top, rgba(156,173,214,0.85) 0%, rgba(71,108,209,0.8) 49%, rgba(156,173,214,0.85) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156,173,214,0.85)), color-stop(49%, rgba(71,108,209,0.8)), color-stop(100%, rgba(156,173,214,0.85)));
+	background: -webkit-linear-gradient(top, rgba(156,173,214,0.85) 0%, rgba(71,108,209,0.8) 49%, rgba(156,173,214,0.85) 100%);
+	background: -o-linear-gradient(top, rgba(156,173,214,0.85) 0%, rgba(71,108,209,0.8) 49%, rgba(156,173,214,0.85) 100%);
+	background: -ms-linear-gradient(top, rgba(156,173,214,0.85) 0%, rgba(71,108,209,0.8) 49%, rgba(156,173,214,0.85) 100%);
+	background: linear-gradient(to bottom, rgba(156,173,214,0.85) 0%, rgba(71,108,209,0.8) 49%, rgba(156,173,214,0.85) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9cadd6', endColorstr='#9cadd6', GradientType=0 );
+}
+#incident-dashboard {
+	* {
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	}
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5, 
+	h6, 
+	p, 
+	ul, 
+	ol {
+		padding: 0;
+		margin: 0;
+	}
+	a,  
+	img,
+	button, 
+	input, 
+	textarea {
+		outline: none;
+		border: 0;
+	}
+	a {
+		text-decoration: none;
+	}
+	ul, ol {
+		list-style: none;
+	}
+	/******* Font Manipulations ********/
+	.thin {
+		font-weight: 100;
+	}
+	.light {
+		font-weight: 300;
+	}
+	.normal {
+		font-weight: 400;
+	}
+	.semi-bold {
+		font-weight: 600;
+	}
+	.bold {
+		font-weight: 700;
+	}
+	.ultra-bold {
+		font-weight: 900;
+	}
+	.italic {
+		font-style: italic;
+	}
+	.small {
+		font-size: .8em;
+	}
+	.big {
+		font-size: 1.1em;
+	}
+	.large {
+		font-size: 1.3em;
+	}
+}
+.justify-content {	
+	position: relative;
+	text-align: justify;
+	width: 100%;
+	&::after {
+		content: "";
+		width: 100%;
+		display: inline-block;
+	}
+	> li {
+		position: relative;
+		display: inline-block;
+	}
+}//.justify-content
+/******* Mixins ********/
+.clear-float {
+	clear: both;
+	width: 100%;
+	height: 0.001em;
+}
+.container {
+	max-width: 960px;
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+	padding: 0 20px;
+}
+.transform(...) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-ms-transform: @arguments;
+	-o-transform: @arguments;
+	transform: @arguments;
+}
+.trans(...) { //Gives elements a transitioning time for better effects
+	-webkit-transition: @arguments;
+	-moz-transition: @arguments;
+	-ms-transition: @arguments;
+	-o-transition: @arguments;
+	transition: @arguments;
+}
+.translateY(@amount: -50%) { //Helps with vertical-centering
+	-webkit-transform: translateY(@amount);
+	-moz-transform: translateY(@amount);
+	-ms-transform: translateY(@amount);
+	-o-transform: translateY(@amount);
+	transform: translateY(@amount);
+}
+.translateX(@amount: -50%) { //Helps with horizontal-centering
+	-webkit-transform: translateX(@amount);
+	-moz-transform: translateX(@amount);
+	-ms-transform: translateX(@amount);
+	-o-transform: translateX(@amount);
+	transform: translateX(@amount);
+}
+.translateBoth(@amount1: -50%, @amount2: -50%) {
+	-webkit-transform: translateX(@amount1) translateY(@amount2);
+	-moz-transform: translateX(@amount1) translateY(@amount2);
+	-ms-transform: translateX(@amount1) translateY(@amount2);
+	-o-transform: translateX(@amount1) translateY(@amount2);
+	transform: translateX(@amount1) translateY(@amount2);
+}
+.scale(@amount: 1.5) {
+	-webkit-transform: scale(@amount);
+	-moz-transform: scale(@amount);
+	-ms-transform: scale(@amount);
+	-o-transform: scale(@amount);
+	transform: scale(@amount);
+}
+.rotate(@amount: 90deg) {
+    -webkit-transform: rotate(@amount);
+    -moz-transform: rotate(@amount);
+    -ms-transform: rotate(@amount);
+    -o-transform: rotate(@amount);
+    transform: rotate(@amount);
+}
+.translateAll(@amount1: 1.5, @amount2: -50%, @amount3: -50%, @amount4: 0deg) { //Scale and Rotation included here
+	-webkit-transform: scale(@amount1) translateX(@amount2) translateY(@amount3) rotate(@amount4);
+	-moz-transform: scale(@amount1) translateX(@amount2) translateY(@amount3) rotate(@amount4);
+	-ms-transform: scale(@amount1) translateX(@amount2) translateY(@amount3) rotate(@amount4);
+	-o-transform: scale(@amount1) translateX(@amount2) translateY(@amount3) rotate(@amount4);
+	transform: scale(@amount1) translateX(@amount2) translateY(@amount3) rotate(@amount4);
+}
+.round(@radius: 9999px) { //Rounded endges
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+.box-shadow(@verShift: 0, @horShift: 0, @blur: 5px, @colour: @black) {
+	-webkit-box-shadow: @verShift @horShift @blur @colour;
+	-moz-box-shadow: @verShift @horShift @blur @colour;
+	-ms-box-shadow: @verShift @horShift @blur @colour;
+	-o-box-shadow: @verShift @horShift @blur @colour;
+	box-shadow: @verShift @horShift @blur @colour;
+}
+.box-shadow-inset(@verShift: 0, @horShift: 0, @blur: 5px, @colour: @black) {
+	-webkit-box-shadow: inset @verShift @horShift @blur @colour;
+	-moz-box-shadow: inset @verShift @horShift @blur @colour;
+	-ms-box-shadow: inset @verShift @horShift @blur @colour;
+	-o-box-shadow: inset @verShift @horShift @blur @colour;
+	box-shadow: inset @verShift @horShift @blur @colour;
+}
+.cover { //Background property
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-ms-background-size: cover;	
+	-o-background-size: cover;
+	background-size: cover;
+}
+// .button {
+// 	text-align: center;
+// 	margin: 15px 0;
+// 	a, button, span {
+// 		color: @offWhite;
+// 		font-size: 14px;
+// 		background: @darkBlue;
+// 		.round(4px);
+// 		padding: 15px 40px;
+// 		.trans(all,0.4s);
+// 		&:hover {
+// 			cursor: pointer;
+// 			background: lighten(@darkBlue, 10%);
+// 		}
+// 	}
+// 	&.color2 {
+// 		a, button, span {
+// 			color: @offWhite;
+// 			background: @darkerBlue;
+// 			&:hover {
+// 				background: lighten(@darkerBlue, 10%);
+// 			}
+// 		}
+// 	}
+// 	&.color3 {
+// 		a, button, span {
+// 			color: @offWhite;
+// 			background: @lightBlue;
+// 			&:hover {
+// 				background: darken(@lightBlue, 10%);
+// 			}
+// 		}
+// 	}
+// 	&.width {
+// 		a, button, span {
+// 			display: block;
+// 			width: 200px;
+// 			padding: 15px;
+// 			margin: 0 auto;
+// 		}
+// 	}
+// }//button1
+/******* Hack to change the color of Placeholder Text on Form Elements ********/
+.placeholder(@colour: @lightBlue) {
+	&::-webkit-input-placeholder {
+		.placeholder-Properties();
+	}
+	&:-moz-placeholder {
+		.placeholder-Properties();
+	}
+	&::-moz-placeholder {
+		.placeholder-Properties();
+	}
+	&:-ms-input-placeholder {
+		.placeholder-Properties();
+	}
+}
+.placeholder-Properties() {
+	color       : @colour;
+	opacity     : 1;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+/************************************************************************************
+*
+*									Header Main
+*
+************************************************************************************/
+/////////////////////////////////////////////////////////////////////////////////////
+header {
+	.box-shadow;
+	background: @lightBlue;	
+	// background: @silver;
+
+	.container {
+		padding: 0;
+	}
+	.logo {
+		position: absolute;
+		top: 50%;
+		left: 15px;
+		.translateY;
+		width: 70px;
+		img {
+			width: 100%;
+		}
+	}//.logo
+	ul {
+		margin: 0;
+		padding: 0;
+		li {
+			list-style: none;
+			a {
+				text-decoration: none;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+	.menu {
+		position: relative;
+		> li {
+			position: relative;
+			float: right;
+			> a {
+				color: @darkerBlue;
+				font-weight: bold;
+				display: block;
+				padding: 40px 20px;
+				.trans(all,0.3s);
+			}//.menu li a
+			.dashboard-nav {
+				cursor: pointer;
+			}
+			.sub-menu {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 90px;
+				text-align: center;
+				width: 100%;
+				height: 100%;
+				background: darken(@lightBlue, 20%);
+				.exit {
+					color: @darkerBlue;
+					position: absolute;
+					top: 0;
+					left: -90px;
+					text-align: center;
+					font-size: 32px;	
+					width: 90px;
+					height: 100%;
+					background: darken(@lightBlue, 20%);
+					cursor: pointer;
+					.box-shadow(1px, -1px, 5px, @darkerBlue);
+					.trans(all,0.3s);
+					.fa {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						.translateBoth;
+					}
+					&:hover {
+						color: @red;
+					}			
+				}
+				> li {
+					> a {
+						color: @darkerBlue;
+						font-weight: bold;
+						display: block;
+						padding: 15px 0;
+						.trans(all,0.3s);						
+					}//.sub-menu li a 
+					&:hover {
+						> a {
+							color: @silver;
+							background: @darkerBlue;
+						}
+					}
+				}//.sub-menu li
+			}//.sub-menu
+			&:hover {
+				> a:hover {
+					color: @silver;
+					background: darken(@lightBlue, 20%);
+				}	
+			}
+		}//.menu li
+	}//.menu
+}//header
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/************************************************************************************
+*
+*								Incident Dashboard
+*
+************************************************************************************/
+/////////////////////////////////////////////////////////////////////////////////////
+.ticket-overlay (@color: @grey) {
+	.ticket-head {
+		.status {
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: fade(@color, 60%);
+				border-top-left-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}		
+		}//.status
+	}//.ticket-head	
+}//.overlay
+html, body {	
+	height: 100%;
+	background: lighten(@silver, 5%);
+}
+#incident-dashboard {
+	padding: 60px 0;
+	min-height: calc(~"100% - 234px - 54px - 21px");
+	.add-ticket-mobile {
+		margin-top: 20px;
+		font-size: 20px;
+		text-align: center;
+		color: @offWhite;
+		position: relative;
+		padding: 10px 0;
+		display: block;
+		background: @darkerBlue;
+		border: 1px solid @lightBlue;
+		.round(6px);
+		.trans(all,0.3s);
+		&:hover {
+			background: lighten(@darkerBlue, 5%);
+		}
+	}//.add-ticket-mobile	
+	.clear-float.mobile {
+		display: none;
+	}	
+	.filter {
+		position: relative;
+		width: 50%;
+		&.view-filter {
+			float: left;
+			.buttons {
+				float: left;
+			}
+		}
+		&.ticket-filter {
+			float: right;
+			.buttons {
+				float: right;
+			}
+		}
+		.buttons {
+			position: relative;
+			border: 2px solid @darkerBlue;
+			.round(6px);
+			.filter-button {
+				background: @offWhite;
+				position: relative;
+				float: left;
+				padding: 10px 5px;
+				width: 75px;
+				text-align: center;
+				cursor: pointer;			
+				&.separator {
+					&::after {
+						content: "";
+						position: absolute;
+						height: 100%;
+						top: 0;
+						right: 0;
+						width: 1px;
+						background: @darkerBlue;
+					}
+				}//.filter-button.separator
+				&::before {
+					opacity: 0;
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 50%;
+					.translateX;
+					border: 5px solid transparent;
+					border-top-color: @darkerBlue;
+					.trans(all,0.5s);
+				}
+				&:hover {
+					&::before {
+						opacity: 1;
+					}
+				}
+				&.first {
+					border-top-left-radius: 4px;
+					border-bottom-left-radius: 4px;
+				}
+				&.last {				
+					border-top-right-radius: 4px;
+					border-bottom-right-radius: 4px;
+				}
+			}//.filter-button
+			.view-shield {
+				position: absolute;
+				width: 85px;
+				height: 130%;
+				top: -15%;
+				.round(8px);
+				.trans(all,0.3s);
+				.gradient-blue;
+				&.Tab {
+					left: -5px;
+				}
+				&.Full {
+					left: 70px;
+				}
+			}//.view-shield
+			.status-shield {
+				position: absolute;
+				width: 85px;
+				height: 130%;
+				top: -15%;
+				.round(8px);
+				.trans(all,0.3s);
+				.gradient-blue;
+				&.Open {
+					left: -5px;
+				}
+				&.Closed {
+					left: 70px;
+				}
+				&.All {
+					left: 145px;
+				}
+				&.Disabled {
+					width: calc(~'100% + 10px');
+					left: -5px;
+				}
+			}//.ticket-shield
+		}//.buttons		
+	}//.ticket-filter	
+	.tickets {
+		width: 100%;
+		.ticket-tabular {
+			display: none;
+			.ticket-container {
+				position: relative;
+				display: none;
+				margin: 20px 0;
+				border: 2px solid @darkerBlue;
+				background: @offWhite;
+				color: @darkerBlue;
+				.round(6px);
+				&.green {
+					.ticket-overlay(@green);
+				}
+				&.gold {
+					.ticket-overlay(@gold);
+				}
+				&.red {
+					.ticket-overlay(@red);
+				}
+				.ticket-head {
+					position: relative;
+					font-size: 20px;
+					.trans(all,0.3s);
+					.status {
+						position: absolute;
+						height: 100%;
+						top: 0;
+						left: 0;
+						width: 40px;
+						z-index: 1000;
+						.fa {
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							.translateBoth;
+						}
+						&::after {
+							content: "";
+							position: absolute;
+							top: 0;
+							right: 0;
+							width: 1px;
+							height: 100%;
+							background: @darkBlue;
+						}
+					}//.ticket-status
+					.title {
+						font-size: 20px;
+						display: block;
+						font-weight: bold;
+						text-transform: uppercase;
+						position: relative;
+						float: left;
+						width: 100%;
+						text-align: center;
+						padding: 20px 50px;
+						.box-shadow(0, 1px, 2px, @black);
+						.round(4px);
+						.arrow {
+							opacity: 0;			
+							z-index: -1;		
+							content: "";
+							position: absolute;
+							left: 50%;
+							border: 8px solid transparent;
+							.translateX;				
+							.trans(all,0.3s);
+							&.top {
+								top: calc(~"100% - 15px");
+								border-top-color: transparent;
+								border-bottom-color: @darkerBlue;
+							}
+							&.bot {
+								top: 100%;
+								border-bottom-color: transparent;
+								border-top-color: @darkerBlue;
+							}
+						}
+						&:hover {
+							background: darken(@silver, 10%);
+							cursor: pointer;
+							.arrow {
+								opacity: 1;
+								z-index: 100;
+							}
+						}
+					}//.ticket-title
+					.update {
+						color: @darkerBlue;
+						position: absolute;
+						top: 0;
+						right: 0;
+						height: 100%;
+						width: 40px;
+						.trans(all,0.3s);
+						z-index: 1000;
+						border-top-right-radius: 4px;
+						border-bottom-right-radius: 4px;
+						.fa {
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							.translateBoth;
+						}
+						&:hover {
+							background: darken(@silver, 10%);
+							cursor: pointer;
+						}
+					}//.plus-minus
+				}//.ticket-head
+				.ticket-content {
+					display: none;
+					padding: 20px;
+					.content-head {
+						padding: 5px 10px;
+						.owner {
+							position: relative;
+							float: left;
+							width: calc(~"100% - 200px");
+							min-width: 50%;
+							font-style: italic;
+						}//.ticket-owner
+						.id {
+							position: relative;
+							float: left;
+							width: 200px;
+							font-style: italic;
+						}//.ticket-id
+						.status {
+							position: relative;
+							display: block;
+							width: 100%;
+							font-style: italic;
+						}
+					}//.content-head
+					.content-body {
+						padding: 5px 10px;
+						.view-ticket {
+							position: relative;
+							cursor: pointer;
+							font-style: italic;
+							text-decoration: underline;
+							.trans(all,0.3s);						
+							&:hover {
+								color: @lightBlue;								
+							}
+						}
+					}//.content-body
+				}//.ticket-content
+			}//.ticket-container
+		}//.ticket-tabular
+		.ticket-full {
+			display: none;
+			.ticket-container {
+				position: relative;
+				display: none;
+				padding-top: 20px;
+				&#ticket-single-0 {
+					display: block;
+				}
+				.ticket-count {
+					color: @lightBlue;
+					position: relative;
+					margin: 0 auto;
+					width: 50px;
+					font-size: 24px;
+					font-weight: bold;
+					font-style: italic;
+				}//.ticket-count
+				.navigation {		
+					position: relative;
+					top: -30px;
+					padding-bottom: 20px;
+					.arrow {
+						position: absolute;
+						top: 0;
+						cursor: pointer;
+						&.arrow-left {
+							left: 0;
+						}
+						&.arrow-right {
+							right: 0;
+						}
+						.fa {
+							color: @lightBlue;
+							font-size: 32px;
+							vertical-align: middle;
+							padding: 0 10px;
+							.trans(all,0.3s);
+							&:hover {
+								color: @darkerBlue;
+							}
+						}
+						span {
+							font-size: 20px;
+							vertical-align: middle;
+						}	
+					}//.arrow	
+				}//.navigation
+				.ticket {
+					border: 2px solid @darkerBlue;
+					.round(6px);
+					.title {
+						position: relative;
+						background: darken(@silver, 10%);
+						border-top-left-radius: 4px;
+						border-top-right-radius: 4px;
+						font-size: 22px;
+						text-transform: uppercase;
+						font-weight: bold;
+						color: @lightBlue;
+						text-align: center;
+						padding: 15px 50px 15px 10px;
+						margin: 0;
+						.box-shadow;
+						.update-ticket {				
+							color: @lightBlue;
+							position: absolute;
+							top: 0;
+							right: 0;
+							height: 100%;
+							width: 40px;
+							.trans(all,0.3s);
+							z-index: 1000;
+							border-top-right-radius: 4px;
+							border-bottom-right-radius: 4px;
+							.fa {
+								position: absolute;
+								top: 50%;
+								left: 50%;
+								.translateBoth;
+							}
+							&:hover {
+								background: darken(@silver, 10%);
+								cursor: pointer;
+							}
+						}//.update-ticket
+					}//.title
+					.ticket-head {
+						padding: 20px 20px 5px 20px;				
+						span {
+							position: relative;
+							display: block;
+							font-style: italic;
+							&.severity {
+								&.red {
+									color: @red;
+								}
+								&.gold {
+									color: @gold;
+								}
+								&.green {
+									color: @green;
+								}
+							}//.severity	
+						}//span				
+					}//.ticket-head
+					.ticket-content {
+						padding: 5px 20px 20px 20px;
+						h3 {
+							font-size: 20px;
+							font-weight: bold;
+							padding: 5px 0;
+							margin: 0;
+						}
+						.narrative {
+							span {
+								position: relative;
+								display: block;						
+							}//span					
+						}//.narrative
+					}//.ticket-content			
+				}//.ticket	
+			}//.ticket-container	
+		}//.ticket-full
+	}//.tickets
+
+}//#incident-dashboard
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/************************************************************************************
+*
+*								Interior Page Forms
+*
+************************************************************************************/
+/////////////////////////////////////////////////////////////////////////////////////
+.interior-page {
+	padding: 60px 0;
+	form {
+		width: 100%;
+		max-width: 500px;
+		.box-shadow;
+		padding: 20px 40px 40px 40px;
+		margin: 0 auto;
+		background: @offWhite;
+		.round(6px);
+		h2 {
+			color: @darkerBlue;
+			font-size: 32px;
+			font-variant: small-caps;
+			text-align: center;
+			padding-bottom: 10px;
+		}
+		input, textarea, select {
+			background: @white;
+		}
+		textarea {
+			max-width: 100%;
+			min-height: 100px;
+		}
+		.btn-primary {			
+			padding: 5px 20px;
+			display: block;
+			margin: 0 auto;
+			font-size: 18px;
+		}
+	}//form
+}//.interior-page
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/************************************************************************************
+*
+*									Footer Main
+*
+************************************************************************************/
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+footer {
+	background: @darkerGrey;
+	color: @silver;
+	font-size: 13px;
+	text-align: center;
+	padding: 20px;
+	.box-shadow;
+	.container {
+		max-width: 500px;
+	}
+	.social {
+		padding: 0;
+		margin: 0 auto;
+		.justify-content;
+		width: 300px;
+		.author {
+			&.left {
+				width: 160px;
+				float: left;
+			}
+			&.right {
+				width: 130px;
+				float: right;
+			}
+			a {
+				padding: 10px 0;
+				display: block;
+				color: @silver;
+				text-decoration: none;
+				.trans(all,0.3s);
+				&:hover {
+					color: @lightBlue;
+				}
+			}
+			.fa {
+				font-size: 22px;
+				vertical-align: middle;				
+			}//.fa
+			.name {
+				vertical-align: middle;
+				padding-left: 5px;
+			}//.name
+		}//.author
+	}//.social
+	.copyright {
+		#author {
+		}//#author
+		#copyright {
+
+		}//#copyright
+	}//.copyright
+}//footer
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*********************************************************************************************************************************************/
+/*																																			 */
+/*																RESPONSIVE 										
+/*																																			 */
+/*********************************************************************************************************************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@import 'responsive.less';

@@ -18,7 +18,7 @@ header partial view
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 		<!-- font-awesome -->
-		<link red="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 		<!-- Custom CSS -->	
 		<link rel="stylesheet" href="/css/style.css">
@@ -27,8 +27,28 @@ header partial view
 
     <body>
 
-	    <header>
-	
-			<%- include navbar %>
+	    <header>	
+			<div class="container">
+				
+				<div class="logo">
+					<img src="/images/company-logo.png">
+				</div><!-- logo -->
+				<ul class="menu">
+					<% if(user) { %>
+					    <li><a href="/logout">Logout</a></li>
+					    <li><a class="dashboard-nav">Dashboard</a>
+					    	<ul class="sub-menu">
+					    		<li><a href="/incident">Incidents</a></li>
+					    		<li><a href="/users">Users</a></li>
+					    		<div class="exit"><i class="fa fa-times"></i></div>
+					    	</ul>
+				    	</li>
+					<% } else { %>
+					    <li><a href="/login">Login</a></li>
+					    <li><a href="/register">Register</a></li>
+					<% } %>
+				    <div class="clear-float"></div>
+				</ul><!-- menu -->
 
+			</div><!-- container -->
 	    </header>				    

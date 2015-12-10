@@ -1,23 +1,1067 @@
-/**.container form {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	border: 1px solid gray;
-	padding: 20px 40px;
-	margin-top: 5%;
-	text-align: center;
-	-webkit-transform: translateY(-50%) translateX(-50%);
-	-moz-transform: translateY(-50%) translateX(-50%);
-	-ms-transform: translateY(-50%) translateX(-50%);
-	-o-transform: translateY(-50%) translateX(-50%);
-	transform: translateY(-50%) translateX(-50%);
-	-webkit-box-shadow: 0 0 8px #000000;
-	-moz-box-shadow: 0 0 8px #000000;
-	-ms-box-shadow: 0 0 8px #000000;
-	-o-box-shadow: 0 0 8px #000000;
-	box-shadow: 0 0 8px #000000;	
-}*/
-
-.interior-header h1 {
-	margin-top: 60px;
+/**
+* Author : Dan Masci
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Tom Tsiliopolous
+* Purpose : Final Team Project - Incident Management
+* Last Updated By : Dan Masci (12/7/2015)
+*/
+/**
+* The follwing stylesheet is the "MASTER". It is a Less file that gets auto-compiled into
+* style.css. It uses @import to include other less files that are included. Everything in
+* THIS file is of my own creation. The GLOBAL mixins are from a Project Template that I 
+* created for my Summer Co-op; customized to this site. 
+*
+*/
+/****************************************************************************************************
+*																									*
+*											GLOBAL 										
+*																									*
+****************************************************************************************************/
+.gradient-blue {
+  background: rgba(156, 173, 214, 0.85);
+  background: -moz-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156, 173, 214, 0.85)), color-stop(49%, rgba(71, 108, 209, 0.8)), color-stop(100%, rgba(156, 173, 214, 0.85)));
+  background: -webkit-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -o-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -ms-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: linear-gradient(to bottom, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9cadd6', endColorstr='#9cadd6', GradientType=0);
+}
+#incident-dashboard {
+  /******* Font Manipulations ********/
+}
+#incident-dashboard * {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+#incident-dashboard h1,
+#incident-dashboard h2,
+#incident-dashboard h3,
+#incident-dashboard h4,
+#incident-dashboard h5,
+#incident-dashboard h6,
+#incident-dashboard p,
+#incident-dashboard ul,
+#incident-dashboard ol {
+  padding: 0;
+  margin: 0;
+}
+#incident-dashboard a,
+#incident-dashboard img,
+#incident-dashboard button,
+#incident-dashboard input,
+#incident-dashboard textarea {
+  outline: none;
+  border: 0;
+}
+#incident-dashboard a {
+  text-decoration: none;
+}
+#incident-dashboard ul,
+#incident-dashboard ol {
+  list-style: none;
+}
+#incident-dashboard .thin {
+  font-weight: 100;
+}
+#incident-dashboard .light {
+  font-weight: 300;
+}
+#incident-dashboard .normal {
+  font-weight: 400;
+}
+#incident-dashboard .semi-bold {
+  font-weight: 600;
+}
+#incident-dashboard .bold {
+  font-weight: 700;
+}
+#incident-dashboard .ultra-bold {
+  font-weight: 900;
+}
+#incident-dashboard .italic {
+  font-style: italic;
+}
+#incident-dashboard .small {
+  font-size: .8em;
+}
+#incident-dashboard .big {
+  font-size: 1.1em;
+}
+#incident-dashboard .large {
+  font-size: 1.3em;
+}
+.justify-content {
+  position: relative;
+  text-align: justify;
+  width: 100%;
+}
+.justify-content::after {
+  content: "";
+  width: 100%;
+  display: inline-block;
+}
+.justify-content > li {
+  position: relative;
+  display: inline-block;
+}
+/******* Mixins ********/
+.clear-float {
+  clear: both;
+  width: 100%;
+  height: 0.001em;
+}
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 20px;
+}
+.cover {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/******* Hack to change the color of Placeholder Text on Form Elements ********/
+/************************************************************************************
+*
+*									Header Main
+*
+************************************************************************************/
+header {
+  -webkit-box-shadow: 0 0 5px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
+  -ms-box-shadow: 0 0 5px #000000;
+  -o-box-shadow: 0 0 5px #000000;
+  box-shadow: 0 0 5px #000000;
+  background: #5271cc;
+}
+header .container {
+  padding: 0;
+}
+header .logo {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 70px;
+}
+header .logo img {
+  width: 100%;
+}
+header ul {
+  margin: 0;
+  padding: 0;
+}
+header ul li {
+  list-style: none;
+}
+header ul li a {
+  text-decoration: none;
+}
+header ul li a:hover {
+  text-decoration: none;
+}
+header .menu {
+  position: relative;
+}
+header .menu > li {
+  position: relative;
+  float: right;
+}
+header .menu > li > a {
+  color: #0f1f4d;
+  font-weight: bold;
+  display: block;
+  padding: 40px 20px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header .menu > li .dashboard-nav {
+  cursor: pointer;
+}
+header .menu > li .sub-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 90px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background: #2a438e;
+}
+header .menu > li .sub-menu .exit {
+  color: #0f1f4d;
+  position: absolute;
+  top: 0;
+  left: -90px;
+  text-align: center;
+  font-size: 32px;
+  width: 90px;
+  height: 100%;
+  background: #2a438e;
+  cursor: pointer;
+  -webkit-box-shadow: 1px -1px 5px #0f1f4d;
+  -moz-box-shadow: 1px -1px 5px #0f1f4d;
+  -ms-box-shadow: 1px -1px 5px #0f1f4d;
+  -o-box-shadow: 1px -1px 5px #0f1f4d;
+  box-shadow: 1px -1px 5px #0f1f4d;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header .menu > li .sub-menu .exit .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+header .menu > li .sub-menu .exit:hover {
+  color: #5a271a;
+}
+header .menu > li .sub-menu > li > a {
+  color: #0f1f4d;
+  font-weight: bold;
+  display: block;
+  padding: 15px 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+header .menu > li .sub-menu > li:hover > a {
+  color: #d4cde5;
+  background: #0f1f4d;
+}
+header .menu > li:hover > a:hover {
+  color: #d4cde5;
+  background: #2a438e;
+}
+/************************************************************************************
+*
+*								Incident Dashboard
+*
+************************************************************************************/
+html,
+body {
+  height: 100%;
+  background: #e2deee;
+}
+#incident-dashboard {
+  padding: 60px 0;
+  min-height: calc(100% - 234px - 54px - 21px);
+}
+#incident-dashboard .add-ticket-mobile {
+  margin-top: 20px;
+  font-size: 20px;
+  text-align: center;
+  color: #f1f1f1;
+  position: relative;
+  padding: 10px 0;
+  display: block;
+  background: #0f1f4d;
+  border: 1px solid #5271cc;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#incident-dashboard .add-ticket-mobile:hover {
+  background: #132862;
+}
+#incident-dashboard .clear-float.mobile {
+  display: none;
+}
+#incident-dashboard .filter {
+  position: relative;
+  width: 50%;
+}
+#incident-dashboard .filter.view-filter {
+  float: left;
+}
+#incident-dashboard .filter.view-filter .buttons {
+  float: left;
+}
+#incident-dashboard .filter.ticket-filter {
+  float: right;
+}
+#incident-dashboard .filter.ticket-filter .buttons {
+  float: right;
+}
+#incident-dashboard .filter .buttons {
+  position: relative;
+  border: 2px solid #0f1f4d;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+#incident-dashboard .filter .buttons .filter-button {
+  background: #f1f1f1;
+  position: relative;
+  float: left;
+  padding: 10px 5px;
+  width: 75px;
+  text-align: center;
+  cursor: pointer;
+}
+#incident-dashboard .filter .buttons .filter-button.separator::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  width: 1px;
+  background: #0f1f4d;
+}
+#incident-dashboard .filter .buttons .filter-button::before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #0f1f4d;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#incident-dashboard .filter .buttons .filter-button:hover::before {
+  opacity: 1;
+}
+#incident-dashboard .filter .buttons .filter-button.first {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#incident-dashboard .filter .buttons .filter-button.last {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#incident-dashboard .filter .buttons .view-shield {
+  position: absolute;
+  width: 85px;
+  height: 130%;
+  top: -15%;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  background: rgba(156, 173, 214, 0.85);
+  background: -moz-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156, 173, 214, 0.85)), color-stop(49%, rgba(71, 108, 209, 0.8)), color-stop(100%, rgba(156, 173, 214, 0.85)));
+  background: -webkit-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -o-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -ms-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: linear-gradient(to bottom, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9cadd6', endColorstr='#9cadd6', GradientType=0);
+}
+#incident-dashboard .filter .buttons .view-shield.Tab {
+  left: -5px;
+}
+#incident-dashboard .filter .buttons .view-shield.Full {
+  left: 70px;
+}
+#incident-dashboard .filter .buttons .status-shield {
+  position: absolute;
+  width: 85px;
+  height: 130%;
+  top: -15%;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  background: rgba(156, 173, 214, 0.85);
+  background: -moz-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156, 173, 214, 0.85)), color-stop(49%, rgba(71, 108, 209, 0.8)), color-stop(100%, rgba(156, 173, 214, 0.85)));
+  background: -webkit-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -o-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: -ms-linear-gradient(top, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  background: linear-gradient(to bottom, rgba(156, 173, 214, 0.85) 0%, rgba(71, 108, 209, 0.8) 49%, rgba(156, 173, 214, 0.85) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9cadd6', endColorstr='#9cadd6', GradientType=0);
+}
+#incident-dashboard .filter .buttons .status-shield.Open {
+  left: -5px;
+}
+#incident-dashboard .filter .buttons .status-shield.Closed {
+  left: 70px;
+}
+#incident-dashboard .filter .buttons .status-shield.All {
+  left: 145px;
+}
+#incident-dashboard .filter .buttons .status-shield.Disabled {
+  width: calc(100% + 10px);
+  left: -5px;
+}
+#incident-dashboard .tickets {
+  width: 100%;
+}
+#incident-dashboard .tickets .ticket-tabular {
+  display: none;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container {
+  position: relative;
+  display: none;
+  margin: 20px 0;
+  border: 2px solid #0f1f4d;
+  background: #f1f1f1;
+  color: #0f1f4d;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container.green .ticket-head .status::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(98, 153, 22, 0.6);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container.gold .ticket-head .status::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(203, 163, 60, 0.6);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container.red .ticket-head .status::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(90, 39, 26, 0.6);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head {
+  position: relative;
+  font-size: 20px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .status {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 40px;
+  z-index: 1000;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .status .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .status::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: #263d7f;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .title {
+  font-size: 20px;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding: 20px 50px;
+  -webkit-box-shadow: 0 1px 2px #000000;
+  -moz-box-shadow: 0 1px 2px #000000;
+  -ms-box-shadow: 0 1px 2px #000000;
+  -o-box-shadow: 0 1px 2px #000000;
+  box-shadow: 0 1px 2px #000000;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .title .arrow {
+  opacity: 0;
+  z-index: -1;
+  content: "";
+  position: absolute;
+  left: 50%;
+  border: 8px solid transparent;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .title .arrow.top {
+  top: calc(100% - 15px);
+  border-top-color: transparent;
+  border-bottom-color: #0f1f4d;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .title .arrow.bot {
+  top: 100%;
+  border-bottom-color: transparent;
+  border-top-color: #0f1f4d;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .title:hover {
+  background: #b7abd4;
+  cursor: pointer;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .title:hover .arrow {
+  opacity: 1;
+  z-index: 100;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .update {
+  color: #0f1f4d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 40px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 1000;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .update .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .update:hover {
+  background: #b7abd4;
+  cursor: pointer;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content {
+  display: none;
+  padding: 20px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head {
+  padding: 5px 10px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .owner {
+  position: relative;
+  float: left;
+  width: calc(100% - 200px);
+  min-width: 50%;
+  font-style: italic;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .id {
+  position: relative;
+  float: left;
+  width: 200px;
+  font-style: italic;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .status {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-style: italic;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body {
+  padding: 5px 10px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body .view-ticket {
+  position: relative;
+  cursor: pointer;
+  font-style: italic;
+  text-decoration: underline;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body .view-ticket:hover {
+  color: #5271cc;
+}
+#incident-dashboard .tickets .ticket-full {
+  display: none;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container {
+  position: relative;
+  display: none;
+  padding-top: 20px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container#ticket-single-0 {
+  display: block;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket-count {
+  color: #5271cc;
+  position: relative;
+  margin: 0 auto;
+  width: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: italic;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation {
+  position: relative;
+  top: -30px;
+  padding-bottom: 20px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow.arrow-left {
+  left: 0;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow.arrow-right {
+  right: 0;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow .fa {
+  color: #5271cc;
+  font-size: 32px;
+  vertical-align: middle;
+  padding: 0 10px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow .fa:hover {
+  color: #0f1f4d;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow span {
+  font-size: 20px;
+  vertical-align: middle;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket {
+  border: 2px solid #0f1f4d;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .title {
+  position: relative;
+  background: #b7abd4;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #5271cc;
+  text-align: center;
+  padding: 15px 50px 15px 10px;
+  margin: 0;
+  -webkit-box-shadow: 0 0 5px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
+  -ms-box-shadow: 0 0 5px #000000;
+  -o-box-shadow: 0 0 5px #000000;
+  box-shadow: 0 0 5px #000000;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket {
+  color: #5271cc;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 40px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  z-index: 1000;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket:hover {
+  background: #b7abd4;
+  cursor: pointer;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head {
+  padding: 20px 20px 5px 20px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head span {
+  position: relative;
+  display: block;
+  font-style: italic;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head span.severity.red {
+  color: #5a271a;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head span.severity.gold {
+  color: #cba33c;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head span.severity.green {
+  color: #629916;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content {
+  padding: 5px 20px 20px 20px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content h3 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 0;
+  margin: 0;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narrative span {
+  position: relative;
+  display: block;
+}
+/************************************************************************************
+*
+*								Interior Page Forms
+*
+************************************************************************************/
+.interior-page {
+  padding: 60px 0;
+}
+.interior-page form {
+  width: 100%;
+  max-width: 500px;
+  -webkit-box-shadow: 0 0 5px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
+  -ms-box-shadow: 0 0 5px #000000;
+  -o-box-shadow: 0 0 5px #000000;
+  box-shadow: 0 0 5px #000000;
+  padding: 20px 40px 40px 40px;
+  margin: 0 auto;
+  background: #f1f1f1;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+.interior-page form h2 {
+  color: #0f1f4d;
+  font-size: 32px;
+  font-variant: small-caps;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.interior-page form input,
+.interior-page form textarea,
+.interior-page form select {
+  background: #ffffff;
+}
+.interior-page form textarea {
+  max-width: 100%;
+  min-height: 100px;
+}
+.interior-page form .btn-primary {
+  padding: 5px 20px;
+  display: block;
+  margin: 0 auto;
+  font-size: 18px;
+}
+/************************************************************************************
+*
+*									Footer Main
+*
+************************************************************************************/
+footer {
+  background: #232323;
+  color: #d4cde5;
+  font-size: 13px;
+  text-align: center;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 5px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
+  -ms-box-shadow: 0 0 5px #000000;
+  -o-box-shadow: 0 0 5px #000000;
+  box-shadow: 0 0 5px #000000;
+}
+footer .container {
+  max-width: 500px;
+}
+footer .social {
+  padding: 0;
+  margin: 0 auto;
+  position: relative;
+  text-align: justify;
+  width: 100%;
+  width: 300px;
+}
+footer .social::after {
+  content: "";
+  width: 100%;
+  display: inline-block;
+}
+footer .social > li {
+  position: relative;
+  display: inline-block;
+}
+footer .social .author.left {
+  width: 160px;
+  float: left;
+}
+footer .social .author.right {
+  width: 130px;
+  float: right;
+}
+footer .social .author a {
+  padding: 10px 0;
+  display: block;
+  color: #d4cde5;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+footer .social .author a:hover {
+  color: #5271cc;
+}
+footer .social .author .fa {
+  font-size: 22px;
+  vertical-align: middle;
+}
+footer .social .author .name {
+  vertical-align: middle;
+  padding-left: 5px;
+}
+/*********************************************************************************************************************************************/
+/*																																			 */
+/*																RESPONSIVE 										
+/*																																			 */
+/*********************************************************************************************************************************************/
+/**
+* Author : Dan Masci
+* Class : Advanced Web Programming
+* Semester : 3
+* Professor : Tom Tsiliopolous
+* Purpose : Final Team Project - Incident Management
+* Last Updated By : Dan Masci (12/7/2015)
+*/
+/**
+* The follwing stylesheet is the File used for all Responsive styling.
+*
+*/
+@media screen and (max-width: 1060px) {
+  #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .update {
+    background: #b7abd4;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket {
+    background: #f1f1f1;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket:hover {
+    background: #f1f1f1;
+  }
+}
+@media screen and (max-width: 640px) {
+  header .logo {
+    left: 12px;
+  }
+  #incident-dashboard .clear-float.mobile {
+    display: block;
+  }
+  #incident-dashboard .filter {
+    width: 100%;
+  }
+  #incident-dashboard .filter.view-filter {
+    float: none;
+  }
+  #incident-dashboard .filter.view-filter .buttons {
+    float: left;
+  }
+  #incident-dashboard .filter.view-filter .buttons .filter-button {
+    width: 50%;
+  }
+  #incident-dashboard .filter.ticket-filter {
+    float: none;
+  }
+  #incident-dashboard .filter.ticket-filter .buttons {
+    float: right;
+  }
+  #incident-dashboard .filter.ticket-filter .buttons .filter-button {
+    width: 33.33%;
+  }
+  #incident-dashboard .filter .buttons {
+    margin: 10px 0;
+    font-size: 20px;
+    width: 100%;
+    float: none;
+  }
+  #incident-dashboard .filter .buttons .filter-button::before {
+    border: 8px solid transparent;
+    border-top-color: #5271cc;
+    opacity: 1;
+  }
+  #incident-dashboard .filter .buttons .filter-button.active::before {
+    display: none;
+  }
+  #incident-dashboard .filter .buttons .view-shield {
+    width: calc(50% + 10px);
+  }
+  #incident-dashboard .filter .buttons .view-shield.Tab {
+    left: -5px;
+  }
+  #incident-dashboard .filter .buttons .view-shield.Full {
+    left: calc(50% - 5px);
+  }
+  #incident-dashboard .filter .buttons .status-shield {
+    width: calc(33.33% + 10px);
+  }
+  #incident-dashboard .filter .buttons .status-shield.Open {
+    left: -5px;
+  }
+  #incident-dashboard .filter .buttons .status-shield.Closed {
+    left: calc(33.33% - 5px);
+  }
+  #incident-dashboard .filter .buttons .status-shield.All {
+    left: calc(66.66% - 5px);
+  }
+  #incident-dashboard .filter .buttons .status-shield.Disabled {
+    left: -5px;
+    width: calc(100% + 10px);
+  }
+  #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head {
+    font-size: 24px;
+  }
+  #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content {
+    font-size: 20px;
+  }
+  #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .owner {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .id {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head {
+    font-size: 20px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content {
+    font-size: 20px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content h3 {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .interior-page {
+    padding: 20px 0 60px 0;
+  }
+  .interior-page form {
+    -webkit-box-shadow: 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 transparent;
+    -ms-box-shadow: 0 0 0 transparent;
+    -o-box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 transparent;
+    background: transparent;
+    padding: 0 10px;
+  }
+  footer .social {
+    width: 100%;
+  }
+  footer .social .author {
+    width: 100%;
+    text-align: center;
+  }
+  footer .social .author.left {
+    width: 100%;
+    float: none;
+  }
+  footer .social .author.right {
+    width: 100%;
+    float: none;
+  }
+  footer .social .author .name {
+    font-size: 18px;
+  }
+  footer .copyright #copyright {
+    font-size: 18px;
+  }
 }
