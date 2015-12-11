@@ -136,9 +136,10 @@ jQuery(document).ready(function($){
 			$('.ticket-full .ticket-container').removeClass('active').hide();
 			$('#ticket-single-' + goTo).addClass('active').fadeIn();
 		}
-		$('.arrow-right').on('click', changeTicket);
-		$('.arrow-left').on('click', changeTicket);
-		$('.view-ticket').on('click', changeTicket);
+		if ($('.ticket-container').length > 2) {
+			$('.arrow-right').on('click', changeTicket);
+			$('.arrow-left').on('click', changeTicket);	
+		}		
 	}
 
 	if ($('.sub-menu').length > 0) {

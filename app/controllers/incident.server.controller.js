@@ -33,22 +33,6 @@ var createReferenceId = function(){
 //dashboard page
 exports.dashboard = function(req, res, next){
 
-    //check if filter is set
-    //and validate if the filter is a value it should be
-    //if not set the filter to a default
-    //state of 'open'
-    if(req.params.filter == 'all'){
-        var filter = 'all';
-    }else if(req.params.filter == 'open'){
-        var filter = 'open';
-    }else if(req.params.filter == 'closed'){
-        var filter = 'closed';
-    }else {
-        //set to default
-        var filter = 'open';
-    }
-
-
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
         Ticket.find({username: req.user.username})
@@ -57,8 +41,7 @@ exports.dashboard = function(req, res, next){
             res.render('tickets/index',{
                 title: 'Client Incident Dashboard',
                 tickets: ticketList,
-                user: req.user,
-                filter: filter
+                user: req.user
             });
         });
     }else if (req.user.role == 2) {//show this if the user is an admin
@@ -70,8 +53,7 @@ exports.dashboard = function(req, res, next){
             res.render('tickets/index', {
                 title: 'Admin Incident Dashboard',
                 tickets: ticketList,
-                user: req.user,
-                filter: filter
+                user: req.user
             });
         });
     }
@@ -82,21 +64,7 @@ exports.dashboard = function(req, res, next){
 //clients cannot update all the same fields
 //as admins can
 exports.update = function(req, res, next){
-
-  if(req.user.role == 1) {//client update page
-      //gets id parameter from url string
-      Ticket.findById(req.params.id, function(err, ticket){
-          if(err){
-              console.log(err);
-              res.end(err);
-          }else {
-              res.render('tickets/update-client', {
-                  title: 'Update your ticket',
-                  ticket: ticket,
-                  user: req.user
-              });
-          }});
-  }else if(req.user.role == 2) {//admin update page
+  if(req.user.role == 2) {//admin update page
       //gets id parameter from url string
       Ticket.findById(req.params.id, function(err, ticket) {
           if(err){
@@ -108,7 +76,11 @@ exports.update = function(req, res, next){
                   ticket: ticket,
                   user: req.user
               });
-          }});
+          }
+     });
+  }
+  else {
+      next();
   }
 };
 
@@ -130,11 +102,13 @@ exports.processUpdate = function(req, res, next){
         impact: req.body.impact,
         title: req.body.title,
         severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
-        narrative: [{
-            //grabs title and body from admin-update view
-            narrativeTitle:req.body.narrativeTitle,
-            narrativeBody:req.body.narrativeBody
-        }]
+        narrative: {            
+            id: createReferenceId(),
+            timeStamp: Date.now(),
+            username: req.user.username,
+            comment: req.body.comment,
+            body: req.body.narrativeBody 
+        }
     });
 
     //update the selected ticket
@@ -143,21 +117,7 @@ exports.processUpdate = function(req, res, next){
             console.log(err);
             res.end(err);
         }else {
-
             res.redirect('/incident/')
-        }
-    });
-};
-
-//delete ticket route functionality
-exports.delete = function(req, res, next){
-    var id = req.params.id;
-    Ticket.remove({_id: id}, function(err){
-        if(err){
-            console.log(err);
-            res.end(err);
-        } else {
-            res.redirect('/incident/');
         }
     });
 };
@@ -185,31 +145,19 @@ exports.add = function(req, res, next){
 exports.processAdd = function(req, res, next){
     if(req.user.role == 1) {
         var ticket = new Ticket(req.body);
-        //default values are passed in when a client creates
-        //a ticket
         Ticket.create({
             username: req.user.username,
             description: req.body.description,
-            priority: 1,
-            status: 'Open',//sets the default status to open
-            isUrgent: req.body.isUrgent,
-            urgency: 1,
-            impact: 1,
             title: req.body.title,
             referenceId: createReferenceId(),
             //defaults are provided as clients cannot change this information
             severity: calculateSeverity(1, 1, 1),
-            //create an empty narrative
-            //that will be filled out as the ticket progresses
-            //if no default values are provided
-            //The client-update and admin-update
-            //will throw errors
-            narrative: [{
-                //shorter user friendly reference id
-                narrativeId: createReferenceId(),
-                narrativeTitle: '',
-                narrativeBody: ''
-            }]
+            narrative: {
+                id: createReferenceId(),
+                timeStamp: Date.now(),
+                username: req.user.username,
+                comment: 'says: CREATED TICKET'
+            }
         }, function(err, Ticket){
             if(err){
                 console.log(err);
@@ -224,24 +172,18 @@ exports.processAdd = function(req, res, next){
             username: req.body.username,
             description: req.body.description,
             priority: req.body.priority,
-            status: 'Open',//sets the default status to open
             isUrgent: req.body.isUrgent,
             urgency: req.body.urgency,
             impact: req.body.impact,
             title: req.body.title,
             referenceId: createReferenceId(),
-            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
-            //create an empty narrative
-            //that will be filled out as the ticket progresses
-            //if no default values are provided
-            //The client-update and admin-update
-            //will throw errors
-            narrative: [{
-                //shorter user friendly reference id
-                narrativeId: createReferenceId(),
-                narrativeTitle: '',
-                narrativeBody: ''
-            }]
+            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),            
+            narrative: {
+                id: createReferenceId(),
+                timeStamp: Date.now(),
+                username: req.user.username,
+                comment: 'says: CREATED TICKET'
+            }
         }, function(err, Ticket){
             if(err){
                 console.log(err);
