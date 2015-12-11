@@ -99,6 +99,7 @@ exports.processUpdate = function(req, res, next){
         urgency: req.body.urgency,
         impact: req.body.impact,
         title: req.body.title,
+        resolution: req.body.resolution,
         severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
         narrative: {            
             id: createReferenceId(),

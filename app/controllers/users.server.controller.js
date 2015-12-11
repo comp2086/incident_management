@@ -51,7 +51,7 @@ exports.renderLogin = function(req, res, next) {
     });
     // User already logged in, redirect to users angular app
   } else {
-    return res.redirect('/users');
+    return res.redirect('/userslist');
   }
 };
 

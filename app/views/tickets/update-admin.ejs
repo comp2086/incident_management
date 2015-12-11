@@ -4,7 +4,12 @@
     <section>
         <div class="container">
             <form method="post" action="/incident/update/<%= ticket._id %>">
+                <%if(ticket.status == 'Closed') { %>
+                <h2>This ticket has been closed</h2>
+                <h2>It cannot be updated</h2>
+                <% } else { %>
                 <h2><%= title %></h2>
+                <% } %>
                 <fieldset class="form-group">
                     <label for="username">Ticket Owner</label>
                     <input type="text" class="form-control" id="username" name="username" value="<%= ticket.username %>" readonly>
@@ -187,6 +192,10 @@
                     </select>
                 </fieldset>
                 <fieldset class="form-group">
+                    <label for="resolution">Resolution</label>
+                     <textarea class="form-control" id="resolution" name="resolution" placeholder="resolution"><%= ticket.resolution %></textarea>
+                </fieldset>
+                <fieldset class="form-group">
                     <label for="comment">Narrative Comment</label>
                     <input type="text" class="form-control" id="comment" name="comment" required>
                 </fieldset>
@@ -199,10 +208,27 @@
                         ticket.narrative.comment + delimiter;    
                 %>
                 <input type="hidden" id="narrativeBody" name="narrativeBody" value="<%= body %>">
+                <%if(ticket.status != 'Closed') { %>
                 <button type="submit" class="btn btn-primary">Update Ticket</button>
+                <% } %>
             </form>
         </div>
     </section>
 </div>
-    
+<script type="text/javascript">
+    //  Bind the event handler to the "submit" JavaScript event
+    $('form').submit(function () {
+
+        // Get the stauts and resolution value and trim it
+        var status = $.trim($('#status').val());
+        var resolution = $.trim($('#resolution').val());
+        // Check if empty of not
+        if (status === 'Closed') {
+            if(resolution === ''){
+                alert('To close a ticket you must have a resolution.');
+                return false;
+            }
+        }
+    });
+</script>
 <%- include ../partials/footer.ejs %>
