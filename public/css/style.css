@@ -614,6 +614,7 @@ body {
   cursor: pointer;
 }
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content {
+  font-size: 16px;
   display: none;
   padding: 20px;
 }
@@ -623,14 +624,14 @@ body {
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .owner {
   position: relative;
   float: left;
-  width: calc(100% - 200px);
+  width: calc(100% - 210px);
   min-width: 50%;
   font-style: italic;
 }
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .id {
   position: relative;
   float: left;
-  width: 200px;
+  width: 210px;
   font-style: italic;
 }
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .status {
@@ -725,6 +726,7 @@ body {
   vertical-align: middle;
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket {
+  font-size: 16px;
   border: 2px solid #0f1f4d;
   background: #f1f1f1;
   color: #232323;
@@ -1066,6 +1068,7 @@ footer .social .author .name {
   }
   #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content {
     font-size: 20px;
+    padding: 10px;
   }
   #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .owner {
     float: none;
@@ -1076,6 +1079,20 @@ footer .social .author .name {
     float: none;
     display: block;
     width: 100%;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container {
+    padding-top: 40px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket-count {
+    top: 15px;
+    width: 65px;
+    font-size: 32px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .navigation {
+    padding-bottom: 50px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .navigation .arrow .fa {
+    font-size: 48px;
   }
   #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head {
     font-size: 20px;
