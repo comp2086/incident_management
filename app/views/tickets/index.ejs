@@ -3,7 +3,7 @@
  * November 30, 2015
  * incident-management.azurewebsite.net
  * Contains the view for our ticket dashboard
- * Last Updated By : Dan (12/8/2015)
+ * Last Updated By : Dan (12/11/2015)
  * */-->
 
 
@@ -96,9 +96,7 @@ a ticket in order to view/edit ticket -->
                 
                 descrLength = 250; /** This specifies how many characters we see on the Dashboard */
                 description = tickets[i].description.substr(0, descrLength);
-                
-                narratives = tickets[i].narrative.body.split('<br>');
-                
+                              
                 ticketStatus = tickets[i].status;
                 
                 if (ticketStatus == 'Open') {

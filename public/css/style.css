@@ -624,14 +624,14 @@ body {
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .owner {
   position: relative;
   float: left;
-  width: calc(100% - 210px);
+  width: calc(100% - 225px);
   min-width: 50%;
   font-style: italic;
 }
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .id {
   position: relative;
   float: left;
-  width: 210px;
+  width: 225px;
   font-style: italic;
 }
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-head .status {
