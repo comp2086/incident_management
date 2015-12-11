@@ -5,8 +5,8 @@
         <div class="container">
             <form method="post" action="/incident/update/<%= ticket._id %>">
                 <%if(ticket.status == 'Closed') { %>
-                <h2>This ticket has been closed</h2>
-                <h2>It cannot be updated</h2>
+                <h2 style="color: red">This ticket has been closed<br>                
+                It cannot be updated</h2>
                 <% } else { %>
                 <h2><%= title %></h2>
                 <% } %>
@@ -26,9 +26,9 @@
                 <fieldset class="form-group">
                     <label for="severity">Severity</label>
                     <input type="text" class="form-control" id="severity" name="severity"
-                        value="<% if (ticket.severity <= 15) { %>Green
-                                <% } else if(ticket.severity >= 16 && ticket.severity <= 30) { %>Yellow
-                                <% } else if (ticket.severity >= 31 && ticket.severity <= 45) { %>Red
+                        value="<% if (ticket.severity >= 30) { %>Red
+                                <% } else if(ticket.severity >= 15) { %>Yellow
+                                <% } else { %>Green
                                 <% } %>" readonly>
                 </fieldset>
                 <fieldset class="form-group">
@@ -191,10 +191,7 @@
                         <% } %>
                     </select>
                 </fieldset>
-                <fieldset class="form-group">
-                    <label for="resolution">Resolution</label>
-                     <textarea class="form-control" id="resolution" name="resolution" placeholder="resolution"><%= ticket.resolution %></textarea>
-                </fieldset>
+                     
                 <fieldset class="form-group">
                     <label for="comment">Narrative Comment</label>
                     <input type="text" class="form-control" id="comment" name="comment" required>
@@ -208,6 +205,7 @@
                         ticket.narrative.comment + delimiter;    
                 %>
                 <input type="hidden" id="narrativeBody" name="narrativeBody" value="<%= body %>">
+                <input type="hidden" id="resolution" name="resolution" value="">
                 <%if(ticket.status != 'Closed') { %>
                 <button type="submit" class="btn btn-primary">Update Ticket</button>
                 <% } %>

@@ -153,7 +153,7 @@ jQuery(document).ready(function($){
 	}
 
 	if ($('.sub-menu').length > 0) {
-		/********** DASHBOARD NAVIGATION (for mobile) **********/
+		/********** DASHBOARD NAVIGATION **********/
 		function showNav() {
 			$('.sub-menu').show();
 		}//showNav()
@@ -169,13 +169,34 @@ jQuery(document).ready(function($){
 		$('form').submit(function () {
 
 			// Get the status and resolution value and trim it
-			var status = $.trim($('#status').val());
-			var resolution = $.trim($('#resolution').val());
+			var status = $('#status').val().trim();
+			var resolution = $('#resolution').val().trim();
 			// Check if empty of not
 			if (status === 'Closed') {
 				if(resolution === ''){
-					alert('To close a ticket you must have a resolution.');
-					return false;
+					// alert('To close a ticket you must have a resolution.');
+					//Create a lightbox message and input it onto the page (hidden by default)
+					$('#update-ticket-admin').append('<div class="lightbox"><div class="form"><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div></div>');
+					//Display the lightbox immediately
+					$('.lightbox').fadeIn();
+					function submitResolution() {
+						//Grab the resolution inputted into the lightbox
+						resolution = $('#resolution-copy').val().trim();
+						//if it's not empty...
+						if(resolution != ''){
+							alert('hi');
+							//set the form's hidden resolution input to the value inputted into the lightbox
+							$('#resolution-message').val(resolution);
+							//hide the lightbox
+							$('.lightbox').fadeOut();
+						}	
+						else {
+							$('.lightbox .form h3').css('color', 'red');
+						}
+					}
+					//when clicking on the lightbox 'submit' button
+					$('#submit-resolution').on('click', submitResolution);					
+					// return false;	
 				}
 			}
 		});

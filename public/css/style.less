@@ -413,6 +413,24 @@ header {
 *
 ************************************************************************************/
 /////////////////////////////////////////////////////////////////////////////////////
+.lightbox {
+	display: none;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: fade(@black, 70%);
+	.form {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		.translateBoth;
+		h3, textarea {
+			display: block;
+		}		
+	}//.form
+}//.lightbox
 .ticket-overlay (@color: @grey) {
 	.ticket-head {
 		.severity {
@@ -893,7 +911,8 @@ html, body {
 /////////////////////////////////////////////////////////////////////////////////////
 .interior-page {
 	padding: 60px 0;
-	form {
+	form,
+	.form {
 		width: 100%;
 		max-width: 500px;
 		.box-shadow;
@@ -908,12 +927,19 @@ html, body {
 			text-align: center;
 			padding-bottom: 10px;
 		}
+		h3 {
+			color: @darkerBlue;
+			font-size: 24px;
+			text-align: center;
+			padding-bottom: 10px;
+		}
 		input, textarea, select {
 			background: @white;
 		}
 		textarea {
 			max-width: 100%;
 			min-height: 100px;
+			max-height: 600px;
 		}
 		.checkbox {
 			text-align: center;
