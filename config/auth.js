@@ -14,3 +14,10 @@ exports.requireAuth = function(req, res, next) {
   }
   next();
 };
+
+exports.requireAdmin = function(req, res, next) {
+    if(req.user.role == 1) {
+        return res.redirect('/incidents');
+    }
+    next();
+};
