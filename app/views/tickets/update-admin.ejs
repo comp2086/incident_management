@@ -187,26 +187,18 @@
                     </select>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="narrativeTitle">Narrative Title</label>
-                    <!--Need to double check that the dot operater is displaying the narrative-->
-                    <input type="text" id="narrativeTitle" name="narrativeTitle" class="form-control"
-                        value="<%= ticket.narrative[0].narrativeTitle %>" placeholder="Narrative Title" required>
+                    <label for="comment">Narrative Comment</label>
+                    <input type="text" class="form-control" id="comment" name="comment" required>
                 </fieldset>
-                <fieldset class="form-group">
-                    <label for="narrativeBody">Narrative Description</label>
-                        <textarea class="form-control" id="narrativeBody" name="narrativeBody"
-                                placeholder="Narrative Description"
-                                required><%= ticket.narrative[0].narrativeBody %></textarea>
-                </fieldset>
-                <fieldset class="form-group">
-                    <div class="checkbox">
-                        <% if (ticket.isUrgent == true) { %>
-                        <input type="checkbox" name="isUrgent" id="isUrgent" checked> Is this ticket urgent?
-                        <% } else if(ticket.isUrgent == false || ticket.isUrgent == null) { %>
-                        <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
-                        <% } %>
-                    </div>
-                </fieldset>
+                <%
+                    var delimiter = '!@#$%';
+                        
+                    var body = ticket.narrative.body +
+                        '(' + ticket.narrative.timeStamp.toLocaleString() + ')' +
+                        ' ' + ticket.narrative.username + ' commented: ' +
+                        ticket.narrative.comment + delimiter;    
+                %>
+                <input type="hidden" id="narrativeBody" name="narrativeBody" value="<%= body %>">
                 <button type="submit" class="btn btn-primary">Update Ticket</button>
             </form>
         </div>
