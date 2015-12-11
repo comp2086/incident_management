@@ -15,9 +15,12 @@ exports.requireAuth = function(req, res, next) {
   next();
 };
 
+// Check if the user is an Admin
 exports.requireAdmin = function(req, res, next) {
     if(req.user.role == 1) {
+        //if client - redirect to incident dashboard
         return res.redirect('/incidents');
     }
+    //else, continue with next action
     next();
 };

@@ -59,10 +59,8 @@ exports.dashboard = function(req, res, next){
     }
 };
 
-//update ticket page
-//need 2 seperate views here because
-//clients cannot update all the same fields
-//as admins can
+//Update Ticket page
+//Client are not allowed to update their tickets directly
 exports.update = function(req, res, next){
   if(req.user.role == 2) {//admin update page
       //gets id parameter from url string
@@ -92,11 +90,11 @@ exports.processUpdate = function(req, res, next){
     var ticket = new Ticket({
         //need to overwrite object id with its own id from the url
         //or else mongo tries to assign a new object id which then
-        //throws an error and crashed the app
+        //throws an error and crashes the app
         _id: req.params.id,
         description: req.body.description,
         priority: req.body.priority,
-        status: req.body.status,//sets the default status to open
+        status: req.body.status,
         isUrgent: req.body.isUrgent,
         urgency: req.body.urgency,
         impact: req.body.impact,
@@ -156,7 +154,7 @@ exports.processAdd = function(req, res, next){
                 id: createReferenceId(),
                 timeStamp: Date.now(),
                 username: req.user.username,
-                comment: 'says: CREATED TICKET'
+                comment: 'CREATED TICKET'
             }
         }, function(err, Ticket){
             if(err){
@@ -182,7 +180,7 @@ exports.processAdd = function(req, res, next){
                 id: createReferenceId(),
                 timeStamp: Date.now(),
                 username: req.user.username,
-                comment: 'says: CREATED TICKET'
+                comment: 'CREATED TICKET'
             }
         }, function(err, Ticket){
             if(err){

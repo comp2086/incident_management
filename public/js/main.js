@@ -12,9 +12,12 @@
 * all of our functionality for the Incident Dashboard and Header.
 * Included: 
 *	TICKET FILTER - DASHBOARD
+*		STATUS FILTER
+*		VIEWS FILTER
 *	TICKET ACCORDIAN - DASHBOARD
 *	TICKET SINGLE VIEW - DASHBOARD
 * 	DASHBOARD NAVIGATION (for mobile)
+*	
 *
 */
 
@@ -51,16 +54,21 @@ jQuery(document).ready(function($){
 		function filterViews(event) {
 			//grab the trigger's id attribute
 			var id = $(this).attr('id');
-
-			var ticketNum;
+			
+			var ticketNum;			
 			if ($(this).hasClass('view-ticket')) {
+				//If handling this event by clicking on the 'View Ticket' link...
+				//Then grab the ticketNumber through the element's ID
 				ticketNum = $(this).attr('id').split('-', 3)[2];
 			}
 			else {
+				//If handling this event by clicking on the "Full View" filter...
+				//Then set the default : 0
 				ticketNum = event.data.ticketNum;		
 			}
-			var viewId = 'view-ticket-' + ticketNum;
-
+			
+			//Uncomment below for debugging purposes
+			// var viewId = 'view-ticket-' + ticketNum;
 			// alert('id: ' + id + ' | ticketNum: ' + ticketNum + ' | viewId: ' + viewId);
 
 			//Begin by hiding both views - then show only desired view
@@ -137,6 +145,8 @@ jQuery(document).ready(function($){
 			$('#ticket-single-' + goTo).addClass('active').fadeIn();
 		}
 		if ($('.ticket-container').length > 2) {
+			//As long as the Full-View shows more than 1 ticket ...
+			//then enable the arrows for on-click event handling.
 			$('.arrow-right').on('click', changeTicket);
 			$('.arrow-left').on('click', changeTicket);	
 		}		
