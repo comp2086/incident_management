@@ -29,4 +29,7 @@ router.post('/update/:id', auth.requireAuth, incidentController.processUpdate);
 //allow the user to delete tickets based on id
 router.get('/delete/:id?', auth.requireAuth, incidentController.delete);
 
+//this handles filter tickets
+router.get('/filter/:filter', auth.requireAuth, incidentController.dashboard);
+
 module.exports = router;

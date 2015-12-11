@@ -7,7 +7,7 @@
 
 //need the ticket model to create new tickets
 var Ticket = require('../models/ticket');
-var User = require('../models/user');
+var User = require('../models/user.server.model');
 //used for generating unique user friendly id's
 var shortId = require('shortid');
 
@@ -17,9 +17,37 @@ var calculateSeverity = function(impact, urgency, priority){
     return ((impact) * ((urgency * 0.75) + (priority * 0.50)));
 };
 
+var createReferenceId = function(){
+    //create date object
+    var today = new Date();
+    var formatDay = today.getDate();
+
+    if(formatDay < 10) {
+        formatDay = '0' + formatDay.toString();
+    }
+
+    return today.getFullYear().toString() + (today.getMonth() + 1).toString()
+            + formatDay + '-' + shortId.generate();
+};
 
 //dashboard page
 exports.dashboard = function(req, res, next){
+
+    //check if filter is set
+    //and validate if the filter is a value it should be
+    //if not set the filter to a default
+    //state of 'open'
+    if(req.params.filter == 'all'){
+        var filter = 'all';
+    }else if(req.params.filter == 'open'){
+        var filter = 'open';
+    }else if(req.params.filter == 'closed'){
+        var filter = 'closed';
+    }else {
+        //set to default
+        var filter = 'open';
+    }
+
 
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
@@ -29,7 +57,8 @@ exports.dashboard = function(req, res, next){
             res.render('tickets/index',{
                 title: 'Client Incident Dashboard',
                 tickets: ticketList,
-                user: req.user
+                user: req.user,
+                filter: filter
             });
         });
     }else if (req.user.role == 2) {//show this if the user is an admin
@@ -41,7 +70,8 @@ exports.dashboard = function(req, res, next){
             res.render('tickets/index', {
                 title: 'Admin Incident Dashboard',
                 tickets: ticketList,
-                user: req.user
+                user: req.user,
+                filter: filter
             });
         });
     }
@@ -166,7 +196,7 @@ exports.processAdd = function(req, res, next){
             urgency: 1,
             impact: 1,
             title: req.body.title,
-            referenceId: shortId.generate(),
+            referenceId: createReferenceId(),
             //defaults are provided as clients cannot change this information
             severity: calculateSeverity(1, 1, 1),
             //create an empty narrative
@@ -176,7 +206,7 @@ exports.processAdd = function(req, res, next){
             //will throw errors
             narrative: [{
                 //shorter user friendly reference id
-                narrativeId:shortId.generate(),
+                narrativeId: createReferenceId(),
                 narrativeTitle: '',
                 narrativeBody: ''
             }]
@@ -199,7 +229,7 @@ exports.processAdd = function(req, res, next){
             urgency: req.body.urgency,
             impact: req.body.impact,
             title: req.body.title,
-            referenceId: shortId.generate(),
+            referenceId: createReferenceId(),
             severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
             //create an empty narrative
             //that will be filled out as the ticket progresses
@@ -208,7 +238,7 @@ exports.processAdd = function(req, res, next){
             //will throw errors
             narrative: [{
                 //shorter user friendly reference id
-                narrativeId:shortId.generate(),
+                narrativeId: createReferenceId(),
                 narrativeTitle: '',
                 narrativeBody: ''
             }]
@@ -222,4 +252,3 @@ exports.processAdd = function(req, res, next){
         });
     }
 };
-

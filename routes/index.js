@@ -15,8 +15,8 @@ var indexController = require('../controller/index');
 router.get('/', indexController.home);
 
 // Login page
-router.get('/login', indexController.renderLogin);
-router.post('/login', indexController.login);
+//router.get('/login', indexController.renderLogin);
+//router.post('/login', indexController.login);
 
 //logout
 router.get('/logout', function(req, res){
