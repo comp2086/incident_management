@@ -47,7 +47,7 @@ exports.renderLogin = function(req, res, next) {
     res.render('login', {
       title: 'Login',
       messages: req.flash('error') || req.flash('info'),
-      user: '' //temporary
+      user: req.user? req.user : ''
     });
     // User already logged in, redirect to users angular app
   } else {
@@ -74,7 +74,7 @@ exports.renderRegister = function(req, res, next) {
     res.render('register', {
       title: 'Register',
       messages: req.flash('error'),
-      user: ''//temporary
+      user: req.user? req.user : ''
     });
     // if user is already logged in, redirect to the main app page
   } else {
@@ -113,7 +113,7 @@ exports.renderUsers = function(req, res, next) {
   res.render('users', {
     title: 'Register',
     messages: req.flash('error'),
-    user: ''//temporary
+    user: req.user? req.user : ''
   });
 }
 
