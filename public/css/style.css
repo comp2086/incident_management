@@ -449,14 +449,14 @@ body {
   margin: 20px 0;
   border: 2px solid #0f1f4d;
   background: #f1f1f1;
-  color: #0f1f4d;
+  color: #232323;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px;
 }
-#incident-dashboard .tickets .ticket-tabular .ticket-container.green .ticket-head .status::before {
+#incident-dashboard .tickets .ticket-tabular .ticket-container.green .ticket-head .severity::before {
   content: "";
   position: absolute;
   top: 0;
@@ -467,7 +467,7 @@ body {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-#incident-dashboard .tickets .ticket-tabular .ticket-container.gold .ticket-head .status::before {
+#incident-dashboard .tickets .ticket-tabular .ticket-container.gold .ticket-head .severity::before {
   content: "";
   position: absolute;
   top: 0;
@@ -478,7 +478,7 @@ body {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-#incident-dashboard .tickets .ticket-tabular .ticket-container.red .ticket-head .status::before {
+#incident-dashboard .tickets .ticket-tabular .ticket-container.red .ticket-head .severity::before {
   content: "";
   position: absolute;
   top: 0;
@@ -498,7 +498,7 @@ body {
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
-#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .status {
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .severity {
   position: absolute;
   height: 100%;
   top: 0;
@@ -506,7 +506,7 @@ body {
   width: 40px;
   z-index: 1000;
 }
-#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .status .fa {
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .severity .fa {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -516,7 +516,7 @@ body {
   -o-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
-#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .status::after {
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-head .severity::after {
   content: "";
   position: absolute;
   top: 0;
@@ -535,6 +535,7 @@ body {
   width: 100%;
   text-align: center;
   padding: 20px 50px;
+  word-break: normal;
   -webkit-box-shadow: 0 1px 2px #000000;
   -moz-box-shadow: 0 1px 2px #000000;
   -ms-box-shadow: 0 1px 2px #000000;
@@ -641,6 +642,14 @@ body {
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body {
   padding: 5px 10px;
 }
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body .description {
+  margin-bottom: 10px;
+}
+#incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body .narrative span {
+  position: relative;
+  display: block;
+  padding-left: 15px;
+}
 #incident-dashboard .tickets .ticket-tabular .ticket-container .ticket-content .content-body .view-ticket {
   position: relative;
   cursor: pointer;
@@ -665,6 +674,12 @@ body {
 }
 #incident-dashboard .tickets .ticket-full .ticket-container#ticket-single-0 {
   display: block;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container.Closed .ticket .ticket-head .status {
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #5a271a;
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket-count {
   color: #5271cc;
@@ -725,10 +740,11 @@ body {
   font-size: 22px;
   text-transform: uppercase;
   font-weight: bold;
-  color: #5271cc;
+  color: #0f1f4d;
   text-align: center;
   padding: 15px 50px 15px 10px;
   margin: 0;
+  word-break: break-all;
   -webkit-box-shadow: 0 0 5px #000000;
   -moz-box-shadow: 0 0 5px #000000;
   -ms-box-shadow: 0 0 5px #000000;
@@ -736,7 +752,7 @@ body {
   box-shadow: 0 0 5px #000000;
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket {
-  color: #5271cc;
+  color: #0f1f4d;
   position: absolute;
   top: 0;
   right: 0;
@@ -762,7 +778,7 @@ body {
   transform: translateX(-50%) translateY(-50%);
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket .title .update-ticket:hover {
-  background: #b7abd4;
+  background: #d4cde5;
   cursor: pointer;
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-head {
@@ -790,6 +806,16 @@ body {
   font-weight: bold;
   padding: 5px 0;
   margin: 0;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narrative {
+  border: 1px solid #0f1f4d;
+  border-collapse: collapse;
+  padding: 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narrative span {
   position: relative;
@@ -835,6 +861,9 @@ body {
 .interior-page form textarea {
   max-width: 100%;
   min-height: 100px;
+}
+.interior-page form .checkbox {
+  text-align: center;
 }
 .interior-page form .btn-primary {
   padding: 5px 20px;

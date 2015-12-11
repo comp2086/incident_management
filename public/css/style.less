@@ -415,7 +415,7 @@ header {
 /////////////////////////////////////////////////////////////////////////////////////
 .ticket-overlay (@color: @grey) {
 	.ticket-head {
-		.status {
+		.severity {
 			&::before {
 				content: "";
 				position: absolute;
@@ -568,7 +568,7 @@ html, body {
 				margin: 20px 0;
 				border: 2px solid @darkerBlue;
 				background: @offWhite;
-				color: @darkerBlue;
+				color: @darkerGrey;
 				.round(6px);
 				&.green {
 					.ticket-overlay(@green);
@@ -583,7 +583,7 @@ html, body {
 					position: relative;
 					font-size: 20px;
 					.trans(all,0.3s);
-					.status {
+					.severity {
 						position: absolute;
 						height: 100%;
 						top: 0;
@@ -602,10 +602,10 @@ html, body {
 							top: 0;
 							right: 0;
 							width: 1px;
-							height: 100%;
+							height: 100%;							
 							background: @darkBlue;
 						}
-					}//.ticket-status
+					}//.severity
 					.title {
 						font-size: 20px;
 						display: block;
@@ -616,6 +616,7 @@ html, body {
 						width: 100%;
 						text-align: center;
 						padding: 20px 50px;
+						word-break: normal;
 						.box-shadow(0, 1px, 2px, @black);
 						.round(4px);
 						.arrow {
@@ -697,6 +698,17 @@ html, body {
 					}//.content-head
 					.content-body {
 						padding: 5px 10px;
+						.description {
+							margin-bottom: 10px;
+							
+						}//.description
+						.narrative {
+							span {
+								position: relative;
+								display: block;		
+								padding-left: 15px;				
+							}			
+						}//.narrative
 						.view-ticket {
 							position: relative;
 							cursor: pointer;
@@ -706,7 +718,7 @@ html, body {
 							&:hover {
 								color: @lightBlue;								
 							}
-						}
+						}//.view-ticket
 					}//.content-body
 				}//.ticket-content
 			}//.ticket-container
@@ -720,6 +732,18 @@ html, body {
 				&#ticket-single-0 {
 					display: block;
 				}
+				&.Closed {
+					.ticket {
+						.ticket-head {
+							.status {
+								text-transform: uppercase;
+								font-size: 1.2em;
+								font-weight: bold;
+								color: @red;
+							}
+						}//.ticket-head
+					}//.ticket
+				}//.ticket-container.Closed
 				.ticket-count {
 					color: @lightBlue;
 					position: relative;
@@ -770,13 +794,14 @@ html, body {
 						font-size: 22px;
 						text-transform: uppercase;
 						font-weight: bold;
-						color: @lightBlue;
+						color: @darkerBlue;
 						text-align: center;
 						padding: 15px 50px 15px 10px;
 						margin: 0;
+						word-break: break-all;
 						.box-shadow;
 						.update-ticket {				
-							color: @lightBlue;
+							color: @darkerBlue;
 							position: absolute;
 							top: 0;
 							right: 0;
@@ -793,7 +818,7 @@ html, body {
 								.translateBoth;
 							}
 							&:hover {
-								background: darken(@silver, 10%);
+								background: @silver;
 								cursor: pointer;
 							}
 						}//.update-ticket
@@ -826,6 +851,10 @@ html, body {
 							margin: 0;
 						}
 						.narrative {
+							border: 1px solid @darkerBlue;
+							border-collapse: collapse;
+							padding: 5px;
+							.round(4px);
 							span {
 								position: relative;
 								display: block;						
@@ -870,6 +899,9 @@ html, body {
 		textarea {
 			max-width: 100%;
 			min-height: 100px;
+		}
+		.checkbox {
+			text-align: center;
 		}
 		.btn-primary {			
 			padding: 5px 20px;
