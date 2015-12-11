@@ -164,5 +164,21 @@ jQuery(document).ready(function($){
 		$('.sub-menu .exit').on('click', hideNav);
 	}
 
+	if($('#update-ticket-admin').length > 0){
+		//  Bind the event handler to the "submit" JavaScript event
+		$('form').submit(function () {
+
+			// Get the status and resolution value and trim it
+			var status = $.trim($('#status').val());
+			var resolution = $.trim($('#resolution').val());
+			// Check if empty of not
+			if (status === 'Closed') {
+				if(resolution === ''){
+					alert('To close a ticket you must have a resolution.');
+					return false;
+				}
+			}
+		});
+	}
 
 });
