@@ -31,7 +31,7 @@ a ticket in order to view/edit ticket -->
 
         <div class="filter ticket-filter">
             <div class="buttons filter-buttons">   
-                <span class="filter-button separator first active" id="Open">Opened</span>
+                <span class="filter-button separator first active" id="Open">Open</span>
                 <span class="filter-button separator" id="Closed">Closed</span>
                 <span class="filter-button last" id="All">All</span>
                 <div class="clear-float"></div>
@@ -50,7 +50,18 @@ a ticket in order to view/edit ticket -->
             var goToNext, gotoPrev;
             var severity,
                 severitySymbol,
-                severityTitle;
+                severityTitle,
+                descrLength,
+                decription,
+                narratives,
+                narrative,
+                ticketStatus,
+                userType;
+                
+            if (user.role == 2)                
+                userType = 'Admin';
+            else
+                userType = 'Client';
                 
             for(var i = 0; i < numOfTickets; i++) {
 
@@ -69,7 +80,7 @@ a ticket in order to view/edit ticket -->
                     severitySymbol = 'road';   
                     severityTitle = 'Low Severity';
                 }
-            
+                
                 if (i == 0) {
                     goToPrev = numOfTickets - 1;
                     goToNext = i + 1;
@@ -83,16 +94,31 @@ a ticket in order to view/edit ticket -->
                     goToPrev = i - 1;
                 }
                 
-                var descrLength = 250; /** This specifies how many characters we see on the Dashboard */
-                var description = tickets[i].description.substr(0, descrLength);
+                descrLength = 250; /** This specifies how many characters we see on the Dashboard */
+                description = tickets[i].description.substr(0, descrLength);
+                
+                narratives = tickets[i].narrative.body.split('<br>');
+                
+                ticketStatus = tickets[i].status;
+                
+                if (ticketStatus == 'Open') {
+                    ticketStatus = 'Open New';
+                }
+                else if (ticketStatus == 'Closed') {
+                    ticketStatus = 'Closed Disabled';
+                }
+                else {
+                    ticketStatus = 'Open';
+                }  
+                
             %>
 
             <div class="ticket-tabular ticket-view Tab">
-                <div class="ticket-container <%= tickets[i].status %> <%= severity %>">
+                <div class="ticket-container <%= ticketStatus %> <%= severity %>">
                     <div class="ticket-head">
-                        <div class="status" title="<%= severityTitle %>"><i class="fa fa-<%= severitySymbol %>"></i></div>
+                        <div class="severity" title="<%= severityTitle %>"><i class="fa fa-<%= severitySymbol %>"></i></div>
                         <h3 class="title ticket-trigger" id="ticket-<%= i %>" title="More Info..."><%= tickets[i].title %><div class="arrow bot"></div></h3>
-                        <a href="/incident/update/<%= tickets[i]._id %>" class="update" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a>
+                        <% if(userType == 'Admin'){ %><a href="/incident/update/<%= tickets[i]._id %>" class="update <%= userType %>" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a><% } %>
                         <div class="clear-float"></div>
                     </div><!-- ticket-head -->
                     <div class="ticket-content" id="ticket-<%= i %>-content">
@@ -103,18 +129,20 @@ a ticket in order to view/edit ticket -->
                             <span class="status"><strong>Status:</strong> <%= tickets[i].status %></span>
                         </div> <!-- content-head -->
                         <div class="content-body">
-                            <div class="description"><strong>Description:</strong> <%= description %> <strong>... <span class="view-ticket" id="view-ticket-<%= i %>">View Ticket</span></strong></div>
+                            <div class="description"><strong>Description:</strong> <%= description %> <strong>... <span class="view-ticket" id="view-ticket-<%= i %>">View Ticket</span></strong></div>                            
                             <div class="narrative">
-                                <div class="narrative-title"><%= tickets[i].narrative.narrativeTitle %></div>
-                                <div class="narrative-content"><%= tickets[i].narrative.narrativeBody %></div>
-                                </div>
+                                <strong>Last Update... </strong>
+                                <span class="timeStamp"><strong>On: </strong><%= tickets[i].narrative.timeStamp.toLocaleString() %></span>
+                                <span class="username"><strong>By: </strong><%= tickets[i].narrative.username %></span>
+                                <span class="comment"><strong>Note: </strong><%= tickets[i].narrative.comment %></span>
+                            </div><!-- narrative -->
                         </div><!-- content-body -->
                     </div><!-- ticket-content -->
                 </div><!-- ticket-container -->   
             </div><!-- ticket-tabular -->
 
             <div class="ticket-full ticket-view Full">
-                <div class="ticket-container <%= tickets[i].status %>" id="ticket-single-<%= i %>">
+                <div class="ticket-container <%= ticketStatus %>" id="ticket-single-<%= i %>">
                     <div class="ticket-count"><%= i+1 %> / <%= numOfTickets %></div>
 
                     <div class="navigation">
@@ -124,7 +152,7 @@ a ticket in order to view/edit ticket -->
 
                     <div class="ticket ticket<%= i %>">                            
                         <h3 class="title"><%= tickets[i].title %>
-                            <a href="/incident/update/<%= tickets[i]._id %>" class="update-ticket" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a>
+                            <% if(userType == 'Admin'){ %><a href="/incident/update/<%= tickets[i]._id %>" class="update-ticket" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a><% } %>
                             <div class="clear-float"></div>
                         </h3>
                         <div class="ticket-head">
@@ -138,16 +166,29 @@ a ticket in order to view/edit ticket -->
                             <h3>Ticket Description</h3>
                             <p class="description"><%= tickets[i].description %></p>
                             <h3>Narrative</h3>
-                            <div class="narrative">
+                            <div class="narratives"> 
+                                <!--
+                                     Our ticket.narrative.body does not include our latest update. 
+                                     So we manually append the latest update before outputting data.
+                                -->            
                                 <%
-                                    var createdAt = tickets[i].narrative[0].narrativeCreatedAt;
-                                    var updatedAt = tickets[i].narrative[0].narrativeUpdatedAt;
-                                %>    
-                                <span class="created"><strong>Created: </strong><%= createdAt.toLocaleDateString() + " @ " + createdAt.toLocaleTimeString() %></span>
-                                <span class="updated"><strong>Updated: </strong><%= updatedAt.toLocaleDateString() + " @ " + updatedAt.toLocaleTimeString() %></span>
-                                <span class="narrative-title"><strong>Title: </strong><%= tickets[i].narrative[0].narrativeTitle %></span>
-                                <span class="body"><strong>Comment: </strong><%= tickets[i].narrative[0].narrativeBody %></span>
-                            </div><!-- narrative -->
+                                    var narrative,
+                                        delimiter = '!@#$%';
+                                        
+                                    var body = tickets[i].narrative.body +
+                                        '(' + tickets[i].narrative.timeStamp.toLocaleString() + ')' +
+                                        ' ' + tickets[i].narrative.username + ' commented: ' +
+                                        tickets[i].narrative.comment + delimiter;
+                                    
+                                    var narratives = body.split(delimiter);
+                                    for (var x=0; x < narratives.length - 1; x++) {
+                                        narrative = narratives[x];
+                                %>                                    
+                                <div class="narrative"><%= narrative %><br></div>                                
+                                <%
+                                    }
+                                %>
+                            </div><!-- narratives -->
                         </div><!-- ticket-content -->
                     </div><!-- ticket -->
                 </div><!-- ticket-single -->

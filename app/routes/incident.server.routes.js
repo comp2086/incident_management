@@ -17,10 +17,8 @@ module.exports = function(app) {
 		 .post(auth.requireAuth, incidentController.processAdd);
 
 	app.route('/incident/update/:id')
-		 .get(auth.requireAuth, incidentController.update)
+		 .get(auth.requireAuth, auth.requireAdmin, incidentController.update)
 		 .post(auth.requireAuth, incidentController.processUpdate);
-
-	app.get('/incident/delete/:id?', auth.requireAuth, incidentController.delete);
 
 	app.get('/incident/filter/:filter', auth.requireAuth, incidentController.dashboard);
 };
