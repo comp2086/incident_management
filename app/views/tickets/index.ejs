@@ -116,7 +116,7 @@ a ticket in order to view/edit ticket -->
                     <div class="ticket-head">
                         <div class="severity" title="<%= severityTitle %>"><i class="fa fa-<%= severitySymbol %>"></i></div>
                         <h3 class="title ticket-trigger" id="ticket-<%= i %>" title="More Info..."><%= tickets[i].title %><div class="arrow bot"></div></h3>
-                        <% if(userType == 'Admin'){ %><a href="/incident/update/<%= tickets[i]._id %>" class="update <%= userType %>" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a><% } %>
+                        <% if(userType == 'Admin' && ticketStatus != 'Closed Disabled'){ %><a href="/incident/update/<%= tickets[i]._id %>" class="update <%= userType %>" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a><% } %>
                         <div class="clear-float"></div>
                     </div><!-- ticket-head -->
                     <div class="ticket-content" id="ticket-<%= i %>-content">
@@ -150,7 +150,7 @@ a ticket in order to view/edit ticket -->
 
                     <div class="ticket ticket<%= i %>">                            
                         <h3 class="title"><%= tickets[i].title %>
-                            <% if(userType == 'Admin'){ %><a href="/incident/update/<%= tickets[i]._id %>" class="update-ticket" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a><% } %>
+                            <% if(userType == 'Admin' && ticketStatus != 'Closed Disabled'){ %><a href="/incident/update/<%= tickets[i]._id %>" class="update-ticket" title="Edit Ticket"><i class="fa fa-pencil-square-o"></i></a><% } %>
                             <div class="clear-float"></div>
                         </h3>
                         <div class="ticket-head">

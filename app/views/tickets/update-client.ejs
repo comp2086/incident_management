@@ -4,14 +4,14 @@
     <section>
         <div class="container">
             <form method="post" action="/incident/update/<%= ticket._id %>">
-                <h2><%= title %></h2>
+                <h2>View ticket</h2>
                 <fieldset class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="<%= ticket.title %>" required>
+                    <label for="title">Title(Read Only)</label>
+                    <input type="text" class="form-control" id="title" name="title" value="<%= ticket.title %>" required readonly>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea class="form-control" id="description" name="description" required><%= ticket.description %></textarea>
+                    <label for="description">Description(Read Only)</label>
+                    <textarea class="form-control" id="description" name="description" required readonly><%= ticket.description %></textarea>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="status">Status(Read Only)</label>
@@ -30,26 +30,27 @@
                     <input type="text" class="form-control" id="urgency" name="urgency" value="<%= ticket.urgency %>" required readonly>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="narrativeTitle">Narrative Title</label>
+                    <label for="narrativeTitle">Narrative Title(Read Only)</label>
                     <input type="text" id="narrativeTitle" name="narrativeTitle" class="form-control" placeholder="Narrative Title" required readonly>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="narrativeBody">Narrative Description</label>
+                    <label for="narrativeBody">Narrative Description(Read Only)</label>
                         <textarea class="form-control" id="narrativeBody" name="narrativeBody"
                                 placeholder="Narrative Description" required readonly></textarea>
                 </fieldset>
                 <fieldset class="form-group">
                     <div class="checkbox">
                         <% if (ticket.isUrgent == true) { %>
-                            <input type="checkbox" name="isUrgent" id="isUrgent" checked> Is this ticket urgent?
+                            <input type="checkbox" name="isUrgent" id="isUrgent" checked readonly> Is this ticket urgent?
                         <% } else if(ticket.isUrgent == false || ticket.isUrgent == null) { %>
-                        <input type="checkbox" name="isUrgent" id="isUrgent"> Is this ticket urgent?
+                        <input type="checkbox" name="isUrgent" id="isUrgent" readonly> Is this ticket urgent?
                         <% } %>
                     </div>
                 </fieldset>
-                <button type="submit" class="btn btn-primary">Update Ticket</button>
+
+                <%/**<button type="submit" class="btn btn-primary">Update Ticket</button>*/%>
+
             </form>
-    
         </div>
     </section>
 </div>    
