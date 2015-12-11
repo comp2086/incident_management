@@ -726,6 +726,8 @@ body {
 }
 #incident-dashboard .tickets .ticket-full .ticket-container .ticket {
   border: 2px solid #0f1f4d;
+  background: #f1f1f1;
+  color: #232323;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
@@ -807,19 +809,30 @@ body {
   padding: 5px 0;
   margin: 0;
 }
-#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narrative {
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives {
   border: 1px solid #0f1f4d;
-  border-collapse: collapse;
-  padding: 5px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narrative span {
-  position: relative;
-  display: block;
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative {
+  padding: 5px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative:nth-child(even) {
+  background: #cbcbcb;
+}
+#incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative:nth-child(odd) {
+  background: #e4e4e4;
 }
 /************************************************************************************
 *
@@ -970,6 +983,21 @@ footer .social .author .name {
   header .logo {
     left: 12px;
   }
+  header .menu > li > a {
+    font-size: 20px;
+    padding: 40px 10px;
+  }
+  header .menu > li .sub-menu {
+    left: 88px;
+  }
+  header .menu > li .sub-menu .exit {
+    left: -88px;
+    width: 88px;
+  }
+  header .menu > li .sub-menu > li > a {
+    font-size: 18px;
+    padding: 14px 0;
+  }
   #incident-dashboard .clear-float.mobile {
     display: block;
   }
@@ -1057,6 +1085,32 @@ footer .social .author .name {
   }
   #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content h3 {
     font-size: 24px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives {
+    margin: 0 -20px;
+    border: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative {
+    padding: 10px 20px;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative:first-child {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+  }
+  #incident-dashboard .tickets .ticket-full .ticket-container .ticket .ticket-content .narratives .narrative:last-child {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
   }
 }
 @media screen and (max-width: 500px) {

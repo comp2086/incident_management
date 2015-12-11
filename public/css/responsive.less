@@ -49,6 +49,27 @@
 		.logo {
 			left: 12px;
 		}//.logo
+		.menu {
+			> li {
+				> a {
+					font-size: 20px;
+					padding: 40px 10px;
+				}//.menu li a
+				.sub-menu {					
+					left: 88px;
+					.exit {
+						left: -88px;	
+						width: 88px;
+					}
+					> li {
+						> a {
+							font-size: 18px;
+							padding: 14px 0;						
+						}//.sub-menu li a
+					}//.sub-menu li
+				}//.sub-menu
+			}//.menu li
+		}//.menu
 	}//header
 	#incident-dashboard {
 		.clear-float.mobile {
@@ -148,10 +169,24 @@
 							font-size: 20px;
 						}//.ticket-head
 						.ticket-content {
+							font-size: 20px;
 							h3 {
 								font-size: 24px;
-							}
-							font-size: 20px;
+							}								
+							.narratives {
+								margin: 0 -20px;
+								border: 0;
+								.round(0);
+								.narrative {
+									padding: 10px 20px;
+									&:first-child {
+										.round(0);
+									}
+									&:last-child {
+										.round(0);
+									}
+								}					
+							}//.narrative
 						}//.ticket-content
 					}//.ticket
 				}//.ticket-single

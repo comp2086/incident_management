@@ -166,7 +166,7 @@ a ticket in order to view/edit ticket -->
                             <h3>Ticket Description</h3>
                             <p class="description"><%= tickets[i].description %></p>
                             <h3>Narrative</h3>
-                            <div class="narrative"> 
+                            <div class="narratives"> 
                                 <!--
                                      Our ticket.narrative.body does not include our latest update. 
                                      So we manually append the latest update before outputting data.
@@ -184,11 +184,11 @@ a ticket in order to view/edit ticket -->
                                     for (var x=0; x < narratives.length - 1; x++) {
                                         narrative = narratives[x];
                                 %>                                    
-                                <%= narrative %><br>                                
+                                <div class="narrative"><%= narrative %><br></div>                                
                                 <%
                                     }
                                 %>
-                            </div><!-- narrative -->
+                            </div><!-- narratives -->
                         </div><!-- ticket-content -->
                     </div><!-- ticket -->
                 </div><!-- ticket-single -->
