@@ -215,20 +215,4 @@
         </div>
     </section>
 </div>
-<script type="text/javascript">
-    //  Bind the event handler to the "submit" JavaScript event
-    $('form').submit(function () {
-
-        // Get the stauts and resolution value and trim it
-        var status = $.trim($('#status').val());
-        var resolution = $.trim($('#resolution').val());
-        // Check if empty of not
-        if (status === 'Closed') {
-            if(resolution === ''){
-                alert('To close a ticket you must have a resolution.');
-                return false;
-            }
-        }
-    });
-</script>
 <%- include ../partials/footer.ejs %>
