@@ -84,6 +84,12 @@ exports.update = function(req, res, next){
 
 //processes the submitted updated ticket
 exports.processUpdate = function(req, res, next){
+    var checkResolution = function() {
+        if (req.body.resolution === '')
+            return false;
+        else
+            return true;
+    }
     //manually populate ticket data
     //so that the nest narrative document is
     //properly filled out
@@ -99,7 +105,10 @@ exports.processUpdate = function(req, res, next){
         urgency: req.body.urgency,
         impact: req.body.impact,
         title: req.body.title,
-        resolution: req.body.resolution,
+        resolution: {
+            exists: checkResolution(),
+            body: req.body.resolution  
+        },
         severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
         narrative: {            
             id: createReferenceId(),
@@ -155,7 +164,7 @@ exports.processAdd = function(req, res, next){
                 id: createReferenceId(),
                 timeStamp: Date.now(),
                 username: req.user.username,
-                comment: 'CREATED TICKET'
+                comment: '(CREATED TICKET)'
             }
         }, function(err, Ticket){
             if(err){

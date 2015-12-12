@@ -166,40 +166,50 @@ jQuery(document).ready(function($){
 
 	if($('#update-ticket-admin').length > 0){
 		//  Bind the event handler to the "submit" JavaScript event
-		$('form').submit(function () {
-
-			// Get the status and resolution value and trim it
-			var status = $('#status').val().trim();
-			var resolution = $('#resolution').val().trim();
+		$('#update-ticket-form').submit(function () {
+			//Get the status and resolution value and trim it
+			var resolution = $.trim($('#resolution').val());
+			var status = $.trim($('#status').val());
 			// Check if empty of not
 			if (status === 'Closed') {
 				if(resolution === ''){
 					// alert('To close a ticket you must have a resolution.');
 					//Create a lightbox message and input it onto the page (hidden by default)
-					$('#update-ticket-admin').append('<div class="lightbox"><div class="form"><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div></div>');
+					$('#update-ticket-admin').append('<div class="lightbox"><div class="form"><div class="cancel-form"><i class="fa fa-times"></i></div><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div>');
 					//Display the lightbox immediately
 					$('.lightbox').fadeIn();
+					//Function that handles our lightbox form that is triggered from
+					//the above functionality		
 					function submitResolution() {
 						//Grab the resolution inputted into the lightbox
-						resolution = $('#resolution-copy').val().trim();
+						var resolutionBody = $.trim($('#resolution-copy').val());
 						//if it's not empty...
-						if(resolution != ''){
-							alert('hi');
+						if(resolutionBody != ''){
 							//set the form's hidden resolution input to the value inputted into the lightbox
-							$('#resolution-message').val(resolution);
+							$('#resolution').val(resolutionBody);
 							//hide the lightbox
 							$('.lightbox').fadeOut();
 						}	
 						else {
 							$('.lightbox .form h3').css('color', 'red');
 						}
-					}
+					}//submitResolution()
+					function cancelResolution() {
+						//hide the lightbox without taking resolution value
+						$('.lightbox').fadeOut();						
+					}//cancelResolution()
 					//when clicking on the lightbox 'submit' button
-					$('#submit-resolution').on('click', submitResolution);					
-					// return false;	
+					$('#submit-resolution').on('click', submitResolution);
+					$('.lightbox .cancel-form').on('click', cancelResolution);	
+					return false;	
+				}
+				else {
+					 //if resolution is provided
+					 //then tag the narrative with a '(TICKET CLOSED)'
+					 $('#comment').val('(TICKET CLOSED) : ' + $('#comment').val());					
 				}
 			}
-		});
+		});	
 	}
 
 });

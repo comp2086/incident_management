@@ -106,8 +106,15 @@ var IncidentSchema = new Schema({
         }
     },
     resolution: {
-        type: String,
-        trim: true
+        exists: {
+            type: Boolean,
+            default: false
+        },
+        body: {
+            type: String,
+            trim: true,
+            default: ''    
+        }        
     }
 },
 {

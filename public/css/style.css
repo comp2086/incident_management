@@ -273,12 +273,11 @@ header .menu > li:hover > a:hover {
 .lightbox .form {
   position: fixed;
   top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -o-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .lightbox .form h3,
 .lightbox .form textarea {
@@ -869,6 +868,7 @@ body {
 }
 .interior-page form,
 .interior-page .form {
+  position: relative;
   width: 100%;
   max-width: 500px;
   -webkit-box-shadow: 0 0 5px #000000;
@@ -884,6 +884,25 @@ body {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px;
+}
+.interior-page form .cancel-form,
+.interior-page .form .cancel-form {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 32px;
+  color: #0f1f4d;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.interior-page form .cancel-form:hover,
+.interior-page .form .cancel-form:hover {
+  cursor: pointer;
+  font-size: 34px;
+  color: #5a271a;
 }
 .interior-page form h2,
 .interior-page .form h2 {

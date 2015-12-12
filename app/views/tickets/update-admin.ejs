@@ -3,10 +3,10 @@
 <div class="interior-page" id="update-ticket-admin">
     <section>
         <div class="container">
-            <form method="post" action="/incident/update/<%= ticket._id %>">
+            <form method="post" action="/incident/update/<%= ticket._id %>" id="update-ticket-form">
+                <div class="cancel-form"><a href="/"><i class="fa fa-times"></i></a></div>
                 <%if(ticket.status == 'Closed') { %>
-                <h2 style="color: red">This ticket has been closed<br>                
-                It cannot be updated</h2>
+                <h2 style="color: red">This ticket has been closed<br>It cannot be updated</h2>                
                 <% } else { %>
                 <h2><%= title %></h2>
                 <% } %>
@@ -205,7 +205,7 @@
                         ticket.narrative.comment + delimiter;    
                 %>
                 <input type="hidden" id="narrativeBody" name="narrativeBody" value="<%= body %>">
-                <input type="hidden" id="resolution" name="resolution" value="">
+                <input type="hidden" id="resolution" name="resolution">
                 <%if(ticket.status != 'Closed') { %>
                 <button type="submit" class="btn btn-primary">Update Ticket</button>
                 <% } %>
@@ -213,4 +213,5 @@
         </div>
     </section>
 </div>
+
 <%- include ../partials/footer.ejs %>

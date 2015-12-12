@@ -424,8 +424,7 @@ header {
 	.form {
 		position: fixed;
 		top: 50%;
-		left: 50%;
-		.translateBoth;
+		.translateY;
 		h3, textarea {
 			display: block;
 		}		
@@ -913,6 +912,7 @@ html, body {
 	padding: 60px 0;
 	form,
 	.form {
+		position: relative;
 		width: 100%;
 		max-width: 500px;
 		.box-shadow;
@@ -920,6 +920,19 @@ html, body {
 		margin: 0 auto;
 		background: @offWhite;
 		.round(6px);
+		.cancel-form {
+			position: absolute;
+			top: 10px;
+			right: 15px;
+			font-size: 32px;
+			color: @darkerBlue;
+			.trans(all,0.3s);
+			&:hover {
+				cursor: pointer;
+				font-size: 34px;
+				color: @red;
+			}
+		}
 		h2 {
 			color: @darkerBlue;
 			font-size: 32px;
