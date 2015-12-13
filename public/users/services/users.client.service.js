@@ -6,6 +6,11 @@ angular.module('users').factory('Users', ['$resource', function($resource) {
   }, {
     update: {
       method: 'PUT'
+    },
+    remove: {
+      method: 'DELETE',
+      url: 'users/:id',
+      params: {id: '@_id'}
     }
   });
 }]);
