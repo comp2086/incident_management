@@ -20,8 +20,17 @@ module.exports = function(app) {
      .get(usersController.renderRegister)
      .post(usersController.register);
 
+  //set ups the routes for angular
+  app.route('/userslist')
+      .get(auth.requireAuth, usersController.renderUsers);
+
+  //deal with single user
+  app.route('/userslist/:userId')
+      .get(auth.requireAuth, usersController.read)
+      .put(auth.requireAuth, usersController.update)
+      .delete(auth.requireAuth, usersController.delete);
+
   app.get('/logout', usersController.logout);
-  app.route('/userslist').get(auth.requireAuth, usersController.renderUsers);
   app.route('/users').get(auth.requireAuth, usersController.list)
   app.param('userId', usersController.userById);
 };
