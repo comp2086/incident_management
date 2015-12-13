@@ -1,0 +1,40 @@
+<!-- The edit article view -->
+<section data-ng-controller="UsersController" data-ng-init="findOne()">
+    <h1>Edit Article</h1>
+    <!-- The edited article form -->
+    <form data-ng-submit="update()" novalidate>
+        <fieldset class="form-group">
+            <label for="username">Username: </label>
+            <input name="username" type="text" class="form-control" required data-ng-model="user.username" />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="email">Email: </label>
+            <input name="email" type="email" class="form-control" required data-ng-model="user.email" autofocus />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="firstName">First Name: </label>
+            <input name="firstName" type="firstName" class="form-control" required data-ng-model="user.firstName" autofocus />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="lastName">Last Name: </label>
+            <input name="lastName" type="lastName" class="form-control" required data-ng-model="user.lastName" autofocus />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="password">Password: </label>
+            <input name="password" type="password" class="form-control"data-ng-model="user.password"/>
+        </fieldset>
+        <fieldset class="form-group text-right">
+            <button type="submit" class="btn btn-primary" value="Update">
+                <i class="fa fa-pencil-square-o"></i> Update</button>
+            <a href="/userslist#!/{{user._id}}/edit" title="Cancel"  class="btn btn-default">
+                <i class="fa fa-undo"></i>  Cancel
+            </a>
+        </fieldset>
+        <!-- The error message element -->
+        <div data-ng-show="error">
+            <strong data-ng-bind="error"></strong>
+        </div>
+
+    </form>
+    </div>
+</section>
