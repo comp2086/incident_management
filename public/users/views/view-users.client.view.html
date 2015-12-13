@@ -1,4 +1,4 @@
-<section data-ng-controller="UsersController" data-ng-init="find()">
+<!--<section data-ng-controller="UsersController" data-ng-init="find()">
   <h2>Users list</h2>
   <ul>
     <li data-ng-repeat="user in users">
@@ -8,16 +8,13 @@
       <span data-ng-bind="user.email"></span>
     </li>
   </ul>
-</section>
+</section>-->
 
 <main class="container" data-ng-controller="UsersController" data-ng-init="find()">
   <h1>Users</h1>
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <a href="/users/add" title="Add User"><i class="fa fa-plus-circle"></i> Add a new User</a>
-    </div> <!-- panel-heading -->
     <div class="panel-body table-responsive">
-      <table class="table table-bordered table-striped table-hover" data-ng-repeat="user in users">
+      <table class="table table-bordered table-striped table-hover" >
         <thead>
         <tr>
           <th>Username</th>
@@ -27,8 +24,8 @@
           <th></th>
         </tr>
         </thead>
-        </tbody>
-        <tr>
+        </tbody >
+        <tr data-ng-repeat="user in users">
           <td>
             {{user.username}}
           </td>
@@ -42,21 +39,19 @@
             {{user.email}}
           </td>
           <td>
-            <a href="/users/<%= users[i]._id %>" title="Edit" >
+            <a href="/userslist#!/{{user._id}}" title="Edit" >
               <button type="button" class="btn btn-primary">Edit</button>
               <i class="fa fa-pencil-square-o"></i>
             </a>
-            <a href="/users/delete/<%= users[i]._id %>" title="Delete" onclick="return confirm('Are you sure you want to delete this?');" >
-              <buton type="button" class="btn btn-danger">Delete</buton>
+            <a href="/userslist#!/{{user._id}}" title="Delete"  ng-really-message="Are you sure?" data-ng-click="delete();" >
+              <button type="button" class="btn btn-danger">Delete</button>
               <i class="fa fa-trash-o"></i>
             </a>
           </td>
         </tr>
-        <% } %>
         </tbody>
       </table>
     </div> <!-- panel-body -->
-    <% } %>
   </div><!-- panel panel-default -->
 
 </main>
