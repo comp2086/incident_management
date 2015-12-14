@@ -46,6 +46,7 @@ function($scope, $routeParams, $location, Authentication, Users) {
   $scope.delete = function(user) {
     // Remove from the users list
     if(user) {
+      console.log('Deleting user ' + user.username);
       user.$remove(function() {
         for(var i in $scope.users) {
           if($scope.users[i] === user) {
@@ -55,10 +56,12 @@ function($scope, $routeParams, $location, Authentication, Users) {
       });
     // Remove when editing a users profile
     } else {
+      console.log('Deleting user ' + user.username);
       $scope.user.$remove(function() {
         $location.path('users');
       });
     }
   };
+
 }
 ]);
