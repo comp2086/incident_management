@@ -129,10 +129,17 @@ a ticket in order to view/edit ticket -->
                         <div class="content-body">
                             <div class="description"><strong>Description:</strong> <%= description %> <strong>... <span class="view-ticket" id="view-ticket-<%= i %>">View Ticket</span></strong></div>                            
                             <div class="narrative">
+                                <% if(tickets[i].resolution.exists) { %>
+                                <strong>Resolution... </strong>
+                                <% } else { %>
                                 <strong>Last Update... </strong>
+                                <% } %>
                                 <span class="timeStamp"><strong>On: </strong><%= tickets[i].narrative.timeStamp.toLocaleString() %></span>
                                 <span class="username"><strong>By: </strong><%= tickets[i].narrative.username %></span>
                                 <span class="comment"><strong>Note: </strong><%= tickets[i].narrative.comment %></span>
+                                <% if(tickets[i].resolution.exists) { %>
+                                <span class="resolution"><strong>Resolution: </strong><%= tickets[i].resolution.body %></span>
+                                <% } %>
                             </div><!-- narrative -->
                         </div><!-- content-body -->
                     </div><!-- ticket-content -->
@@ -158,7 +165,11 @@ a ticket in order to view/edit ticket -->
                             <span class="id"><strong>Ref #: </strong><%= tickets[i].referenceId %></span>
                             <span class="status"><strong>Status: </strong><%= tickets[i].status %></span>
                             <span class="severity <%= severity %>"><strong>Severity: </strong><%= severityTitle %></span>
-                            <span class="created"><strong>Created: </strong><%= tickets[i].createdAt.toLocaleDateString() + " @ " + tickets[i].createdAt.toLocaleTimeString() %></span>
+                            <span class="created"><strong>Created: </strong><%= tickets[i].createdAt.toLocaleDateString() + " @ " + tickets[i].createdAt.toLocaleTimeString() %></span>                            
+                            <% if(tickets[i].resolution.exists) { %>
+                            <span class="closed"><strong>Closed: </strong><%= tickets[i].narrative.timeStamp.toLocaleDateString() + " @ " + tickets[i].narrative.timeStamp.toLocaleTimeString() %></span>
+                            <span class="resolution"><strong>Resolution: </strong><%= tickets[i].resolution.body %></span>
+                            <% } %>
                         </div><!-- ticket-head -->
                         <div class="ticket-content">
                             <h3>Ticket Description</h3>

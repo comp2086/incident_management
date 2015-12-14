@@ -261,6 +261,28 @@ header .menu > li:hover > a:hover {
 *								Incident Dashboard
 *
 ************************************************************************************/
+.lightbox {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.lightbox .form {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.lightbox .form h3,
+.lightbox .form textarea {
+  display: block;
+}
 html,
 body {
   height: 100%;
@@ -844,7 +866,9 @@ body {
 .interior-page {
   padding: 60px 0;
 }
-.interior-page form {
+.interior-page form,
+.interior-page .form {
+  position: relative;
   width: 100%;
   max-width: 500px;
   -webkit-box-shadow: 0 0 5px #000000;
@@ -861,26 +885,60 @@ body {
   -o-border-radius: 6px;
   border-radius: 6px;
 }
-.interior-page form h2 {
+.interior-page form .cancel-form,
+.interior-page .form .cancel-form {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 32px;
+  color: #0f1f4d;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.interior-page form .cancel-form:hover,
+.interior-page .form .cancel-form:hover {
+  cursor: pointer;
+  font-size: 34px;
+  color: #5a271a;
+}
+.interior-page form h2,
+.interior-page .form h2 {
   color: #0f1f4d;
   font-size: 32px;
   font-variant: small-caps;
   text-align: center;
   padding-bottom: 10px;
 }
+.interior-page form h3,
+.interior-page .form h3 {
+  color: #0f1f4d;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 10px;
+}
 .interior-page form input,
+.interior-page .form input,
 .interior-page form textarea,
-.interior-page form select {
+.interior-page .form textarea,
+.interior-page form select,
+.interior-page .form select {
   background: #ffffff;
 }
-.interior-page form textarea {
+.interior-page form textarea,
+.interior-page .form textarea {
   max-width: 100%;
   min-height: 100px;
+  max-height: 600px;
 }
-.interior-page form .checkbox {
+.interior-page form .checkbox,
+.interior-page .form .checkbox {
   text-align: center;
 }
-.interior-page form .btn-primary {
+.interior-page form .btn-primary,
+.interior-page .form .btn-primary {
   padding: 5px 20px;
   display: block;
   margin: 0 auto;
