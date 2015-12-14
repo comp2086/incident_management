@@ -21,7 +21,21 @@ module.exports = function(app) {
      .post(usersController.register);
 
   app.get('/logout', usersController.logout);
-  app.route('/userslist').get(auth.requireAuth, usersController.renderUsers);
-  app.route('/users').get(auth.requireAuth, usersController.list)
-  app.param('userId', usersController.userById);
+
+  // Load Angular Users app
+  app.route('/userslist')
+     .get(auth.requireAuth, usersController.renderUsers);
+
+  // Load all users
+  app.route('/users')
+     .get(auth.requireAuth, usersController.list)
+     .post(auth.requireAuth, usersController.create);
+
+  // Manipulate single user
+  app.route('/users/:userId')
+     .get(usersController.read)
+     .put(auth.requireAuth, usersController.update)
+     .delete(auth.requireAuth, usersController.delete);
+
+  app.param('userId', auth.requireAuth, usersController.userById);
 };

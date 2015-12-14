@@ -2,9 +2,11 @@ angular.module('users').controller('UsersController',
 ['$scope', '$routeParams', '$location', 'Authentication', 'Users',
 function($scope, $routeParams, $location, Authentication, Users) {
   $scope.authentication = Authentication;
+  $scope.users = Users.query();
 
   // Create a new user
   $scope.create = function() {
+    console.log("create-client-function");
     var user = new Users({
       firstName : this.firstName,
       lastName : this.lastName,
@@ -23,11 +25,13 @@ function($scope, $routeParams, $location, Authentication, Users) {
 
   // Find all users
   $scope.find = function() {
+    console.log("find-client-function");
     $scope.users = Users.query();
   };
 
   // Find a single user
   $scope.findOne = function() {
+    console.log("findOne-client-function");
     $scope.user = Users.get({
       userId: $routeParams.userId
     });
@@ -35,6 +39,7 @@ function($scope, $routeParams, $location, Authentication, Users) {
 
   // Update a user
   $scope.update = function() {
+    console.log("update-client-function");
     $scope.user.$update(function() {
       $location.path('users/' + $scope.user._id);
     }, function(errorResponse) {
@@ -43,24 +48,13 @@ function($scope, $routeParams, $location, Authentication, Users) {
   };
 
   // Remove a user
-  $scope.delete = function(user) {
-    // Remove from the users list
-    if(user) {
-      console.log('Deleting user ' + user.username);
-      user.$remove(function() {
-        for(var i in $scope.users) {
-          if($scope.users[i] === user) {
-            $scope.users.splice(i, 1);
-          }
-        }
-      });
-    // Remove when editing a users profile
-    } else {
-      console.log('Deleting user ' + user.username);
-      $scope.user.$remove(function() {
-        $location.path('users');
-      });
-    }
+  $scope.delete = function(index) {
+    console.log("delete-client-function");
+    var user = $scope.users[index];
+
+    Users.remove({ id: user._id }, function() {
+      $scope.users.splice(index, 1);
+    });
   };
 
 }

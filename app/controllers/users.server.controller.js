@@ -110,6 +110,7 @@ exports.register = function(req, res, next) {
 };
 
 exports.renderUsers = function(req, res, next) {
+  console.log("renderUsers-server-function");
   res.render('users', {
     title: 'Register',
     messages: req.flash('error'),
@@ -136,6 +137,7 @@ var getNgErrorMessage = function(err) {
 
 // Create a new user
 exports.create = function(req, res) {
+  console.log("create-server-function");
   var user = new User(req.body);
 
   user.provider = 'local';
@@ -154,6 +156,7 @@ exports.create = function(req, res) {
 
 // List all users
 exports.list = function(req, res) {
+  console.log("list-server-function");
   User.find().sort('-lastName').exec(function(err, users) {
     if(err) {
       return res.status(400).send({
@@ -167,6 +170,7 @@ exports.list = function(req, res) {
 
 // Find user by ID
 exports.userById = function(req, res, next, id) {
+  console.log("userById-server-function");
   User.findById(id).exec(function(err, user) {
     if(err) return next(err);
     if(!user) return next(new Error('Failed to find user ' + id));
@@ -177,11 +181,13 @@ exports.userById = function(req, res, next, id) {
 };
 
 exports.read = function(req, res) {
+  console.log("read-server-function");
   res.json(req.user);
 }
 
 // Update user
 exports.update = function(req, res) {
+  console.log("update-server-function");
   var user = req.user;
 
   user.firstName = req.body.firstName;
@@ -204,6 +210,7 @@ exports.update = function(req, res) {
 
 // Delete user
 exports.delete = function(req, res) {
+  console.log("delete-server-function");
   var user = req.user;
 
   user.remove(function(err) {
