@@ -33,7 +33,7 @@ module.exports = function(app) {
 
   // Manipulate single user
   app.route('/users/:userId')
-     .get(usersController.read)
+     //.get(auth.requireAuth, usersController.read)
      .put(auth.requireAuth, usersController.update)
      .delete(auth.requireAuth, usersController.delete);
 
