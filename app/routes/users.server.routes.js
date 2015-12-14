@@ -32,10 +32,11 @@ module.exports = function(app) {
      .post(auth.requireAuth, usersController.create);
 
   // Manipulate single user
-  app.route('/users/:userId')
+  app.param('userId', usersController.userById);
+  app.route('/userslist/:userId')
      //.get(auth.requireAuth, usersController.read)
      .put(auth.requireAuth, usersController.update)
      .delete(auth.requireAuth, usersController.delete);
 
-  app.param('userId', auth.requireAuth, usersController.userById);
+
 };
