@@ -1358,6 +1358,18 @@ footer .social .author .name {
   #user-dashboard .user-filter .buttons .user-shield.Admin {
     left: calc(66.66% - 5px);
   }
+  #user-dashboard .user-container .user-head {
+    font-size: 24px;
+  }
+  #user-dashboard .user-container .user-head .username {
+    font-size: 24px;
+  }
+  #user-dashboard .user-container .user-head .update {
+    background: #b7abd4;
+  }
+  #user-dashboard .user-container .user-content {
+    font-size: 20px;
+  }
   #incident-dashboard .clear-float.mobile {
     display: block;
   }
