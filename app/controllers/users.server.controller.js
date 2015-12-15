@@ -1,13 +1,13 @@
-/**
-* Anthony Scinocco
-* incident-management.azurewebsites.net
-* November 23, 2015
-* Handles the logic for requests specific to the user management functionality
+/*
+File name: users.server.controller.js
+Author: Alex Andriishyn
+Website: http://incident-management.azurewebsites.net/
+File description: users controller
 */
 
 var mongoose = require('mongoose'),
-    passport = require('passport'),
-    User = require('../models/user.server.model.js');
+passport = require('passport'),
+User = require('../models/user.server.model.js');
 
 // Render the login page
 exports.renderLogin = function(req, res, next) {
@@ -33,8 +33,8 @@ exports.login = passport.authenticate('local', {
 
 // logout
 exports.logout = function(req, res) {
-	req.logout();
-	res.redirect('/');
+  req.logout();
+  res.redirect('/');
 };
 
 // Render the register page
@@ -60,9 +60,45 @@ exports.register = passport.authenticate('local-signup', {
 
 // Users dashboard
 exports.renderUsers = function(req, res, next) {
-  res.render('users', {
-    title: 'Register',
-    messages: req.flash('error'),
-    user: req.user? req.user : ''
+  // Admin gets all users
+  if(req.user.role == 2) {
+    User.find(function(err, users) {
+      if(err) {
+        console.log(err);
+        res.end(err);
+      } else {
+        res.render('users/index', {
+          title: 'Users List',
+          messages: req.flash('error'),
+          editUserID: -1,
+          user: req.user,
+          users: users
+        });
+      }
+    });
+    // Client gets only his own profile
+  } else {
+    res.render('users/profile', {
+      title: req.user.username + '\'s Profile',
+      messages: req.flash('error'),
+      editUser: req.user, // User being edited
+      user: req.user // Active user
+    });
+  }
+};
+
+// Update user
+exports.updateUser = function(req, res, next) {
+  var user = new User(req.body);
+  user.updated = Date.now;
+
+  // Update DB
+  User.update({ _id: user._id }, user, function(err) {
+    if(err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.redirect('/users');
+    }
   });
 }

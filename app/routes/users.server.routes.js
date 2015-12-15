@@ -1,9 +1,10 @@
-/**
-* Anthony Scinocco
-* incident-management.azurewebsites.net
-* November 23, 2015
-* Handles routing for all user related url request
+/*
+File name: users.server.routes.js
+Author: Alex Andriishyn
+Website: http://incident-management.azurewebsites.net/
+File description: users routes
 */
+
 'use strict';
 
 var usersController = require('../controllers/users.server.controller.js'),
@@ -21,4 +22,7 @@ module.exports = function(app) {
      .post(usersController.register);
 
   app.get('/logout', usersController.logout);
+
+  app.get('/users', auth.requireAuth, usersController.renderUsers)
+     .post('/users', auth.requireAuth, usersController.updateUser);
 };

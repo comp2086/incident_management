@@ -32,7 +32,7 @@ var createReferenceId = function(){
 
 //dashboard page
 exports.dashboard = function(req, res, next){
-
+console.log('adasdada');
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
         Ticket.find({username: req.user.username})
@@ -107,15 +107,15 @@ exports.processUpdate = function(req, res, next){
         title: req.body.title,
         resolution: {
             exists: checkResolution(),
-            body: req.body.resolution  
+            body: req.body.resolution
         },
         severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
-        narrative: {            
+        narrative: {
             id: createReferenceId(),
             timeStamp: Date.now(),
             username: req.user.username,
             comment: req.body.comment,
-            body: req.body.narrativeBody 
+            body: req.body.narrativeBody
         }
     });
 
@@ -185,7 +185,7 @@ exports.processAdd = function(req, res, next){
             impact: req.body.impact,
             title: req.body.title,
             referenceId: createReferenceId(),
-            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),            
+            severity: calculateSeverity(req.body.impact, req.body.urgency, req.body.priority),
             narrative: {
                 id: createReferenceId(),
                 timeStamp: Date.now(),

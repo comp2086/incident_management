@@ -1,0 +1,26 @@
+<%- include ../partials/header.ejs %>
+<div class="interior-page" id="register-page">
+	<div class="container">
+		<form method="post">
+      <div class="cancel-form"><a href="/users"><i class="fa fa-times"></i></a></div>
+      <% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
+			<h2>Edit profile</h2>
+			<fieldset class="form-group">
+				<input id="firstName" name="firstName" type="text" class="form-control" value="<%= editUser.firstName %>" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="lastName" name="lastName" type="text" class="form-control" value="<%= editUser.lastName %>" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="email" name="email" type="email" class="form-control" value="<%= editUser.email %>" autofocus required>
+			</fieldset>
+			<fieldset class="form-group">
+				<input id="username" name="username" type="text" class="form-control" value="<%= editUser.username %>" autofocus required>
+			</fieldset>
+      <input id="_id" name="_id" type="hidden" value="<%= editUser._id %>">
+			<button type="submit" class="btn btn-primary">Update</button>
+		</form>
+	</div><!-- container -->
+</div><!-- #register-page -->
+<%- include ../partials/boot.ejs %>
+<%- include ../partials/footer.ejs %>

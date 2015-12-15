@@ -1,7 +1,7 @@
 /*
 File name: local_signup.js
 Author: Alex Andriishyn
-Website: http://alexandriishyn.azurewebsites.net/
+Website: http://incident-management.azurewebsites.net/
 File description: local sign up strategy
 */
 
