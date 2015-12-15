@@ -22,7 +22,7 @@ module.exports = function() {
           // No user found
           if(!user) {
             return done(null, false, {
-              message: 'Unknown username'
+              message: 'Username does not exist'
             });
           }
           // Incorrect password

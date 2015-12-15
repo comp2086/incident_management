@@ -14,8 +14,10 @@
 *	TICKET FILTER - DASHBOARD
 *		STATUS FILTER
 *		VIEWS FILTER
+	USER FILTER - DASHBOARD
 *	TICKET ACCORDIAN - DASHBOARD
 *	TICKET SINGLE VIEW - DASHBOARD
+* 	USER ACCORDIAN - DASHBOARD
 * 	DASHBOARD NAVIGATION (for mobile)
 *	
 *
@@ -24,11 +26,38 @@
 jQuery(document).ready(function($){
 
 	
+	/////////////////////////////////////////////////////////////
+	/*
+	*			Filtering - DASHBOARD (User and Ticket)
+	*/
+	/////////////////////////////////////////////////////////////
 	if($('.filter-button').length > 0) {				
 	/********** TICKET FILTER - DASHBOARD **********/
 		//Show Open tickets on Tab View by default
 		$('.ticket-view.Tab').addClass('active').fadeIn();
 		$('.ticket-container.Open').addClass('active').fadeIn();
+		//Show All users by default
+		$('.user-container.All').addClass('active').fadeIn();
+
+		/********** USER FILTER - DASHBOARD **********/
+		function filterUsers() {
+			//grab the trigger's id attribute
+			var id = $(this).attr('id');
+			//begin by hiding all users - then show only desired users
+			$('.user-container').removeClass('active').hide();
+			//Take care of appropriate Ticket-Filter animations
+			$('.user-shield').removeClass("Client").removeClass("Admin").removeClass("All");			
+			$('.user-shield').addClass(id);
+			$('.user-filter .filter-button').removeClass('active');
+			$('.user-filter .filter-button#' + id).addClass('active');		
+			//Show appropriate users based on what filter was chosen
+			if (id == 'All') {
+				$('.user-container').addClass('active').fadeIn();
+			}
+			else {			
+				$('.user-container.' + id).addClass('active').fadeIn();	
+			}	
+		}//filterUsers()
 
 		/********** STATUS FILTER - DASHBOARD **********/
 		function filterTickets() {
@@ -115,11 +144,17 @@ jQuery(document).ready(function($){
 		//Event handler - on click
 		$('.ticket-filter .filter-button').on('click', filterTickets);
 		$('.view-filter .filter-button').click({ticketNum: 0}, filterViews);
+		$('.user-filter .filter-button').on('click', filterUsers);
 		//When clicking 'View Ticket' in Ticket Information
 		$('.view-ticket').click({ticketNum: 0}, filterViews);
 	}
 
-	if($('.ticket-container').length > 0) {
+	/////////////////////////////////////////////////////////////
+	/*
+	*				Ticket Dashboard - TAB VIEW
+	*/
+	/////////////////////////////////////////////////////////////
+	if($('.ticket-view.Tab .ticket-container').length > 0) {
 		/********** TICKET ACCORDIAN - DASHBOARD **********/
 		function showTicketInfo() {
 			var id = $(this).attr('id');
@@ -135,7 +170,12 @@ jQuery(document).ready(function($){
 		}//showTicketInfo()
 		$('.ticket-trigger').on('click', showTicketInfo);
 	}
-
+	
+	/////////////////////////////////////////////////////////////
+	/*
+	*				Ticket Dashboard - FULL VIEW
+	*/
+	/////////////////////////////////////////////////////////////
 	if($('.ticket-view.Full .ticket-container').length > 0) {
 		/********** TICKET SINGLE VIEW - DASHBOARD **********/
 		function changeTicket() {
@@ -151,7 +191,34 @@ jQuery(document).ready(function($){
 			$('.arrow-left').on('click', changeTicket);	
 		}		
 	}
+	
+	/////////////////////////////////////////////////////////////
+	/*
+	*				User Dashboard - TAB VIEW
+	*/
+	/////////////////////////////////////////////////////////////
+	if($('.user-container').length > 0) {
+		/********** TICKET ACCORDIAN - DASHBOARD **********/
+		function showUserInfo() {
+			var id = $(this).attr('id');
+			
+			if($('#' + id + '-content').hasClass('active')) {
+				$('#' + id + '-content').removeClass('active').slideUp(300);
+				$(this).find('.arrow').addClass('bot').removeClass('top');
+			}
+			else {				
+				$('#' + id + '-content').addClass('active').slideDown(300);
+				$(this).find('.arrow').addClass('top').removeClass('bot');
+			}
+		}//showUserInfo()
+		$('.user-trigger').on('click', showUserInfo);
+	}
 
+	/////////////////////////////////////////////////////////////
+	/*
+	*				Header Dashboard Button
+	*/
+	/////////////////////////////////////////////////////////////
 	if ($('.sub-menu').length > 0) {
 		/********** DASHBOARD NAVIGATION **********/
 		function showNav() {
@@ -164,6 +231,11 @@ jQuery(document).ready(function($){
 		$('.sub-menu .exit').on('click', hideNav);
 	}
 
+	/////////////////////////////////////////////////////////////
+	/*
+	*					Update Ticket - ADMIN
+	*/
+	/////////////////////////////////////////////////////////////
 	if($('#update-ticket-admin').length > 0){
 		//  Bind the event handler to the "submit" JavaScript event
 		$('#update-ticket-form').submit(function () {
@@ -175,9 +247,9 @@ jQuery(document).ready(function($){
 				if(resolution === ''){
 					// alert('To close a ticket you must have a resolution.');
 					//Create a lightbox message and input it onto the page (hidden by default)
-					$('#update-ticket-admin').append('<div class="lightbox"><div class="form"><div class="cancel-form"><i class="fa fa-times"></i></div><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div>');
+					$('#update-ticket-admin').append('<div class="lightbox" id="ticket-lightbox"><div class="form"><div class="cancel-form"><i class="fa fa-times"></i></div><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div></div>');
 					//Display the lightbox immediately
-					$('.lightbox').fadeIn();
+					$('#ticket-lightbox').fadeIn();
 					//Function that handles our lightbox form that is triggered from
 					//the above functionality		
 					function submitResolution() {
@@ -188,19 +260,20 @@ jQuery(document).ready(function($){
 							//set the form's hidden resolution input to the value inputted into the lightbox
 							$('#resolution').val(resolutionBody);
 							//hide the lightbox
-							$('.lightbox').fadeOut();
+							$('#ticket-lightbox').fadeOut();
 						}	
 						else {
-							$('.lightbox .form h3').css('color', 'red');
+							$('#ticket-lightbox .form h3').css('color', 'red');
 						}
 					}//submitResolution()
 					function cancelResolution() {
 						//hide the lightbox without taking resolution value
-						$('.lightbox').fadeOut();						
+						$('#ticket-lightbox').fadeOut();						
 					}//cancelResolution()
+					
 					//when clicking on the lightbox 'submit' button
 					$('#submit-resolution').on('click', submitResolution);
-					$('.lightbox .cancel-form').on('click', cancelResolution);	
+					$('#ticket-lightbox .cancel-form').on('click', cancelResolution);	
 					return false;	
 				}
 				else {
@@ -211,5 +284,30 @@ jQuery(document).ready(function($){
 			}
 		});	
 	}
+	
+	/////////////////////////////////////////////////////////////
+	/*
+	*					Delete User - ADMIN
+	*/
+	/////////////////////////////////////////////////////////////
+	if($('#user-profile').length > 0){
+		
+		$('#user-profile').append('<div class="lightbox" id="user-lightbox"><div class="form"><div class="cancel-form" title="Cancel"><i class="fa fa-times"></i></div><h3>Are you sure you want to delete this user?</h3><div class="button"><a href="/users/delete/' + $('#_id').val() + '" class="btn btn-danger" id="confirm-delete" title="Confirm Delete">Delete</a></div></div></div>');
+		//Display the lightbox immediately
+		$('#user-lightbox').hide();
+		
+		function showLightBox() {
+			$('#user-lightbox').fadeIn();			
+		}
+		function cancelDelete() {
+			$('#user-lightbox').fadeOut();			
+		}		
+		$('#delete-user').on('click', showLightBox);
+		$('#user-lightbox .cancel-form').on('click', cancelDelete);
+	}
+	
+		
+			
+	
 
 });
