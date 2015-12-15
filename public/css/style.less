@@ -405,6 +405,18 @@ header {
 	}//.menu
 }//header
 
+/////////////////////////////////////////////////////////////////////////////////////
+/************************************************************************************
+*
+*								Flash Messages
+*
+************************************************************************************/
+/////////////////////////////////////////////////////////////////////////////////////
+.message {
+	text-align: center;
+	color: lighten(@red, 20%);
+	font-size: 20px;	
+}//.message
 
 /////////////////////////////////////////////////////////////////////////////////////
 /************************************************************************************
@@ -978,6 +990,179 @@ html, body {
 *				Dashboard
 ******************************************/
 #user-dashboard {
+	h3 {
+		margin: 0;
+	}
+	.user-filter {
+		position: relative;		
+		float: left;
+		.buttons {
+			position: relative;
+			border: 2px solid @darkerBlue;
+			.round(6px);
+			.filter-button {
+				background: @offWhite;
+				position: relative;
+				float: left;
+				padding: 10px 5px;
+				width: 75px;
+				text-align: center;
+				cursor: pointer;			
+				&.separator {
+					&::after {
+						content: "";
+						position: absolute;
+						height: 100%;
+						top: 0;
+						right: 0;
+						width: 1px;
+						background: @darkerBlue;
+					}
+				}//.filter-button.separator
+				&::before {
+					opacity: 0;
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 50%;
+					.translateX;
+					border: 5px solid transparent;
+					border-top-color: @darkerBlue;
+					.trans(all,0.5s);
+				}
+				&:hover {
+					&::before {
+						opacity: 1;
+					}
+				}
+				&.first {
+					border-top-left-radius: 4px;
+					border-bottom-left-radius: 4px;
+				}
+				&.last {				
+					border-top-right-radius: 4px;
+					border-bottom-right-radius: 4px;
+				}
+			}//.filter-button
+			.user-shield {
+				position: absolute;
+				width: 85px;
+				height: 130%;
+				top: -15%;
+				.round(8px);
+				.trans(all,0.3s);
+				.gradient-blue;
+				&.All {
+					left: -5px;
+				}
+				&.Client {
+					left: 70px;
+				}
+				&.Admin {
+					left: 145px;
+				}
+			}//.user-shield
+		}//.buttons		
+	}//.user-filter
+	.user-container {
+		position: relative;
+		margin: 20px 0;
+		border: 2px solid @darkerBlue;
+		background: @offWhite;
+		color: @darkerGrey;
+		.round(6px);
+		.user-head {
+			position: relative;
+			font-size: 20px;
+			.trans(all,0.3s);			
+			.username {
+				font-size: 20px;
+				display: block;
+				font-weight: bold;
+				text-transform: uppercase;
+				position: relative;
+				float: left;
+				width: 100%;
+				text-align: center;
+				padding: 20px 50px;
+				word-break: normal;
+				.box-shadow(0, 1px, 2px, @black);
+				.round(4px);
+				.arrow {
+					opacity: 0;			
+					z-index: -1;		
+					content: "";
+					position: absolute;
+					left: 50%;
+					border: 8px solid transparent;
+					.translateX;				
+					.trans(all,0.3s);
+					&.top {
+						top: calc(~"100% - 15px");
+						border-top-color: transparent;
+						border-bottom-color: @darkerBlue;
+					}
+					&.bot {
+						top: 100%;
+						border-bottom-color: transparent;
+						border-top-color: @darkerBlue;
+					}
+				}
+				&:hover {
+					background: darken(@silver, 10%);
+					cursor: pointer;
+					.arrow {
+						opacity: 1;
+						z-index: 100;
+					}
+				}
+			}//.ticket-title
+			.update {
+				color: @darkerBlue;
+				position: absolute;
+				top: 0;
+				right: 0;
+				height: 100%;
+				width: 40px;
+				.trans(all,0.3s);
+				z-index: 1000;
+				border-top-right-radius: 4px;
+				border-bottom-right-radius: 4px;
+				.fa {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					.translateBoth;
+				}
+				&:hover {
+					background: darken(@silver, 10%);
+					cursor: pointer;
+				}
+			}//.plus-minus
+		}//.user-head
+		.user-content {			
+			font-size: 16px;
+			display: none;
+			padding: 20px;
+			.content-head {
+				padding: 5px 10px;
+				.created,
+				.updated,
+				.role {
+					position: relative;
+					display: block;
+					width: 100%;
+					font-style: italic;
+				}
+			}//.content-head
+			.content-body {
+				padding: 5px 10px;	
+				span {
+					display: block;
+				}			
+			}//.content-body
+		}//.user-content
+	}//.user-container
 	
 }//#user-dashboard
 /*****************************************

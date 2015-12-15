@@ -5,38 +5,58 @@
     
         <% if (users.length > 0) { %>
         
+        <div class="filter user-filter">
+            <div class="buttons filter-buttons">   
+                <span class="filter-button separator first active" id="All">All</span>
+                <span class="filter-button separator" id="Client">Client</span>
+                <span class="filter-button last" id="Admin">Admin</span>
+                <div class="clear-float"></div>
+                <div class="shield user-shield All"></div>
+            </div><!-- buttons -->
+            <div class="clear-float"></div>
+        </div><!-- user-filter -->
+
+        <div class="clear-float"></div>
         
-        
-            <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                <th></th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(var i = 0; i < users.length; i++) { %>
-                <tr style="text-align: left;">
-                    <td><%= i + 1 %></td>
-                    <td><%= users[i].firstName %></td>
-                    <td><%= users[i].lastName %></td>
-                    <td><%= users[i].username %></td>
-                    <td><%= users[i].email %></td>
-                    <td style="text-align: center;">
-                    <a href="/users/edit/<%= users[i]._id %>" title="Edit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-edit"> </span>
-                    </a>
-                    </td>
-                </tr>
-                <% } %> <!-- end loop -->
-                </tbody>
-            </table>
-        
-        
+        <div class="users">
+            <%                 
+            var userRole,
+                createdOn,
+                updatedOn;
+            
+            for (var i = 0; i < users.length; i++) {          
+            
+                if (users[i].role == 2)
+                    userRole = 'Admin';
+                else
+                    userRole = 'Client';                              
+            %>
+            
+            <div class="user-container <%= userRole %>">                
+            
+                <div class="user-head">
+                    <h3 class="username user-trigger" id="user-<%= i %>" title="More Info..."><%= users[i].username %><div class="arrow bot"></div></h3>
+                    <a href="/users/edit/<%= users[i]._id %>" title="Edit User" class="update"><i class="fa fa-pencil-square-o"></i></a>
+                    <div class="clear-float"></div>
+                </div><!-- user-head -->
+                <div class="user-content" id="user-<%= i %>-content">
+                    <div class="content-head">
+                        <span class="created"><strong>Created On:</strong> <%= users[i].created.toLocaleString() %></span>
+                        <span class="updated"><strong>Last Updated On:</strong> <%= users[i].updated.toLocaleString() %></span>
+                        <span class="role"><strong>Role:</strong> <%= userRole %></span>
+                    </div><!-- content-head -->
+                    <div class="content-body">                    
+                        <span class="firstName"><strong>First Name:</strong> <%= users[i].firstName %></span>
+                        <span class="lastName"><strong>Last Name:</strong> <%= users[i].lastName %></span>
+                        <span class="email"><strong>Email:</strong> <%= users[i].email %></span>
+                    </div><!-- content-body -->   
+                </div><!-- user-content -->
+                
+            </div><!-- user-container -->
+            
+            <% } %> <!-- end for -->
+        </div><!-- users -->
+            
         <% } %> <!-- end if -->
     </div><!-- .container -->
 </div><!-- #user-dashboard -->

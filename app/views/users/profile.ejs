@@ -12,16 +12,32 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<label for="lastName">Last Name:</label>
-				<input id="lastName" name="lastName" type="text" class="form-control" value="<%= editUser.lastName %>" autofocus required>
+				<input id="lastName" name="lastName" type="text" class="form-control" value="<%= editUser.lastName %>" required>
 			</fieldset>
 			<fieldset class="form-group">
 				<label for="email">Email:</label>
-				<input id="email" name="email" type="email" class="form-control" value="<%= editUser.email %>" autofocus required>
+				<input id="email" name="email" type="email" class="form-control" value="<%= editUser.email %>" required>
 			</fieldset>
 			<fieldset class="form-group">
 				<label for="username">Username:</label>
-				<input id="username" name="username" type="text" class="form-control" value="<%= editUser.username %>" autofocus required>
+				<input id="username" name="username" type="text" class="form-control" value="<%= editUser.username %>" required>
 			</fieldset>
+			<% if(user.role === 2) { %>			
+			<fieldset class="form-group">
+				<label for="role">Role:</label>
+				<select id="role" name="role" type="text" class="form-control" required>
+					<% if(editUser.role === 1 ) { %>
+					<option value="1" selected>Client Account</option>
+					<option value="2">Administrative Account</option>
+					<% } else { %>
+					<option value="1">Client Account</option>
+					<option value="2" selected>Administrative Account</option>
+					<% } %>
+				</select>
+			</fieldset>
+			<% } else { %>
+			<input id="role" name="role" type="hidden" value="<%= editUser.role %>">
+			<% } %>
 			<input id="_id" name="_id" type="hidden" value="<%= editUser._id %>">
 			<div class="buttons">
 				<button type="submit" class="btn btn-success">

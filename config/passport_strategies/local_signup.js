@@ -14,41 +14,34 @@ module.exports = function() {
 		passReqToCallback: true
 	},
 	function(req, username, password, done) {
-
 		process.nextTick(function() {
 			// Check if not already logged in
 			if(!req.user) {
 				User.findOne({'username': username},
 				function(err, user) {
-					if(err) {
+					if(err) { // Error occurs
 						return done(err);
-					}
-
-					// Username already exists
-					if(user) {
+					}					
+					if(username) { // Username already exists
 						return done(null, false, {
-              message: 'This username is already taken'
-            });
-					}
-
-          // Create a user object and save it in the DB
-					else {
+							message: 'This username is already taken'
+						});
+					}          			
+					else { // Create a user object and save it in the DB
 						var newUser = new User(req.body);
 						newUser.password = newUser.generateHash(newUser.password);
 						newUser.provider = 'local';
-
+						
 						newUser.save(function(err) {
-							if(err) {
-								throw err;
-							}
+							if(err) 
+								throw err;						
 
 							return done(null, newUser);
 						});
 					}
-				});
-
-      // Already logged in
-			} else {
+				});      
+			} 
+			else { // Already logged in
 				return done(null, req.user);
 			}
 		});

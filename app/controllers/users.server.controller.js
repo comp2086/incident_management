@@ -6,8 +6,8 @@ File description: users controller
 */
 
 var mongoose = require('mongoose'),
-passport = require('passport'),
-User = require('../models/user.server.model.js');
+    passport = require('passport'),
+    User = require('../models/user.server.model.js');
 
 // Render the login page
 exports.renderLogin = function(req, res, next) {
@@ -109,7 +109,7 @@ exports.renderUpdateUser = function(req, res, next) {
 // Update user
 exports.updateUser = function(req, res, next) {
   var user = new User(req.body);
-  user.updated = Date.now;
+  user.updated = Date.now();
 
   // Update DB
   User.update({ _id: user._id }, user, function(err) {
