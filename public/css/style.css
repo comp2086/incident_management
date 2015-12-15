@@ -293,6 +293,12 @@ header .menu > li:hover > a:hover {
 .lightbox .form textarea {
   display: block;
 }
+.lightbox .form .button {
+  text-align: center;
+}
+.lightbox .form .button .btn-danger {
+  font-size: 18px;
+}
 html,
 body {
   height: 100%;

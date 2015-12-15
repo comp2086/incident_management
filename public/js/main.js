@@ -247,9 +247,9 @@ jQuery(document).ready(function($){
 				if(resolution === ''){
 					// alert('To close a ticket you must have a resolution.');
 					//Create a lightbox message and input it onto the page (hidden by default)
-					$('#update-ticket-admin').append('<div class="lightbox"><div class="form"><div class="cancel-form"><i class="fa fa-times"></i></div><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div></div>');
+					$('#update-ticket-admin').append('<div class="lightbox" id="ticket-lightbox"><div class="form"><div class="cancel-form"><i class="fa fa-times"></i></div><h3>To close a ticket you must have a resolution</h3><fieldset class="form-group"><textarea class="form-control" id="resolution-copy" name="resolution-copy" placeholder="Resolution..."></textarea></fieldset><div class="btn btn-primary" id="submit-resolution">Done</div></div></div>');
 					//Display the lightbox immediately
-					$('.lightbox').fadeIn();
+					$('#ticket-lightbox').fadeIn();
 					//Function that handles our lightbox form that is triggered from
 					//the above functionality		
 					function submitResolution() {
@@ -260,19 +260,20 @@ jQuery(document).ready(function($){
 							//set the form's hidden resolution input to the value inputted into the lightbox
 							$('#resolution').val(resolutionBody);
 							//hide the lightbox
-							$('.lightbox').fadeOut();
+							$('#ticket-lightbox').fadeOut();
 						}	
 						else {
-							$('.lightbox .form h3').css('color', 'red');
+							$('#ticket-lightbox .form h3').css('color', 'red');
 						}
 					}//submitResolution()
 					function cancelResolution() {
-					//hide the lightbox without taking resolution value
-					$('.lightbox').fadeOut();						
+						//hide the lightbox without taking resolution value
+						$('#ticket-lightbox').fadeOut();						
 					}//cancelResolution()
+					
 					//when clicking on the lightbox 'submit' button
 					$('#submit-resolution').on('click', submitResolution);
-					$('.lightbox .cancel-form').on('click', cancelResolution);	
+					$('#ticket-lightbox .cancel-form').on('click', cancelResolution);	
 					return false;	
 				}
 				else {
@@ -289,14 +290,24 @@ jQuery(document).ready(function($){
 	*					Delete User - ADMIN
 	*/
 	/////////////////////////////////////////////////////////////
-	if($('#delete-user').length > 0){
+	if($('#user-profile').length > 0){
+		
+		$('#user-profile').append('<div class="lightbox" id="user-lightbox"><div class="form"><div class="cancel-form" title="Cancel"><i class="fa fa-times"></i></div><h3>Are you sure you want to delete this user?</h3><div class="button"><a href="/users/delete/' + $('#_id').val() + '" class="btn btn-danger" id="confirm-delete" title="Confirm Delete">Delete</a></div></div></div>');
+		//Display the lightbox immediately
+		$('#user-lightbox').hide();
 		
 		function showLightBox() {
-			$('#update-ticket-admin').append('<div class="lightbox"><div class="form"><div class="cancel-form"><i class="fa fa-times"></i></div><h3>Are you sure you want to delete ' + $('#username').Text + '</h3><a href="/users/delete/<%= editUser._id %>" class="btn btn-primary" id="confirm-delete">Delete</a></div></div>');
-			//Display the lightbox immediately
-			$('.lightbox').fadeIn();
+			$('#user-lightbox').fadeIn();			
+		}
+		function cancelDelete() {
+			$('#user-lightbox').fadeOut();			
 		}		
-		$('#delete-user').on('click', showLightBox);	
+		$('#delete-user').on('click', showLightBox);
+		$('#user-lightbox .cancel-form').on('click', cancelDelete);
 	}
+	
+		
+			
+	
 
 });
