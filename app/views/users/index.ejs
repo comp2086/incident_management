@@ -1,6 +1,5 @@
 <%- include ../partials/header.ejs %>
   <% if (users.length > 0) { %>
-      <form method="post">
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
@@ -13,27 +12,7 @@
             </tr>
           </thead>
           <tbody>
-            <% for(var i = 0; i < users.length; i++) {
-              if(editUserID != -1 && users[i].id === editUserID) { %>
-              <tr style="text-align: left;">
-                <td><%= i + 1 %></td>
-                <td><input type="text" name="firstName" value="<%= users[i].firstName %>" /></td>
-                <td><input type="text" name="lastName" value="<%= users[i].lastName %>" /></td>
-                <td><input type="text" name="username" value="<%= users[i].username %>" /></td>
-                <td><input type="email" name="email" value="<%= users[i].email %>" /></td>
-                <td style="text-align: center;">
-                  <a href="/users/cancel" title="Discard changes" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-ban-circle"> </span>
-                  </a>
-                  <button type="submit" class="btn btn-success" title="Apply changes">
-                    <span class="glyphicon glyphicon-floppy-disk"> </span>
-                  </button>
-                  <a href="/users/delete/<%= users[i]._id %>" title="Delete" onclick="return confirm('Are you sure you want to delete this user?');" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </a>
-                </td>
-              </tr>
-              <% } else { %>
+            <% for(var i = 0; i < users.length; i++) { %>
               <tr style="text-align: left;">
                 <td><%= i + 1 %></td>
                 <td><%= users[i].firstName %></td>
@@ -41,18 +20,13 @@
                 <td><%= users[i].username %></td>
                 <td><%= users[i].email %></td>
                 <td style="text-align: center;">
-                  <a href="/users/<%= users[i]._id %>" title="Edit" class="btn btn-primary">
+                  <a href="/users/edit/<%= users[i]._id %>" title="Edit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-edit"> </span>
-                  </a>
-                  <a href="/users/delete/<%= users[i]._id %>" title="Delete" onclick="return confirm('Are you sure you want to delete this user?');" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>
               </tr>
-              <% } <!--end else -->
-            } %> <!-- end loop -->
+            <% } %> <!-- end loop -->
             </tbody>
           </table>
-        </form>
       <% } %> <!-- end if -->
 <%- include ../partials/footer.ejs %>

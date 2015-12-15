@@ -87,6 +87,25 @@ exports.renderUsers = function(req, res, next) {
   }
 };
 
+// Render update user page for admins
+exports.renderUpdateUser = function(req, res, next) {
+
+  // Get all Users
+  User.findById(req.params.userId, function(err, userProfile) {
+    if(err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.render('users/profile', {
+          title: 'Edit user',
+          messages: req.flash('error'),
+          editUser: userProfile, // User being edited
+          user: req.user // Active user
+      });
+    }
+  });
+};
+
 // Update user
 exports.updateUser = function(req, res, next) {
   var user = new User(req.body);
@@ -94,6 +113,19 @@ exports.updateUser = function(req, res, next) {
 
   // Update DB
   User.update({ _id: user._id }, user, function(err) {
+    if(err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.redirect('/users');
+    }
+  });
+};
+
+// Delete user
+exports.deleteUser = function(req, res, next) {
+  var id = req.params.userId;
+  User.remove({ _id: id }, function(err) {
     if(err) {
       console.log(err);
       res.end(err);

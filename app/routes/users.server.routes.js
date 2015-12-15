@@ -23,6 +23,14 @@ module.exports = function(app) {
 
   app.get('/logout', usersController.logout);
 
+  // Common route for admins and users to GET index(admins) or profile(users) page
   app.get('/users', auth.requireAuth, usersController.renderUsers)
      .post('/users', auth.requireAuth, usersController.updateUser);
+
+  // Admin route for a specific user profile
+  app.get('/users/edit/:userId', auth.requireAuth, usersController.renderUpdateUser)
+     .post('/users/edit/:userId', auth.requireAuth, usersController.updateUser);
+
+  // Delete a user
+  app.get('/users/delete/:userId', auth.requireAuth, usersController.deleteUser);
 };
