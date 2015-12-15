@@ -25,4 +25,5 @@ module.exports = function() {
 
   // Strategies
   require('./passport_strategies/login.js')();
+  require('./passport_strategies/local_signup.js')();
 };

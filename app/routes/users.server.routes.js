@@ -21,7 +21,4 @@ module.exports = function(app) {
      .post(usersController.register);
 
   app.get('/logout', usersController.logout);
-  app.route('/userslist').get(auth.requireAuth, usersController.renderUsers);
-  app.route('/users').get(auth.requireAuth, usersController.list)
-  app.param('userId', usersController.userById);
 };
