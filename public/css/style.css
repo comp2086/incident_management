@@ -1321,6 +1321,43 @@ footer .social .author .name {
     font-size: 18px;
     padding: 14px 0;
   }
+  #user-dashboard .clear-float.mobile {
+    display: block;
+  }
+  #user-dashboard .user-filter {
+    float: none;
+  }
+  #user-dashboard .user-filter .buttons {
+    width: 100%;
+    float: left;
+    font-size: 20px;
+  }
+  #user-dashboard .user-filter .buttons .filter-button {
+    width: 33.33%;
+  }
+  #user-dashboard .user-filter .buttons .filter-button::before {
+    opacity: 1;
+    border: 8px solid transparent;
+    border-top-color: #5271cc;
+  }
+  #user-dashboard .user-filter .buttons .filter-button.active::before {
+    display: none;
+  }
+  #user-dashboard .user-filter .buttons .user-shield {
+    position: absolute;
+    width: calc(33.33% + 10px);
+    height: 130%;
+    top: -15%;
+  }
+  #user-dashboard .user-filter .buttons .user-shield.All {
+    left: -5px;
+  }
+  #user-dashboard .user-filter .buttons .user-shield.Client {
+    left: calc(33.33% - 5px);
+  }
+  #user-dashboard .user-filter .buttons .user-shield.Admin {
+    left: calc(66.66% - 5px);
+  }
   #incident-dashboard .clear-float.mobile {
     display: block;
   }

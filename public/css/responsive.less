@@ -71,6 +71,45 @@
 			}//.menu li
 		}//.menu
 	}//header
+	#user-dashboard {
+		.clear-float.mobile {
+			display: block;
+		}
+		.user-filter {		
+			float: none;			
+			.buttons {
+				width: 100%;
+				float: left;	
+				font-size: 20px;
+				.filter-button {	
+					width: 33.33%;	
+					&::before {
+						opacity: 1;
+						border: 8px solid transparent;	
+						border-top-color: @lightBlue;	
+					}
+					&.active::before {
+						display: none;
+					}
+				}//.filter-button
+				.user-shield {
+					position: absolute;
+					width: calc(~"33.33% + 10px");
+					height: 130%;
+					top: -15%;
+					&.All {
+						left: -5px;
+					}
+					&.Client {
+						left: calc(~"33.33% - 5px");
+					}
+					&.Admin {
+						left: calc(~"66.66% - 5px");
+					}
+				}//.user-shield
+			}//.buttons		
+		}//.user-filter		
+	}//#user-dashboard
 	#incident-dashboard {
 		.clear-float.mobile {
 			display: block;
