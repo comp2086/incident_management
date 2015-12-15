@@ -946,6 +946,25 @@ body {
 }
 /************************************************************************************
 *
+*										Users
+*
+************************************************************************************/
+/*****************************************
+*				Dashboard
+******************************************/
+/*****************************************
+*				Profile
+******************************************/
+#user-profile .buttons {
+  text-align: center;
+}
+#user-profile .buttons .btn-success,
+#user-profile .buttons .btn-danger {
+  font-size: 20px;
+  width: 100px;
+}
+/************************************************************************************
+*
 *									Footer Main
 *
 ************************************************************************************/
@@ -1190,7 +1209,7 @@ footer .social .author .name {
 }
 @media screen and (max-width: 500px) {
   .interior-page {
-    padding: 20px 0 60px 0;
+    padding: 60px 0 100px 0;
   }
   .interior-page form {
     -webkit-box-shadow: 0 0 0 transparent;
@@ -1200,6 +1219,10 @@ footer .social .author .name {
     box-shadow: 0 0 0 transparent;
     background: transparent;
     padding: 0 10px;
+  }
+  .interior-page form .cancel-form {
+    position: absolute;
+    top: -40px;
   }
   footer .social {
     width: 100%;

@@ -1,31 +1,41 @@
 <%- include ../partials/header.ejs %>
-<div class="interior-page" id="register-page">
+
+<div class="interior-page" id="user-profile">
 	<div class="container">
 		<form method="post">
-      <div class="cancel-form"><a href="/users"><i class="fa fa-times"></i></a></div>
-      <% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
+			<div class="cancel-form"><a href="/users"><i class="fa fa-times"></i></a></div>
+			<% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
 			<h2>Edit profile</h2>
 			<fieldset class="form-group">
+				<label for="firstName">First Name:</label>
 				<input id="firstName" name="firstName" type="text" class="form-control" value="<%= editUser.firstName %>" autofocus required>
 			</fieldset>
 			<fieldset class="form-group">
+				<label for="lastName">Last Name:</label>
 				<input id="lastName" name="lastName" type="text" class="form-control" value="<%= editUser.lastName %>" autofocus required>
 			</fieldset>
 			<fieldset class="form-group">
+				<label for="email">Email:</label>
 				<input id="email" name="email" type="email" class="form-control" value="<%= editUser.email %>" autofocus required>
 			</fieldset>
 			<fieldset class="form-group">
+				<label for="username">Username:</label>
 				<input id="username" name="username" type="text" class="form-control" value="<%= editUser.username %>" autofocus required>
 			</fieldset>
-      <input id="_id" name="_id" type="hidden" value="<%= editUser._id %>">
-			<button type="submit" class="btn btn-primary">Update</button>
-      <% if(user.role === 2) { %>
-      <a href="/users/delete/<%= editUser._id %>" title="Delete" onclick="return confirm('Are you sure you want to delete this user?');" class="btn btn-danger">
-        <span class="glyphicon glyphicon-trash"></span>
-      </a>
-      <% } %>
+			<input id="_id" name="_id" type="hidden" value="<%= editUser._id %>">
+			<div class="buttons">
+				<button type="submit" class="btn btn-success">
+					<i class="fa fa-check"></i>
+				</button>
+				<% if(user.role === 2) { %>
+				<a href="/users/delete/<%= editUser._id %>" title="Delete" class="btn btn-danger">
+					<i class="fa fa-trash-o"></i>
+				</a>
+				<% } %>
+			</div><!-- buttons -->
 		</form>
-	</div>
-</div>
+	</div><!-- container -->
+</div><!-- #user-profile -->
+
 <%- include ../partials/boot.ejs %>
 <%- include ../partials/footer.ejs %>

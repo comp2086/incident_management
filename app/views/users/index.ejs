@@ -1,32 +1,44 @@
 <%- include ../partials/header.ejs %>
-  <% if (users.length > 0) { %>
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th></th>
-              <th>First name</th>
-              <th>Last name</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i = 0; i < users.length; i++) { %>
-              <tr style="text-align: left;">
-                <td><%= i + 1 %></td>
-                <td><%= users[i].firstName %></td>
-                <td><%= users[i].lastName %></td>
-                <td><%= users[i].username %></td>
-                <td><%= users[i].email %></td>
-                <td style="text-align: center;">
-                  <a href="/users/edit/<%= users[i]._id %>" title="Edit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-edit"> </span>
-                  </a>
-                </td>
-              </tr>
-            <% } %> <!-- end loop -->
-            </tbody>
-          </table>
-      <% } %> <!-- end if -->
+
+<div class="interior-page" id="user-dashboard">
+    <div class="container">
+    
+        <% if (users.length > 0) { %>
+        
+        
+        
+            <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                <th></th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < users.length; i++) { %>
+                <tr style="text-align: left;">
+                    <td><%= i + 1 %></td>
+                    <td><%= users[i].firstName %></td>
+                    <td><%= users[i].lastName %></td>
+                    <td><%= users[i].username %></td>
+                    <td><%= users[i].email %></td>
+                    <td style="text-align: center;">
+                    <a href="/users/edit/<%= users[i]._id %>" title="Edit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-edit"> </span>
+                    </a>
+                    </td>
+                </tr>
+                <% } %> <!-- end loop -->
+                </tbody>
+            </table>
+        
+        
+        <% } %> <!-- end if -->
+    </div><!-- .container -->
+</div><!-- #user-dashboard -->
+
 <%- include ../partials/footer.ejs %>
