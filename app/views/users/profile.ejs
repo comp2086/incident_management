@@ -3,7 +3,7 @@
 <div class="interior-page" id="user-profile">
 	<div class="container">
 		<form method="post">
-			<div class="cancel-form"><a href="/users"><i class="fa fa-times"></i></a></div>
+			<div class="cancel-form" title="Cancel"><a href="/users"><i class="fa fa-times"></i></a></div>
 			<% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
 			<h2>Edit profile</h2>
 			<fieldset class="form-group">
@@ -44,9 +44,9 @@
 					<i class="fa fa-check"></i>
 				</button>
 				<% if(user.role === 2) { %>
-				<a href="/users/delete/<%= editUser._id %>" title="Delete" class="btn btn-danger">
+				<button title="Delete" class="btn btn-danger" id="delete-user">
 					<i class="fa fa-trash-o"></i>
-				</a>
+				</button>
 				<% } %>
 			</div><!-- buttons -->
 		</form>

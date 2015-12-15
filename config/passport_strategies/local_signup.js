@@ -33,9 +33,9 @@ module.exports = function() {
 						newUser.provider = 'local';
 						
 						newUser.save(function(err) {
-							if(err) 
-								throw err;						
-
+							if(err) {
+								throw err;
+							}
 							return done(null, newUser);
 						});
 					}
