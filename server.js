@@ -11,7 +11,7 @@ var mongoose = require('./config/mongoose'),
 var debug = require('debug')('incident_management:server');
 
 var app = express();
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3190');
 app.set('port', port);
 
 // Create a new Mongoose connection instance
