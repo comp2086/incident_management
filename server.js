@@ -82,7 +82,5 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-Identity.Impersonation = false;
-
 // Use the module.exports property to expose our Express application instance for external usage
 module.exports = app;
