@@ -1,5 +1,3 @@
-'use strict';
-
 var config = require('./config'),
     express = require('express'),
     morgan = require('morgan'),
