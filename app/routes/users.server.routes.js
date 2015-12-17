@@ -1,8 +1,9 @@
 /*
-File name: users.server.routes.js
-Author: Alex Andriishyn
-Website: http://incident-management.azurewebsites.net/
-File description: users routes
+Authors : Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
+Website : incident-management.azurewebsites.net
+
+File : incident.server.routes.js
+Description : Handles routing for all User related url request 
 */
 
 'use strict';

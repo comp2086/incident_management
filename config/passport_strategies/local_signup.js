@@ -1,9 +1,15 @@
 /*
-File name: local_signup.js
-Author: Alex Andriishyn
-Website: http://incident-management.azurewebsites.net/
-File description: local sign up strategy
+Authors : Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
+Website : incident-management.azurewebsites.net
+
+File : config/passport_strategies/local_signup.js
+Description : This is our local registration strategy that uses
+              Passport to validate a new user can be created with
+              the given data.
 */
+
+
+
  
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,

@@ -1,9 +1,13 @@
-/**
-* Anthony Scinocco
-* incident-management.azurewebsites.net
-* November 23, 2015
-* Handles routing for all incident related url request
+/*
+Authors : Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
+Website : incident-management.azurewebsites.net
+
+File : incident.server.routes.js
+Description : Handles routing for all incident related url request 
 */
+
+
+
 'use strict';
 
 var incidentController = require('../controllers/incident.server.controller.js'),
