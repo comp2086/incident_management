@@ -1,9 +1,12 @@
-/**
- * Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
- * incident-management.azurewebsites.net
- * November 23, 2015
- * local login strategy
- */
+/*
+Authors : Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
+Website : incident-management.azurewebsites.net
+
+File : config/passport_strategies/login.js
+Description : This is our login strategy that uses Passport to
+              validate the credentials given by the User.
+*/
+
 
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,

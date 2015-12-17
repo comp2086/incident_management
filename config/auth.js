@@ -1,10 +1,18 @@
-/**
- * Modified By: Anthony Scinocco
- * incident-management.azurewebsites.net
- * November 30, 2015
- * Update: changed the way the function is being exported, because node was complaining
- * that it was recieving an object not a function
- */
+/*
+Authors : Anthony Scinocco, Alex Andriishyn, Dan Masci, David Yu
+Website : incident-management.azurewebsites.net
+Last Updated : November 30th, 2015 by Anthony
+
+File : config/auth.js
+Description : This file includes 2 functions that authenticate
+              1) if there is an authenticated user logged in
+              and 2) if the current user is an Admin. These functions
+              are used in various places in our routing to keep
+              certain views hidden from unwanted users.
+*/
+
+
+
 var passport = require('passport');
 
 // Authentication check
