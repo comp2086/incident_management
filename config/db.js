@@ -16,9 +16,9 @@
  */
 module.exports = {
     //local database
-    'url':'mongodb://localhost/incident-management-local'
+    //'url':'mongodb://localhost/incident-management-local'
     //development database
-    //'url':'mongodb://<daad>:<advancedweb>@ds054288.mongolab.com:54288/production'
+    'url':'mongodb://daad:advancedweb@ds054288.mongolab.com:54288/production'
     //production database
     //'url':'mongodb://<daad>:<advancedweb>@ds054288.mongolab.com:54288/development'
 };
