@@ -100,7 +100,8 @@ exports.renderUpdateUser = function(req, res, next) {
           title: 'Edit user',
           messages: req.flash('error'),
           editUser: userProfile, // User being edited
-          user: req.user // Active user
+          user: req.user, // Active user
+          usernameTaken: ''
       });
     }
   });
@@ -111,14 +112,44 @@ exports.updateUser = function(req, res, next) {
   var user = new User(req.body);
   user.updated = Date.now();
 
-  // Update DB
-  User.update({ _id: user._id }, user, function(err) {
-    if(err) {
-      console.log(err);
-      res.end(err);
-    } else {
-      res.redirect('/users');
-    }
+  User.findOne({'username': user.username},
+  function(err, user) {
+      if(err) {
+          return done(err);
+      }
+      // Username already exists
+      if(user) {
+        /**console.log("Found user");
+          return done(null, false, {
+              message: 'This username is already taken'
+          });*/
+          User.findById(req.params.userId, function(err, userProfile) {
+            if(err) {
+              console.log(err);
+              res.end(err);
+            } else {
+              res.render('users/profile', {
+                  title: 'Edit user',
+                  messages: req.flash('error'),
+                  editUser: userProfile, // User being edited
+                  user: req.user, // Active user
+                  usernameTaken: 'That username is taken'
+              });
+            }
+          });
+
+      }else {
+        // Update DB
+        User.update({ _id: user._id }, user, function(err) {
+          if(err) {
+            console.log(err);
+            res.end(err);
+          } else {
+            res.redirect('/users');
+          }
+        });
+
+      }
   });
 };
 

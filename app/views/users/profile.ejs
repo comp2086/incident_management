@@ -9,7 +9,7 @@ Description : This is the view that we render when a User wants to
 			  get to this view via the User Dashboard. If the User
 			  is a client, they get to this view rather than being
 			  taken to the User Dashboard. The User's information
-			  is populated based on the ID passed in. 
+			  is populated based on the ID passed in.
 -->
 
 
@@ -22,6 +22,11 @@ Description : This is the view that we render when a User wants to
 		<form method="post">
 			<div class="cancel-form" title="Cancel"><a href="/users"><i class="fa fa-times"></i></a></div>
 			<% if (messages.length > 0) { %><div class="message"><span><%= messages %></span></div><% } %>
+			<% if(usernameTaken.length > 0) { %>
+				<div class="message">
+					<span><%= usernameTaken %></span>
+				</div>
+			<% } %>
 			<h2>Edit profile</h2>
 			<fieldset class="form-group">
 				<label for="firstName">First Name:</label>
@@ -39,7 +44,7 @@ Description : This is the view that we render when a User wants to
 				<label for="username">Username:</label>
 				<input id="username" name="username" type="text" class="form-control" value="<%= editUser.username %>" required>
 			</fieldset>
-			<% if(user.role === 2) { %>			
+			<% if(user.role === 2) { %>
 			<fieldset class="form-group">
 				<label for="role">Role:</label>
 				<select id="role" name="role" type="text" class="form-control" required>

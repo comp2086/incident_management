@@ -32,7 +32,6 @@ var createReferenceId = function(){
 
 //dashboard page
 exports.dashboard = function(req, res, next){
-console.log('adasdada');
     if(req.user.role == 1){//show this if the user is a client
         //find all tickets that belong to the one logged in user
         Ticket.find({username: req.user.username})
