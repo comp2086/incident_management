@@ -11,7 +11,7 @@ var mongoose = require('./config/mongoose'),
 var debug = require('debug')('incident_management:server');
 
 var app = express();
-var port = normalizePort(process.env.PORT || '4191');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 // Create a new Mongoose connection instance
@@ -81,6 +81,8 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+Identity.Impersonstion = false;
 
 // Use the module.exports property to expose our Express application instance for external usage
 module.exports = app;
